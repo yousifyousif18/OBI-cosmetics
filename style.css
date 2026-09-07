@@ -84,7 +84,7 @@ header {
 
     padding: 50px 20px;
 
-    background: #eeeeee;
+    background: #954ba0;
 }
 
 .hero h1 {
@@ -189,21 +189,6 @@ header {
     font-weight: 600;
 }
 
-.product-card button {
-    width: calc(100% - 24px);
-
-    margin: 0 12px 12px;
-
-    padding: 10px;
-
-    border: none;
-
-    border-radius: 5px;
-
-    background: #222222;
-    color: white;
-}
-
 
 /* ---------- FOOTER ---------- */
 
@@ -262,4 +247,69 @@ footer {
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
     }
+}
+/* ---------- SHADES ---------- */
+
+.shade-section {
+    margin: 0 12px 16px;
+}
+
+.shade-label {
+    margin-bottom: 8px;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    color: #666;
+}
+
+.shade-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.shade-swatch {
+    width: 28px;
+    height: 28px;
+
+    min-width: 28px;
+
+    padding: 0;
+
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.shade-swatch:hover {
+    transform: scale(1.08);
+}
+
+.shade-swatch.selected {
+    outline: 2px solid #222222;
+    outline-offset: 2px;
+}
+
+.selected-shade {
+    font-size: 13px;
+
+    color: #555555;
+}
+
+.view-product-button {
+    width: calc(100% - 24px);
+
+    margin: 0 12px 12px;
+
+    padding: 10px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #222222;
+    color: white;
 }
