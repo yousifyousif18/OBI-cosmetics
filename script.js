@@ -19,7 +19,13 @@ products.forEach(function (product) {
         <article class="product-card">
 
             <div class="product-image">
-                ${product.name}
+
+               <img
+                 src="${product.image}"
+                 alt="${product.name}"
+                  loading="lazy"
+                >
+
             </div>
 
             <h3>${product.name}</h3>

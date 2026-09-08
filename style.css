@@ -686,8 +686,123 @@ footer {
 }
 
 
-/* Prevent background scrolling */
+ Prevent background scrolling */
 
-/*body.cart-open {
+body.cart-open {
     overflow: hidden;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #222222;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 38px;
+    height: 38px;
+
+    object-fit: contain;
+}
+
+
+.cart-button {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.cart-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.cart-count {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    min-width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    border-radius: 50%;
+
+    background: #222222;
+    color: white;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.hero {
+    position: relative;
+
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 50px 20px;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.30),
+            rgba(0, 0, 0, 0.30)
+        ),
+        url("images/hero/hero.webp");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+}
+
+.hero p {
+    max-width: 450px;
+
+    margin-bottom: 28px;
+
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.shop-button {
+    display: inline-block;
+
+    width: fit-content;
+
+    padding: 13px 24px;
+
+    background: white;
+    color: #222222;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-weight: 600;
 }

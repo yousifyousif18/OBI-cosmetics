@@ -4,7 +4,7 @@ const products = [
         id: 1,
         name: "Lip Gloss",
         price: 180,
-        image: "images/lip-gloss.jpg",
+        image: "images/products/lip-gloss.webp",
         description: "Glossy lip colour with a smooth finish.",
         shades: [
         { name: "01 Nude", color: "#81331d" },
@@ -22,7 +22,7 @@ const products = [
         id: 2,
         name: "Lip Oil",
         price: 200,
-        image: "images/lip-oil.jpg",
+        image: "images/products/lip-oil.webp",
         description: "Lightweight lip oil for shine and moisture.",
         shades: [
         { name: "01 Nude", color: "#81331d" },
@@ -37,7 +37,7 @@ const products = [
         id: 3,
         name: "Lip Liner Pencil",
         price: 200,
-        image: "images/lip-liner-pencil.jpg",
+        image: "images/products/lip-liner-pencil.webp",
         description: "Classic pencil lip liner for precise definition.",
         shades: [
         { name: "01 Nude", color: "#81331d" },
@@ -52,7 +52,7 @@ const products = [
         id: 4,
         name: "Lip Liner Roll-Up",
         price: 300,
-        image: "images/lip-liner-rollup.jpg",
+        image: "images/products/lip-liner-rollup.webp",
         description: "Retractable lip liner with smooth application.",
         shades: [
         { name: "01 Nude", color: "#81331d" },
@@ -62,5 +62,4 @@ const products = [
         { name: "05 Berry", color: "#35eccbb1" },
     ]
     }
-    
-];
+    ];
