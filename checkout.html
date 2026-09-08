@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | Obi Cosmetics</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+    <header>
+
+        <nav class="navbar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                Obi Cosmetics
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="checkout-container">
+
+        <h1>Checkout</h1>
+
+
+        <section class="checkout-order">
+
+            <h2>Your Order</h2>
+
+            <div id="checkout-items"></div>
+
+            <div class="checkout-total">
+
+                <span>Total</span>
+
+                <strong id="checkout-total">
+                   --
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <section class="customer-details">
+
+            <h2>Delivery Details</h2>
+
+            <form id="checkout-form">
+
+                <label for="customer-name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customer-name"
+                    required
+                >
+
+
+                <label for="customer-phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    required
+                >
+
+
+                <label for="customer-address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="customer-address"
+                    rows="4"
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="whatsapp-checkout-button"
+                >
+                    Checkout via WhatsApp
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script src="products.js"></script>
+<script src="checkout.js"></script>
+
+</body>
+
+</html>
