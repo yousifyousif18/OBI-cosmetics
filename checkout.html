@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,62 +10,259 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Checkout | Obi Cosmetics</title>
+    <title>
+        Checkout | Obi Cosmetics
+    </title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
 
 
 <body>
 
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
     <header>
 
         <nav class="navbar">
+
+
+            <!-- LOGO -->
 
             <a
                 href="index.html"
                 class="logo"
             >
-                Obi Cosmetics
+
+                <img
+                    src="images/brand/logo.webp"
+                    alt="Obi Cosmetics logo"
+                    class="brand-logo"
+                >
+
+                <span>
+                    Obi Cosmetics
+                </span>
+
             </a>
 
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="nav-actions">
+
+                <button
+                    id="menu-button"
+                    class="menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
         </nav>
+
+
+
+        <!-- ========================================
+             DROPDOWN MENU
+        ========================================= -->
+
+        <div
+            id="mobile-menu"
+            class="mobile-menu"
+        >
+
+
+            <div class="shop-menu-group">
+
+                <button
+                    id="shop-menu-button"
+                    class="shop-menu-button"
+                    type="button"
+                >
+
+                    <span>
+                        Shop
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="shop-submenu"
+                    class="shop-submenu"
+                >
+
+                    <a href="shop.html">
+                        Shop All
+                    </a>
+
+                    <a href="shop.html?category=lip-gloss">
+                        Lip Glosses
+                    </a>
+
+                    <a href="shop.html?category=lip-oil">
+                        Lip Oils
+                    </a>
+
+                    <a href="shop.html?category=lip-liner">
+                        Lip Liners
+                    </a>
+
+                    <a href="shop.html?category=blush">
+                        Blush
+                    </a>
+
+                    <a href="shop.html?category=liquid-lipstick">
+                        Liquid Lipsticks
+                    </a>
+
+                    <a href="shop.html?category=body-care">
+                        Body Care
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="delivery.html">
+                Delivery
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
 
     </header>
 
 
+
+    <!-- ========================================
+         CHECKOUT
+    ========================================= -->
+
     <main class="checkout-container">
 
-        <h1>Checkout</h1>
 
+        <h1>
+            Checkout
+        </h1>
+
+
+
+        <!-- ORDER SUMMARY -->
 
         <section class="checkout-order">
 
-            <h2>Your Order</h2>
+            <h2>
+                Your Order
+            </h2>
 
-            <div id="checkout-items"></div>
 
-            <div class="checkout-total">
+            <!-- checkout.js creates products here -->
 
-                <span>Total</span>
+            <div id="checkout-items">
+            </div>
 
-                <strong id="checkout-total">
-                   --
-                </strong>
+
+
+            <!-- PRICE SUMMARY -->
+
+            <div class="checkout-price-summary">
+
+
+                <div class="checkout-price-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="checkout-subtotal">
+                        --
+                    </strong>
+
+                </div>
+
+
+
+                <div class="checkout-price-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong id="checkout-delivery">
+                        Select area
+                    </strong>
+
+                </div>
+
+
+
+                <div class="checkout-price-row final-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="checkout-total">
+                        --
+                    </strong>
+
+                </div>
+
 
             </div>
 
         </section>
 
 
+
+        <!-- ========================================
+             CUSTOMER DETAILS
+        ========================================= -->
+
         <section class="customer-details">
 
-            <h2>Delivery Details</h2>
+            <h2>
+                Delivery Details
+            </h2>
+
 
             <form id="checkout-form">
+
+
+                <!-- NAME -->
 
                 <label for="customer-name">
                     Full Name
@@ -73,9 +271,13 @@
                 <input
                     type="text"
                     id="customer-name"
+                    autocomplete="name"
                     required
                 >
 
+
+
+                <!-- PHONE -->
 
                 <label for="customer-phone">
                     Phone Number
@@ -84,20 +286,68 @@
                 <input
                     type="tel"
                     id="customer-phone"
+                    autocomplete="tel"
                     required
                 >
 
 
+
+                <!-- CITY -->
+
+                <label for="customer-city">
+                    City
+                </label>
+
+                <select
+                    id="customer-city"
+                    required
+                >
+
+                    <option value="">
+                        Select your city
+                    </option>
+
+                </select>
+
+
+
+                <!-- AREA -->
+
+                <label for="customer-area">
+                    Area / Neighborhood
+                </label>
+
+                <select
+                    id="customer-area"
+                    required
+                    disabled
+                >
+
+                    <option value="">
+                        Select your area
+                    </option>
+
+                </select>
+
+
+
+                <!-- EXACT ADDRESS -->
+
                 <label for="customer-address">
-                    Delivery Address
+                    Exact Delivery Address
                 </label>
 
                 <textarea
                     id="customer-address"
                     rows="4"
+                    placeholder="Street, building number, floor, apartment, landmark..."
+                    autocomplete="street-address"
                     required
                 ></textarea>
 
+
+
+                <!-- WHATSAPP CHECKOUT -->
 
                 <button
                     type="submit"
@@ -106,6 +356,7 @@
                     Checkout via WhatsApp
                 </button>
 
+
             </form>
 
         </section>
@@ -113,8 +364,37 @@
     </main>
 
 
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Obi Cosmetics
+        </p>
+
+    </footer>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <!-- Product database -->
     <script src="products.js"></script>
-<script src="checkout.js"></script>
+
+    <!-- Delivery cities and fees -->
+    <script src="delivery.js"></script>
+
+    <!-- Menu behaviour -->
+    <script src="menu.js"></script>
+
+    <!-- Checkout behaviour -->
+    <script src="checkout.js"></script>
+
 
 </body>
 

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Shop | Obi Cosmetics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <nav class="navbar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <img
+                    src="images/brand/logo.webp"
+                    alt="Obi Cosmetics logo"
+                    class="brand-logo"
+                >
+
+                <span>
+                    Obi Cosmetics
+                </span>
+
+            </a>
+
+
+            <div class="nav-actions">
+
+                <button
+                    id="menu-button"
+                    class="menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+
+                <button
+                    id="open-cart-button"
+                    class="cart-button"
+                    type="button"
+                    aria-label="Open shopping cart"
+                >
+
+                    <svg
+                        class="cart-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="9"
+                            cy="20"
+                            r="1"
+                        ></circle>
+
+                        <circle
+                            cx="19"
+                            cy="20"
+                            r="1"
+                        ></circle>
+
+                        <path
+                            d="M3 4h2l2.5 11h10l2-7H7"
+                        ></path>
+
+                    </svg>
+
+
+                    <span
+                        id="cart-count"
+                        class="cart-count"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div
+            id="mobile-menu"
+            class="mobile-menu"
+        >
+
+            <div class="shop-menu-group">
+
+                <button
+                    id="shop-menu-button"
+                    class="shop-menu-button"
+                    type="button"
+                >
+                    <span>Shop</span>
+                    <span>+</span>
+                </button>
+
+
+                <div
+                    id="shop-submenu"
+                    class="shop-submenu"
+                >
+
+                    <a href="shop.html">
+                        Shop All
+                    </a>
+
+                    <a href="shop.html?category=lip-gloss">
+                        Lip Glosses
+                    </a>
+
+                    <a href="shop.html?category=lip-oil">
+                        Lip Oils
+                    </a>
+
+                    <a href="shop.html?category=lip-liner">
+                      Lip Liners
+                   </a>
+
+                    <a href="shop.html?category=blush">
+                        Blush
+                    </a>
+
+                    <a href="shop.html?category=liquid-lipstick">
+                        Liquid Lipsticks
+                    </a>
+
+                    <a href="shop.html?category=body-care">
+                        Body Care
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="about.html">
+                About Us
+            </a>
+
+            <a href="delivery.html">
+                Delivery
+            </a>
+
+            <a href="faq.html">
+                FAQ
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="shop-header">
+
+            <p class="section-label">
+                Obi Cosmetics
+            </p>
+
+            <h1 id="shop-title">
+                Shop All
+            </h1>
+
+            <p id="shop-description">
+                Explore the Obi Cosmetics collection.
+            </p>
+
+        </section>
+
+
+        <section class="shop-category-nav">
+
+            <a href="shop.html">
+               All
+            </a>
+
+            <a href="shop.html?category=lip-gloss">
+              Lip Glosses
+           </a>
+
+            <a href="shop.html?category=lip-oil">
+               Lip Oils
+            </a>
+
+           <a href="shop.html?category=lip-liner">
+              Lip Liners
+            </a>
+
+           <a href="shop.html?category=blush">
+              Blush
+            </a>
+
+           <a href="shop.html?category=liquid-lipstick">
+             Liquid Lipsticks
+          </a>
+
+           <a href="shop.html?category=body-care">
+               Body Care
+          </a>
+
+        </section>
+
+
+        <section class="products-section">
+
+            <div
+                id="product-grid"
+                class="product-grid"
+            >
+            </div>
+
+            <p
+                id="no-products-message"
+                class="no-products-message"
+                hidden
+            >
+                No products are available in this
+                category yet.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <div
+        id="cart-overlay"
+        class="cart-overlay"
+    ></div>
+
+
+    <aside
+        id="cart-drawer"
+        class="cart-drawer"
+    >
+
+        <div class="cart-drawer-header">
+
+            <h2>
+                Your Cart
+            </h2>
+
+            <button
+                id="close-cart-button"
+                class="close-cart-button"
+                type="button"
+                aria-label="Close cart"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="cart-items"
+            class="cart-items"
+        >
+        </div>
+
+
+        <div class="cart-drawer-footer">
+
+            <div class="cart-subtotal">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="cart-subtotal">
+                    LE 0
+                </strong>
+
+            </div>
+
+
+            <button
+                id="cart-checkout-button"
+                class="cart-checkout-button"
+                type="button"
+            >
+                Go to Checkout
+            </button>
+
+
+            <button
+                id="continue-shopping-button"
+                class="continue-shopping-button"
+                type="button"
+            >
+                Continue Shopping
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <footer>
+
+        <p>
+            © 2026 Obi Cosmetics
+        </p>
+
+    </footer>
+
+
+    <script src="products.js"></script>
+    <script src="menu.js"></script>
+   <script src="shop.js"></script>
+   <script src="store.js"></script>
+    
+</body>
+
+</html>
