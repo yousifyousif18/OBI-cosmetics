@@ -1125,3 +1125,7017 @@ body.cart-open {
     }
 
 }
+/* ========================================
+   BRAND HEADER UPDATE
+======================================== */
+
+:root {
+    --obi-pink: #ef6ab8;
+    --obi-dark: #1f1f1f;
+    --obi-white: #ffffff;
+}
+
+
+header {
+    background: var(--obi-pink);
+}
+
+
+.navbar {
+    background: var(--obi-pink);
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+.brand-wordmark {
+    display: block;
+    width: 190px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.menu-button,
+.cart-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+.menu-button span {
+    width: 24px;
+    height: 2px;
+    display: block;
+    margin: 4px 0;
+    background: var(--obi-white);
+    border-radius: 10px;
+}
+
+
+.cart-button {
+    color: var(--obi-white);
+}
+
+
+.cart-icon {
+    width: 24px;
+    height: 24px;
+}
+
+
+.cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background: var(--obi-dark);
+    color: var(--obi-white);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    position: relative;
+    top: -8px;
+    left: -4px;
+}
+
+
+.mobile-menu {
+    background: #fff7fb;
+}
+
+@media (max-width: 767px) {
+
+    .brand-wordmark {
+        width: 160px;
+    }
+
+}
+/* ========================================
+   FINAL HEADER STYLES
+======================================== */
+
+header {
+    background: #fb70c3;
+}
+
+
+.navbar {
+    background: #fb70c3;
+
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 16px;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+
+    flex-shrink: 1;
+}
+
+
+.brand-wordmark {
+    display: block;
+
+    width: 200px;
+    height: 70px;
+
+    object-fit: cover;
+
+    border: none;
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: auto;
+
+    flex-shrink: 0;
+}
+
+
+/* HAMBURGER BUTTON */
+
+.menu-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+.menu-button span {
+    display: block;
+
+    width: 25px;
+    height: 3px;
+
+    margin: 0;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+}
+
+
+/* CART */
+
+.cart-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    flex-shrink: 0;
+}
+
+
+.cart-icon {
+    width: 26px;
+    height: 26px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    .navbar {
+        min-height: 76px;
+
+        padding: 8px 12px;
+    }
+
+
+    .brand-wordmark {
+        width: 165px;
+        height: 58px;
+    }
+
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+
+    .menu-button,
+    .cart-button {
+        width: 38px;
+        height: 38px;
+    }
+
+
+    .menu-button span {
+        width: 23px;
+    }
+
+}
+/* ========================================
+   FEATURED COLLECTIONS
+======================================== */
+
+.featured-collections-section {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 70px 16px;
+}
+
+
+.featured-collections-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+
+    margin-top: 32px;
+}
+
+
+.featured-collection-card {
+    position: relative;
+
+    min-height: 320px;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: #f4f4f4;
+}
+
+
+.featured-collection-card img {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+.featured-collection-card::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.05)
+        );
+}
+
+
+.featured-collection-overlay {
+    position: absolute;
+
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+
+    z-index: 2;
+}
+
+
+.featured-collection-overlay p {
+    margin-bottom: 3px;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+.featured-collection-overlay h3 {
+    margin-bottom: 12px;
+
+    font-size: 28px;
+}
+
+
+.featured-collection-overlay span {
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.featured-collection-card:hover img {
+    transform: scale(1.05);
+}
+
+
+@media (min-width: 600px) {
+
+    .featured-collections-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (min-width: 1024px) {
+
+    .featured-collection-card {
+        min-height: 380px;
+    }
+
+}
+/* =========================================================
+   OBI HOMEPAGE — BRAND SYSTEM
+========================================================= */
+
+:root {
+
+    --obi-pink: #fb70c3;
+
+    --obi-pink-dark:
+        #d94d9f;
+
+    --obi-pink-soft:
+        #fff1f8;
+
+    --obi-cream:
+        #fffaf7;
+
+    --obi-black:
+        #181818;
+
+    --obi-berry:
+        #742a54;
+
+    --obi-white:
+        #ffffff;
+
+}
+
+
+
+/* =========================================================
+   ANNOUNCEMENT
+========================================================= */
+
+.obi-announcement {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background:
+        var(--obi-black);
+
+    color:
+        var(--obi-white);
+
+    padding:
+        9px 0;
+
+}
+
+
+.obi-announcement-track {
+
+    width: max-content;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 45px;
+
+
+    animation:
+        obiAnnouncementMove
+        25s
+        linear
+        infinite;
+
+}
+
+
+.obi-announcement-track span {
+
+    white-space: nowrap;
+
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.7px;
+
+}
+
+
+.obi-announcement:hover
+.obi-announcement-track {
+
+    animation-play-state:
+        paused;
+
+}
+
+
+
+@keyframes obiAnnouncementMove {
+
+    from {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    to {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.obi-hero {
+
+    min-height:
+        calc(100vh - 100px);
+
+
+    display: grid;
+
+    grid-template-columns:
+        1fr;
+
+
+    background:
+        var(--obi-pink);
+
+
+    overflow: hidden;
+
+
+    position: relative;
+
+}
+
+
+
+/* COPY */
+
+.obi-hero-copy {
+
+    padding:
+        65px 20px 50px;
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+
+    position: relative;
+
+    z-index: 3;
+
+}
+
+
+.obi-kicker {
+
+    margin-bottom:
+        18px;
+
+
+    color:
+        var(--obi-berry);
+
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.obi-hero h1 {
+
+    margin: 0 0 22px;
+
+
+    color:
+        var(--obi-black);
+
+
+    font-size:
+        clamp(
+            55px,
+            17vw,
+            96px
+        );
+
+
+    font-weight:
+        800;
+
+    line-height:
+        0.82;
+
+    letter-spacing:
+        -4px;
+
+}
+
+
+.obi-hero h1 span {
+
+    display: block;
+
+}
+
+
+.obi-hero-accent {
+
+    color:
+        var(--obi-white);
+
+}
+
+
+.obi-hero-description {
+
+    max-width:
+        400px;
+
+
+    margin-bottom:
+        30px;
+
+
+    color:
+        #4d243c;
+
+
+    font-size:
+        16px;
+
+    line-height:
+        1.6;
+
+}
+
+
+
+/* HERO BUTTONS */
+
+.obi-hero-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+
+    gap: 12px;
+
+
+    margin-bottom:
+        35px;
+
+}
+
+
+.obi-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+    gap: 10px;
+
+
+    min-height:
+        48px;
+
+
+    padding:
+        12px 22px;
+
+
+    border-radius:
+        999px;
+
+
+    text-decoration: none;
+
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+
+}
+
+
+.obi-button-primary {
+
+    background:
+        var(--obi-black);
+
+    color:
+        var(--obi-white);
+
+}
+
+
+.obi-button-primary:hover {
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+.obi-button-link {
+
+    padding-left:
+        10px;
+
+
+    color:
+        var(--obi-black);
+
+}
+
+
+.obi-button-link:hover {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+
+/* SMALL TAGLINE */
+
+.obi-hero-note {
+
+    display: flex;
+
+    align-items: center;
+
+
+    gap: 10px;
+
+
+    color:
+        var(--obi-berry);
+
+}
+
+
+.obi-hero-note span {
+
+    font-size:
+        18px;
+
+}
+
+
+.obi-hero-note p {
+
+    margin: 0;
+
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .5px;
+
+}
+
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.obi-hero-visual {
+
+    position: relative;
+
+
+    min-height:
+        420px;
+
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+.obi-hero-blob {
+
+    position: absolute;
+
+
+    width:
+        min(115vw, 550px);
+
+    aspect-ratio:
+        1;
+
+
+    border-radius:
+        50%;
+
+
+    background:
+        var(--obi-pink-soft);
+
+
+    bottom:
+        -25%;
+
+    left:
+        50%;
+
+
+    transform:
+        translateX(-50%);
+
+}
+
+
+.obi-hero-image {
+
+    position: relative;
+
+
+    z-index: 2;
+
+
+    width:
+        min(88%, 500px);
+
+
+    max-height:
+        500px;
+
+
+    object-fit:
+        cover;
+
+
+    border-radius:
+        180px 180px 0 0;
+
+
+    box-shadow:
+        0 25px 70px
+        rgba(
+            79,
+            20,
+            56,
+            .20
+        );
+
+
+    animation:
+        obiHeroImageEnter
+        1s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        )
+        both;
+
+}
+
+
+
+@keyframes obiHeroImageEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.97);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+
+/* SPARKLES */
+
+.obi-sparkle {
+
+    position: absolute;
+
+
+    z-index: 4;
+
+
+    color:
+        white;
+
+
+    pointer-events: none;
+
+
+    animation:
+        obiSparkleFloat
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+.obi-sparkle-one {
+
+    top:
+        18%;
+
+    left:
+        12%;
+
+
+    font-size:
+        36px;
+
+}
+
+
+.obi-sparkle-two {
+
+    top:
+        33%;
+
+    right:
+        9%;
+
+
+    font-size:
+        23px;
+
+
+    animation-delay:
+        -1.8s;
+
+}
+
+
+
+@keyframes obiSparkleFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateY(-8px)
+            rotate(8deg);
+
+    }
+
+}
+
+
+
+/* FLOATING LABEL */
+
+.obi-floating-label {
+
+    position: absolute;
+
+
+    z-index: 5;
+
+
+    right:
+        12px;
+
+    bottom:
+        35px;
+
+
+    display: flex;
+
+    align-items: center;
+
+
+    gap: 7px;
+
+
+    padding:
+        10px 13px;
+
+
+    border-radius:
+        999px;
+
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .88
+        );
+
+
+    backdrop-filter:
+        blur(8px);
+
+
+    color:
+        var(--obi-black);
+
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.obi-floating-dot {
+
+    width:
+        8px;
+
+    height:
+        8px;
+
+
+    border-radius:
+        50%;
+
+
+    background:
+        var(--obi-pink);
+
+}
+
+
+
+/* =========================================================
+   SHADE PARADE
+========================================================= */
+
+.obi-shade-parade {
+
+    overflow: hidden;
+
+
+    padding:
+        20px 0 24px;
+
+
+    background:
+        var(--obi-cream);
+
+
+    border-bottom:
+        1px solid
+        #f0dfE8;
+
+}
+
+
+.obi-shade-title {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    gap: 10px;
+
+
+    margin-bottom:
+        16px;
+
+
+    color:
+        var(--obi-berry);
+
+}
+
+
+.obi-shade-title p {
+
+    margin: 0;
+
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.obi-shade-marquee {
+
+    overflow: hidden;
+
+}
+
+
+.obi-shade-track {
+
+    width:
+        max-content;
+
+
+    display: flex;
+
+    align-items: center;
+
+
+    gap:
+        42px;
+
+
+    animation:
+        obiShadeMove
+        23s
+        linear
+        infinite;
+
+}
+
+
+.obi-shade-track:hover {
+
+    animation-play-state:
+        paused;
+
+}
+
+
+.obi-shade-item {
+
+    display: flex;
+
+    align-items: center;
+
+
+    gap: 9px;
+
+
+    white-space:
+        nowrap;
+
+
+    color:
+        var(--obi-black);
+
+
+    text-decoration:
+        none;
+
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.obi-shade-circle {
+
+    width:
+        22px;
+
+    height:
+        22px;
+
+
+    border-radius:
+        50%;
+
+
+    border:
+        2px solid
+        white;
+
+
+    box-shadow:
+        0 0 0 1px
+        #d6c3cc;
+
+}
+
+
+.obi-shade-item:hover {
+
+    color:
+        var(--obi-pink-dark);
+
+}
+
+
+
+@keyframes obiShadeMove {
+
+    from {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    to {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TABLET / DESKTOP
+========================================================= */
+
+@media (min-width: 768px) {
+
+    .obi-hero {
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+
+        min-height:
+            720px;
+
+    }
+
+
+    .obi-hero-copy {
+
+        padding:
+            80px 40px;
+
+    }
+
+
+    .obi-hero h1 {
+
+        font-size:
+            clamp(
+                68px,
+                8vw,
+                110px
+            );
+
+    }
+
+
+    .obi-hero-visual {
+
+        min-height:
+            100%;
+
+
+        align-items:
+            center;
+
+    }
+
+
+    .obi-hero-blob {
+
+        width:
+            min(
+                48vw,
+                650px
+            );
+
+
+        bottom:
+            auto;
+
+        top:
+            50%;
+
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+
+    .obi-hero-image {
+
+        width:
+            min(
+                75%,
+                520px
+            );
+
+
+        height:
+            min(
+                70vh,
+                620px
+            );
+
+
+        max-height:
+            none;
+
+
+        border-radius:
+            260px 260px 25px 25px;
+
+    }
+
+
+    .obi-floating-label {
+
+        right:
+            7%;
+
+        bottom:
+            16%;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .obi-hero-copy {
+
+        padding-left:
+            max(
+                60px,
+                calc(
+                    (
+                        100vw - 1200px
+                    ) / 2
+                )
+            );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    .obi-announcement-track,
+    .obi-shade-track,
+    .obi-hero-image,
+    .obi-sparkle {
+
+        animation:
+            none;
+
+    }
+
+}
+
+/* =========================================================
+   OBI SHADE PARADE
+========================================================= */
+
+.shade-parade-section {
+
+    padding:
+        55px 0 45px;
+
+    overflow: hidden;
+
+    background:
+        #fff8fc;
+
+    border-top:
+        1px solid
+        rgba(
+            116,
+            42,
+            84,
+            0.08
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            116,
+            42,
+            84,
+            0.08
+        );
+
+}
+
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.shade-parade-heading {
+
+    max-width: 600px;
+
+    margin:
+        0 auto 34px;
+
+    padding:
+        0 20px;
+
+    text-align: center;
+
+}
+
+
+.shade-parade-eyebrow {
+
+    margin-bottom: 8px;
+
+    color:
+        #a3487c;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.shade-parade-heading h2 {
+
+    margin-bottom: 10px;
+
+    color:
+        #1a1a1a;
+
+    font-size:
+        clamp(
+            32px,
+            7vw,
+            50px
+        );
+
+    line-height: 1;
+
+}
+
+
+.shade-parade-heading > p:last-child {
+
+    max-width: 430px;
+
+    margin:
+        0 auto;
+
+    color:
+        #6d5b65;
+
+    font-size: 14px;
+
+}
+
+
+
+/* ========================================
+   MOVING SHADES
+======================================== */
+
+.shade-marquee {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+}
+
+
+/*
+    Soft fade on the left/right edges.
+*/
+
+.shade-marquee::before,
+.shade-marquee::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 55px;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+}
+
+
+.shade-marquee::before {
+
+    left: 0;
+
+    background:
+        linear-gradient(
+            to right,
+            #fff8fc,
+            transparent
+        );
+
+}
+
+
+.shade-marquee::after {
+
+    right: 0;
+
+    background:
+        linear-gradient(
+            to left,
+            #fff8fc,
+            transparent
+        );
+
+}
+
+
+
+.shade-parade-track {
+
+    width:
+        max-content;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 34px;
+
+    padding:
+        10px 17px;
+
+    animation:
+        obiShadeParade
+        28s
+        linear
+        infinite;
+
+}
+
+
+.shade-parade-track:hover {
+
+    animation-play-state:
+        paused;
+
+}
+/* ========================================
+   SHADE ITEM
+======================================== */
+
+.shade-parade-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    color:
+        #272127;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.shade-parade-colour {
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    border:
+        3px solid white;
+
+    box-shadow:
+        0 0 0 1px
+        rgba(
+            0,
+            0,
+            0,
+            0.15
+        );
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.shade-parade-name {
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.shade-parade-item:hover {
+
+    color:
+        #d94d9f;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.shade-parade-item:hover
+.shade-parade-colour {
+
+    transform:
+        scale(1.15);
+
+}
+
+
+
+/* ========================================
+   LINK UNDER SHADES
+======================================== */
+
+.shade-parade-action {
+
+    margin-top: 28px;
+
+    text-align: center;
+
+}
+
+
+.shade-parade-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color:
+        #1a1a1a;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.shade-parade-link span {
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.shade-parade-link:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   MARQUEE ANIMATION
+======================================== */
+
+@keyframes obiShadeParade {
+
+    from {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    to {
+
+        transform:
+            translateX(-50%);
+
+    }
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 768px) {
+
+    .shade-parade-section {
+
+        padding:
+            70px 0 55px;
+
+    }
+
+
+    .shade-parade-track {
+
+        gap:
+            50px;
+
+    }
+
+
+    .shade-parade-colour {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+    }
+
+
+    .shade-parade-name {
+
+        font-size:
+            15px;
+
+    }
+
+}
+
+
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    .shade-parade-track {
+
+        animation: none;
+
+    }
+
+}
+/* ========================================
+   FINAL SHADE PARADE SPACING
+======================================== */
+
+.shade-parade-section {
+    padding: 55px 0 45px;
+}
+
+
+.shade-parade-heading {
+    margin-bottom: 25px;
+}
+
+
+.shade-marquee {
+    margin-top: 20px;
+}
+
+
+.shade-parade-action {
+    margin-top: 28px;
+}
+.shade-parade-track {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.shade-marquee {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/* =========================================================
+   PICK YOUR VIBE
+========================================================= */
+
+.obi-vibes-section {
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        80px 16px;
+
+    background:
+        #ffffff;
+
+}
+
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.obi-vibes-heading {
+
+    max-width: 680px;
+
+    margin-bottom: 38px;
+
+}
+
+
+.obi-vibes-eyebrow {
+
+    margin-bottom: 10px;
+
+    color:
+        #b04482;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.obi-vibes-heading h2 {
+
+    margin-bottom: 12px;
+
+    color:
+        #171717;
+
+    font-size:
+        clamp(
+            38px,
+            8vw,
+            65px
+        );
+
+    line-height: .95;
+
+}
+
+
+.obi-vibes-heading > p:last-child {
+
+    color:
+        #6b5c64;
+
+    font-size:
+        15px;
+
+}
+
+
+
+/* ========================================
+   GRID
+======================================== */
+
+.obi-vibes-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap: 14px;
+
+}
+
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.obi-vibe-card {
+
+    position: relative;
+
+    min-height: 340px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background:
+        #f3e8ee;
+
+    color:
+        white;
+
+    text-decoration: none;
+
+    isolation: isolate;
+
+}
+
+
+.obi-vibe-card img {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform
+        .65s
+        cubic-bezier(
+            .2,
+            .7,
+            .2,
+            1
+        );
+
+}
+
+
+
+/* DARK FADE */
+
+.obi-vibe-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(
+                24,
+                10,
+                18,
+                .76
+            )
+            0%,
+
+            rgba(
+                24,
+                10,
+                18,
+                .15
+            )
+            65%,
+
+            rgba(
+                24,
+                10,
+                18,
+                .03
+            )
+            100%
+        );
+
+}
+
+
+
+/* ========================================
+   TEXT
+======================================== */
+
+.obi-vibe-content {
+
+    position: absolute;
+
+    z-index: 2;
+
+    left: 22px;
+    right: 22px;
+
+    bottom: 23px;
+
+}
+
+
+.obi-vibe-content > span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .78
+        );
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+
+}
+
+
+.obi-vibe-content h3 {
+
+    margin-bottom: 2px;
+
+    font-size:
+        clamp(
+            34px,
+            8vw,
+            58px
+        );
+
+    line-height: .95;
+
+}
+
+
+.obi-vibe-content p {
+
+    margin-bottom: 14px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .86
+        );
+
+    font-size: 13px;
+
+}
+
+
+.obi-vibe-content strong {
+
+    display: inline-block;
+
+    font-size: 13px;
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+
+/* ========================================
+   CARD INTERACTION
+======================================== */
+
+.obi-vibe-card:hover img {
+
+    transform:
+        scale(1.055);
+
+}
+
+
+.obi-vibe-card:hover
+.obi-vibe-content strong {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   VIEW ALL
+======================================== */
+
+.obi-vibes-footer {
+
+    margin-top: 35px;
+
+    text-align: center;
+
+}
+
+
+.obi-view-all {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        13px 21px;
+
+    border:
+        1px solid
+        #1c1c1c;
+
+    border-radius:
+        999px;
+
+    color:
+        #1c1c1c;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+
+.obi-view-all:hover {
+
+    background:
+        #1c1c1c;
+
+    color:
+        white;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (min-width: 650px) {
+
+    .obi-vibes-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .obi-vibe-card {
+
+        min-height:
+            390px;
+
+    }
+
+}
+
+
+
+/* ========================================
+   DESKTOP EDITORIAL LAYOUT
+======================================== */
+
+@media (min-width: 950px) {
+
+    .obi-vibes-section {
+
+        padding:
+            110px 30px;
+
+    }
+
+
+    .obi-vibes-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        grid-auto-rows:
+            290px;
+
+    }
+
+
+    /*
+        Main large Gloss card
+    */
+
+    .obi-vibe-featured {
+
+        grid-column:
+            span 2;
+
+        grid-row:
+            span 2;
+
+    }
+
+
+    .obi-vibe-card {
+
+        min-height:
+            0;
+
+    }
+
+}
+
+/* =========================================================
+   OBI EDITORIAL CAMPAIGN
+========================================================= */
+
+.obi-editorial {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr;
+
+    overflow: hidden;
+
+    background:
+        #fb70c3;
+
+}
+
+
+
+/* ========================================
+   IMAGE SIDE
+======================================== */
+
+.obi-editorial-image {
+
+    position: relative;
+
+    min-height:
+        430px;
+
+    overflow: hidden;
+
+}
+
+
+.obi-editorial-image img {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform
+        .8s
+        cubic-bezier(
+            .2,
+            .7,
+            .2,
+            1
+        );
+
+}
+
+
+.obi-editorial:hover
+.obi-editorial-image img {
+
+    transform:
+        scale(1.035);
+
+}
+
+
+
+/* subtle dark image fade */
+
+.obi-editorial-image-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(
+                30,
+                10,
+                22,
+                .35
+            ),
+            transparent 60%
+        );
+
+}
+
+
+
+/* little floating label */
+
+.obi-editorial-badge {
+
+    position: absolute;
+
+    left: 20px;
+
+    bottom: 20px;
+
+
+    padding:
+        10px 15px;
+
+
+    border-radius:
+        999px;
+
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+
+    color:
+        #1b1719;
+
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.7px;
+
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+
+/* ========================================
+   TEXT SIDE
+======================================== */
+
+.obi-editorial-content {
+
+    position: relative;
+
+    overflow: hidden;
+
+
+    padding:
+        65px 22px 75px;
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+
+    background:
+        #fb70c3;
+
+}
+
+
+.obi-editorial-eyebrow {
+
+    position: relative;
+
+    z-index: 2;
+
+
+    margin-bottom:
+        14px;
+
+
+    color:
+        #702549;
+
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+
+/* MAIN TITLE */
+
+.obi-editorial-content h2 {
+
+    position: relative;
+
+    z-index: 2;
+
+
+    max-width:
+        550px;
+
+
+    margin-bottom:
+        22px;
+
+
+    color:
+        #151515;
+
+
+    font-size:
+        clamp(
+            52px,
+            13vw,
+            95px
+        );
+
+
+    line-height:
+        .88;
+
+
+    letter-spacing:
+        -3px;
+
+}
+
+
+.obi-editorial-content h2 span {
+
+    display: block;
+
+    color:
+        white;
+
+}
+
+
+
+/* DESCRIPTION */
+
+.obi-editorial-description {
+
+    position: relative;
+
+    z-index: 2;
+
+
+    max-width:
+        430px;
+
+
+    margin-bottom:
+        30px;
+
+
+    color:
+        #51283f;
+
+
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
+
+}
+
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.obi-editorial-button {
+
+    position: relative;
+
+    z-index: 2;
+
+
+    width:
+        fit-content;
+
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+
+    gap:
+        11px;
+
+
+    padding:
+        13px 22px;
+
+
+    border-radius:
+        999px;
+
+
+    background:
+        #171717;
+
+
+    color:
+        white;
+
+
+    text-decoration:
+        none;
+
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-editorial-button span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-editorial-button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.obi-editorial-button:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   GIANT BACKGROUND OBI
+======================================== */
+
+.obi-editorial-decoration {
+
+    position: absolute;
+
+    right:
+        -25px;
+
+    bottom:
+        -60px;
+
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .12
+        );
+
+
+    font-size:
+        190px;
+
+    font-weight:
+        900;
+
+    line-height:
+        1;
+
+
+    pointer-events:
+        none;
+
+    user-select:
+        none;
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 850px) {
+
+    .obi-editorial {
+
+        grid-template-columns:
+            1.15fr
+            .85fr;
+
+        min-height:
+            650px;
+
+    }
+
+
+    .obi-editorial-image {
+
+        min-height:
+            650px;
+
+    }
+
+
+    .obi-editorial-content {
+
+        padding:
+            80px
+            clamp(
+                45px,
+                6vw,
+                95px
+            );
+
+    }
+
+
+    .obi-editorial-decoration {
+
+        font-size:
+            250px;
+
+        bottom:
+            -85px;
+
+    }
+
+}
+/* =========================================================
+   HOME SCROLL REVEAL
+========================================================= */
+
+[data-reveal] {
+
+    opacity: 0;
+
+    transform:
+        translateY(35px);
+
+    transition:
+        opacity .75s ease,
+        transform .75s ease;
+
+}
+
+
+[data-reveal].is-visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+@media (
+    prefers-reduced-motion:
+    reduce
+) {
+
+    [data-reveal] {
+
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+
+    }
+
+}
+
+/* =========================================================
+   BUILD YOUR OBI COMBO
+========================================================= */
+
+.obi-combo-section {
+
+    padding:
+        85px 16px;
+
+    background:
+        #fff8fc;
+
+}
+
+
+.obi-combo-inner {
+
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:
+        45px;
+
+    align-items:
+        center;
+
+}
+
+
+
+/* ========================================
+   COPY
+======================================== */
+
+.obi-combo-copy {
+
+    max-width:
+        540px;
+
+}
+
+
+.obi-combo-eyebrow {
+
+    margin-bottom:
+        12px;
+
+    color:
+        #b04482;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.obi-combo-copy h2 {
+
+    margin-bottom:
+        20px;
+
+    color:
+        #171717;
+
+    font-size:
+        clamp(
+            45px,
+            10vw,
+            75px
+        );
+
+    line-height:
+        .9;
+
+    letter-spacing:
+        -2px;
+
+}
+
+
+.obi-combo-copy h2 span {
+
+    display:
+        block;
+
+    color:
+        #fb70c3;
+
+}
+
+
+.obi-combo-description {
+
+    max-width:
+        460px;
+
+    margin-bottom:
+        28px;
+
+    color:
+        #685660;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
+
+}
+
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.obi-combo-button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        13px 22px;
+
+    border-radius:
+        999px;
+
+    background:
+        #171717;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-combo-button span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-combo-button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.obi-combo-button:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   VISUAL
+======================================== */
+
+.obi-combo-visual {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:
+        18px;
+
+    align-items:
+        center;
+
+}
+
+
+.obi-combo-card {
+
+    display:
+        block;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        18px;
+
+    background:
+        white;
+
+    color:
+        #1a1a1a;
+
+    text-decoration:
+        none;
+
+    box-shadow:
+        0 16px 45px
+        rgba(
+            80,
+            38,
+            62,
+            .08
+        );
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.obi-combo-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 22px 60px
+        rgba(
+            80,
+            38,
+            62,
+            .13
+        );
+
+}
+
+
+
+/* ========================================
+   IMAGE
+======================================== */
+
+.obi-combo-image {
+
+    aspect-ratio:
+        1 / 1;
+
+    overflow:
+        hidden;
+
+    background:
+        #f6edf2;
+
+}
+
+
+.obi-combo-image img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+.obi-combo-card:hover
+.obi-combo-image img {
+
+    transform:
+        scale(1.045);
+
+}
+
+
+
+/* ========================================
+   CARD TEXT
+======================================== */
+
+.obi-combo-card-content {
+
+    padding:
+        20px;
+
+}
+
+
+.obi-combo-card-content span {
+
+    display:
+        block;
+
+    margin-bottom:
+        6px;
+
+    color:
+        #b04482;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.7px;
+
+}
+
+
+.obi-combo-card-content h3 {
+
+    font-size:
+        22px;
+
+}
+
+
+
+/* ========================================
+   PLUS SIGN
+======================================== */
+
+.obi-combo-plus {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        54px;
+
+    height:
+        54px;
+
+    margin:
+        auto;
+
+    border-radius:
+        50%;
+
+    background:
+        #fb70c3;
+
+    color:
+        white;
+
+    font-size:
+        30px;
+
+    font-weight:
+        300;
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 900px) {
+
+    .obi-combo-section {
+
+        padding:
+            120px 30px;
+
+    }
+
+
+    .obi-combo-inner {
+
+        grid-template-columns:
+            .8fr
+            1.2fr;
+
+        gap:
+            70px;
+
+    }
+
+
+    .obi-combo-visual {
+
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap:
+            20px;
+
+    }
+
+
+    .obi-combo-plus {
+
+        margin:
+            0;
+
+    }
+
+}
+/* =========================================================
+   HOW OBI ORDERING WORKS
+========================================================= */
+
+.obi-order-section {
+
+    padding:
+        90px 16px;
+
+    background:
+        #171717;
+
+    color:
+        white;
+
+}
+
+
+.obi-order-inner {
+
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+
+}
+
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.obi-order-heading {
+
+    max-width:
+        700px;
+
+    margin-bottom:
+        55px;
+
+}
+
+
+.obi-order-eyebrow {
+
+    margin-bottom:
+        12px;
+
+    color:
+        #fb70c3;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+.obi-order-heading h2 {
+
+    margin-bottom:
+        18px;
+
+    color:
+        white;
+
+    font-size:
+        clamp(
+            45px,
+            10vw,
+            76px
+        );
+
+    line-height:
+        .9;
+
+    letter-spacing:
+        -2px;
+
+}
+
+
+.obi-order-heading h2 span {
+
+    display:
+        block;
+
+    color:
+        #fb70c3;
+
+}
+
+
+.obi-order-heading > p:last-child {
+
+    max-width:
+        520px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .68
+        );
+
+    font-size:
+        15px;
+
+    line-height:
+        1.7;
+
+}
+
+
+
+/* ========================================
+   STEPS
+======================================== */
+
+.obi-order-steps {
+
+    position:
+        relative;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+}
+
+
+
+/* Each step */
+
+.obi-order-step {
+
+    position:
+        relative;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        72px 1fr;
+
+    gap:
+        18px;
+
+    padding:
+        30px 0;
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .13
+        );
+
+}
+
+
+.obi-order-step:last-child {
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .13
+        );
+
+}
+
+
+
+/* ========================================
+   LARGE NUMBER
+======================================== */
+
+.obi-order-number {
+
+    color:
+        #fb70c3;
+
+    font-size:
+        34px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+}
+
+
+
+/* ========================================
+   STEP TEXT
+======================================== */
+
+.obi-order-step-content > span {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .45
+        );
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.7px;
+
+}
+
+
+.obi-order-step-content h3 {
+
+    margin-bottom:
+        9px;
+
+    color:
+        white;
+
+    font-size:
+        clamp(
+            25px,
+            6vw,
+            34px
+        );
+
+}
+
+
+.obi-order-step-content p {
+
+    max-width:
+        420px;
+
+    margin:
+        0;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .64
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+}
+
+
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.obi-order-bottom {
+
+    margin-top:
+        45px;
+
+}
+
+
+.obi-order-button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        14px 23px;
+
+    border-radius:
+        999px;
+
+    background:
+        #fb70c3;
+
+    color:
+        #171717;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    transition:
+        transform .25s ease,
+        background .25s ease;
+
+}
+
+
+.obi-order-button span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-order-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        white;
+
+}
+
+
+.obi-order-button:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 850px) {
+
+    .obi-order-section {
+
+        padding:
+            120px 30px;
+
+    }
+
+
+    .obi-order-heading {
+
+        margin-bottom:
+            75px;
+
+    }
+
+
+    .obi-order-steps {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        border-top:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                .13
+            );
+
+        border-bottom:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                .13
+            );
+
+    }
+
+
+    .obi-order-step {
+
+        display:
+            block;
+
+        min-height:
+            300px;
+
+        padding:
+            35px 35px 40px;
+
+        border-top:
+            none;
+
+        border-right:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                .13
+            );
+
+    }
+
+
+    .obi-order-step:last-child {
+
+        border-right:
+            none;
+
+        border-bottom:
+            none;
+
+    }
+
+
+    .obi-order-number {
+
+        margin-bottom:
+            80px;
+
+        font-size:
+            48px;
+
+    }
+
+}
+/* =========================================================
+   MEET OBI
+========================================================= */
+
+.obi-story {
+
+    padding:
+        90px 16px;
+
+    background:
+        #fffdfb;
+
+}
+
+
+.obi-story-inner {
+
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:
+        55px;
+
+    align-items:
+        center;
+
+}
+
+
+
+/* ========================================
+   IMAGE
+======================================== */
+
+.obi-story-visual {
+
+    position:
+        relative;
+
+}
+
+
+.obi-story-image-main {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        500px;
+
+    border-radius:
+        220px 220px 25px 25px;
+
+    background:
+        #f7e9f0;
+
+}
+
+
+.obi-story-image-main img {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform .7s ease;
+
+}
+
+
+.obi-story:hover
+.obi-story-image-main img {
+
+    transform:
+        scale(1.035);
+
+}
+
+
+
+/* ========================================
+   FLOATING STICKER
+======================================== */
+
+.obi-story-sticker {
+
+    position:
+        absolute;
+
+    right:
+        -5px;
+
+    bottom:
+        35px;
+
+
+    width:
+        105px;
+
+    height:
+        105px;
+
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+
+    gap:
+        3px;
+
+
+    border-radius:
+        50%;
+
+
+    background:
+        #fb70c3;
+
+
+    color:
+        white;
+
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.4px;
+
+
+    text-align:
+        center;
+
+
+    box-shadow:
+        0 15px 35px
+        rgba(
+            106,
+            40,
+            77,
+            .18
+        );
+
+}
+
+
+.obi-story-sticker span {
+
+    font-size:
+        20px;
+
+}
+
+
+
+/* ========================================
+   CONTENT
+======================================== */
+
+.obi-story-content {
+
+    max-width:
+        540px;
+
+}
+
+
+.obi-story-eyebrow {
+
+    margin-bottom:
+        12px;
+
+
+    color:
+        #b04482;
+
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+
+/* TITLE */
+
+.obi-story-content h2 {
+
+    margin-bottom:
+        25px;
+
+
+    color:
+        #171717;
+
+
+    font-size:
+        clamp(
+            48px,
+            11vw,
+            80px
+        );
+
+
+    line-height:
+        .9;
+
+
+    letter-spacing:
+        -3px;
+
+}
+
+
+.obi-story-content h2 span {
+
+    display:
+        block;
+
+    color:
+        #fb70c3;
+
+}
+
+
+
+/* MAIN TEXT */
+
+.obi-story-lead {
+
+    max-width:
+        490px;
+
+
+    margin-bottom:
+        18px;
+
+
+    color:
+        #3e343a;
+
+
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.obi-story-text {
+
+    max-width:
+        430px;
+
+
+    margin-bottom:
+        30px;
+
+
+    color:
+        #796a72;
+
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+
+}
+
+
+
+/* ========================================
+   LINK
+======================================== */
+
+.obi-story-link {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+
+    gap:
+        10px;
+
+
+    padding-bottom:
+        5px;
+
+
+    border-bottom:
+        1px solid
+        #171717;
+
+
+    color:
+        #171717;
+
+
+    text-decoration:
+        none;
+
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+}
+
+
+.obi-story-link span {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.obi-story-link:hover span {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* ========================================
+   SIGNATURE
+======================================== */
+
+.obi-story-signature {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    align-items:
+        center;
+
+
+    gap:
+        10px;
+
+
+    margin-top:
+        55px;
+
+
+    padding-top:
+        20px;
+
+
+    border-top:
+        1px solid
+        #eadde4;
+
+
+    color:
+        #9f567d;
+
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.8px;
+
+}
+
+
+.obi-story-star {
+
+    color:
+        #fb70c3;
+
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 850px) {
+
+    .obi-story {
+
+        padding:
+            125px 30px;
+
+    }
+
+
+    .obi-story-inner {
+
+        grid-template-columns:
+            .95fr
+            1.05fr;
+
+        gap:
+            90px;
+
+    }
+
+
+    .obi-story-image-main {
+
+        min-height:
+            680px;
+
+    }
+
+
+    .obi-story-sticker {
+
+        right:
+            -35px;
+
+        bottom:
+            65px;
+
+
+        width:
+            125px;
+
+        height:
+            125px;
+
+    }
+
+}
+html {
+    scroll-behavior: smooth;
+}
+.shade-parade-item {
+    cursor: default;
+}
+
+.shade-parade-item:hover {
+    color: #272127;
+    transform: none;
+}
+
+.shade-parade-item:hover .shade-parade-colour {
+    transform: none;
+}
+/* =========================================================
+   FINAL OBI CTA
+========================================================= */
+
+.obi-final-cta {
+    padding: 100px 18px;
+
+    background:
+        #fb70c3;
+
+    text-align:
+        center;
+
+    overflow:
+        hidden;
+}
+
+
+.obi-final-cta-inner {
+    max-width:
+        900px;
+
+    margin:
+        auto;
+}
+
+
+.obi-final-eyebrow {
+    margin-bottom:
+        16px;
+
+    color:
+        #702549;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+}
+
+
+.obi-final-cta h2 {
+    margin:
+        0 auto 22px;
+
+    color:
+        #171717;
+
+    font-size:
+        clamp(
+            54px,
+            12vw,
+            105px
+        );
+
+    line-height:
+        .86;
+
+    letter-spacing:
+        -4px;
+}
+
+
+.obi-final-cta h2 span {
+    display:
+        block;
+
+    color:
+        white;
+}
+
+
+.obi-final-description {
+    margin-bottom:
+        30px;
+
+    color:
+        #51283f;
+
+    font-size:
+        16px;
+}
+
+
+.obi-final-button {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        11px;
+
+    padding:
+        15px 25px;
+
+    border-radius:
+        999px;
+
+    background:
+        #171717;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    transition:
+        transform .25s ease;
+}
+
+
+.obi-final-button span {
+    transition:
+        transform .25s ease;
+}
+
+
+.obi-final-button:hover {
+    transform:
+        translateY(-3px);
+}
+
+
+.obi-final-button:hover span {
+    transform:
+        translateX(5px);
+}
+
+
+/* Decorative shades */
+
+.obi-final-dots {
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin-top:
+        42px;
+}
+
+
+.obi-final-dots span {
+    width:
+        18px;
+
+    height:
+        18px;
+
+    border-radius:
+        50%;
+
+    border:
+        2px solid
+        rgba(
+            255,
+            255,
+            255,
+            .85
+        );
+
+    box-shadow:
+        0 0 0 1px
+        rgba(
+            60,
+            20,
+            43,
+            .12
+        );
+}
+
+
+@media (min-width: 800px) {
+
+    .obi-final-cta {
+        padding:
+            140px 30px;
+    }
+
+}
+/* =========================================================
+   OBI FOOTER
+========================================================= */
+
+.obi-footer {
+    background:
+        #171717;
+
+    color:
+        white;
+
+    padding:
+        70px 18px 25px;
+}
+
+
+.obi-footer-inner {
+    max-width:
+        1200px;
+
+    margin:
+        auto;
+}
+
+
+
+/* ========================================
+   BRAND
+======================================== */
+
+.obi-footer-brand {
+    max-width:
+        430px;
+
+    margin-bottom:
+        55px;
+}
+
+
+.obi-footer-logo {
+    display:
+        inline-block;
+
+    margin-bottom:
+        8px;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        28px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        -1px;
+}
+
+
+.obi-footer-tagline {
+    margin-bottom:
+        16px;
+
+    color:
+        #fb70c3;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.5px;
+}
+
+
+.obi-footer-intro {
+    max-width:
+        350px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .58
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.7;
+}
+
+
+
+/* ========================================
+   LINK COLUMNS
+======================================== */
+
+.obi-footer-links {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    gap:
+        42px 25px;
+}
+
+
+.obi-footer-column {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        11px;
+}
+
+
+.obi-footer-column h3 {
+    margin-bottom:
+        7px;
+
+    color:
+        #fb70c3;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1.8px;
+}
+
+
+.obi-footer-column a {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .72
+        );
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+.obi-footer-column a:hover {
+    color:
+        white;
+
+    transform:
+        translateX(3px);
+}
+
+
+
+/* ========================================
+   CONTACT / WHATSAPP
+======================================== */
+
+.obi-footer-contact {
+    margin-top:
+        65px;
+
+    padding:
+        27px 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        20px;
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .12
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .12
+        );
+}
+
+
+.obi-footer-contact > div > span {
+    display:
+        block;
+
+    margin-bottom:
+        5px;
+
+    color:
+        #fb70c3;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.7px;
+}
+
+
+.obi-footer-contact h3 {
+    margin:
+        0;
+
+    color:
+        white;
+
+    font-size:
+        28px;
+}
+
+
+.obi-whatsapp-button {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        13px 20px;
+
+    border-radius:
+        999px;
+
+    background:
+        #fb70c3;
+
+    color:
+        #171717;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.obi-whatsapp-button:hover {
+    background:
+        white;
+
+    transform:
+        translateY(-2px);
+}
+
+
+
+/* ========================================
+   FOOTER BOTTOM
+======================================== */
+
+.obi-footer-bottom {
+    padding-top:
+        25px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        10px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .42
+        );
+
+    font-size:
+        11px;
+}
+
+
+.obi-footer-bottom p {
+    margin:
+        0;
+}
+
+
+.obi-footer-bottom a {
+    width:
+        fit-content;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            .55
+        );
+
+    text-decoration:
+        none;
+}
+
+
+
+/* ========================================
+   DESKTOP
+======================================== */
+
+@media (min-width: 850px) {
+
+    .obi-footer {
+        padding:
+            90px 30px 30px;
+    }
+
+
+    .obi-footer-links {
+        grid-template-columns:
+            1.25fr
+            1fr
+            .8fr
+            1fr;
+
+        gap:
+            50px;
+    }
+
+
+    .obi-footer-contact {
+        flex-direction:
+            row;
+
+        justify-content:
+            space-between;
+
+        align-items:
+            center;
+    }
+
+
+    .obi-footer-bottom {
+        flex-direction:
+            row;
+
+        align-items:
+            center;
+
+        justify-content:
+            space-between;
+    }
+
+}
+#shade-parade,
+#obi-order {
+    scroll-margin-top: 95px;
+}
+#shade-parade,
+#obi-order {
+    scroll-margin-top: 95px;
+}
+/* =========================================================
+   PICK YOUR VIBE - MOBILE HORIZONTAL SWIPE
+========================================================= */
+
+@media (max-width: 649px) {
+
+    .obi-vibes-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .obi-vibes-heading {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .obi-vibes-grid {
+        display: flex;
+
+        gap: 14px;
+
+        overflow-x: auto;
+
+        padding:
+            5px 18px 20px;
+
+        scroll-snap-type:
+            x mandatory;
+
+        scroll-padding-left:
+            18px;
+
+        -webkit-overflow-scrolling:
+            touch;
+
+        scrollbar-width:
+            none;
+    }
+
+    .obi-vibes-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .obi-vibe-card {
+        flex:
+            0 0 84%;
+
+        min-height:
+            410px;
+
+        scroll-snap-align:
+            start;
+    }
+
+    .obi-vibes-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+}
+.obi-editorial-description {
+    margin-bottom: 0;
+}
+#shade-parade,
+#obi-order {
+    scroll-margin-top: 95px;
+}
+/* ========================================
+   SHADE PARADE PAUSE / RESUME
+======================================== */
+
+.shade-parade-track.is-paused {
+    animation-play-state: paused;
+}
+
+
+/* Desktop mouse only */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .shade-parade-track:hover {
+        animation-play-state: paused;
+    }
+
+}
+/* =========================================================
+   OBI SHOP PAGE
+========================================================= */
+
+.obi-shop-page {
+    min-height: 100vh;
+
+    background:
+        #fffdfb;
+}
+
+
+/* =========================================================
+   SHOP HERO
+========================================================= */
+
+.obi-shop-hero {
+    padding:
+        75px 18px 50px;
+
+    text-align:
+        center;
+
+    background:
+        #fff2f9;
+}
+
+
+.obi-shop-eyebrow {
+    margin-bottom:
+        12px;
+
+    color:
+        #a7477c;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+}
+
+
+.obi-shop-hero h1 {
+    margin:
+        0 0 15px;
+
+    color:
+        #171717;
+
+    font-size:
+        clamp(
+            48px,
+            12vw,
+            90px
+        );
+
+    line-height:
+        .9;
+
+    letter-spacing:
+        -3px;
+}
+
+
+.obi-shop-description {
+    max-width:
+        500px;
+
+    margin:
+        auto;
+
+    color:
+        #705e68;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+.obi-shop-filter-section {
+    position:
+        sticky;
+
+    top:
+        0;
+
+    z-index:
+        15;
+
+    padding:
+        13px 0;
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(
+            255,
+            253,
+            251,
+            .94
+        );
+
+    border-bottom:
+        1px solid
+        #eee5ea;
+
+    backdrop-filter:
+        blur(12px);
+}
+
+
+.obi-shop-filters {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    overflow-x:
+        auto;
+
+    padding:
+        0 16px;
+
+    scrollbar-width:
+        none;
+
+    -webkit-overflow-scrolling:
+        touch;
+}
+
+
+.obi-shop-filters::-webkit-scrollbar {
+    display:
+        none;
+}
+
+
+.obi-shop-filter {
+    flex-shrink:
+        0;
+
+    padding:
+        10px 16px;
+
+    border:
+        1px solid
+        #ddd0d7;
+
+    border-radius:
+        999px;
+
+    background:
+        white;
+
+    color:
+        #242024;
+
+    text-decoration:
+        none;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+
+.obi-shop-filter:hover {
+    border-color:
+        #fb70c3;
+}
+
+
+.obi-shop-filter.active {
+    border-color:
+        #171717;
+
+    background:
+        #171717;
+
+    color:
+        white;
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.obi-shop-products {
+    max-width:
+        1250px;
+
+    margin:
+        auto;
+
+    padding:
+        38px 14px 90px;
+}
+
+
+.obi-shop-products-top {
+    margin-bottom:
+        20px;
+}
+
+
+.obi-shop-products-top p {
+    margin:
+        0;
+
+    color:
+        #84747c;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1.2px;
+}
+
+
+/* =========================================================
+   PRODUCT GRID
+========================================================= */
+
+.obi-shop-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap:
+        28px 10px;
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
+
+.obi-product-card {
+    min-width:
+        0;
+}
+
+
+.obi-product-image-button {
+    position:
+        relative;
+
+    width:
+        100%;
+
+    display:
+        block;
+
+    padding:
+        0;
+
+    border:
+        none;
+
+    background:
+        none;
+
+    cursor:
+        pointer;
+}
+
+
+.obi-product-image {
+    position:
+        relative;
+
+    aspect-ratio:
+        1 / 1.12;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        15px;
+
+    background:
+        #f5edf1;
+}
+
+
+.obi-product-image img {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform
+        .55s
+        cubic-bezier(
+            .2,
+            .7,
+            .2,
+            1
+        );
+}
+
+
+.obi-product-card:hover
+.obi-product-image img {
+    transform:
+        scale(1.04);
+}
+
+
+/* Product option badge */
+
+.obi-product-option-count {
+    position:
+        absolute;
+
+    left:
+        10px;
+
+    bottom:
+        10px;
+
+    padding:
+        7px 10px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .9
+        );
+
+    color:
+        #292126;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .4px;
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+/* =========================================================
+   PRODUCT INFORMATION
+========================================================= */
+
+.obi-product-info {
+    padding:
+        14px 3px 0;
+}
+
+
+.obi-product-heading h2 {
+    margin:
+        0 0 5px;
+
+    color:
+        #181818;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.25;
+}
+
+
+.obi-product-price {
+    margin:
+        0;
+
+    color:
+        #181818;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+}
+
+
+.obi-product-description {
+    margin:
+        9px 0 14px;
+
+    color:
+        #84737c;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   CHOOSE PRODUCT BUTTON
+========================================================= */
+
+.obi-product-open {
+    width:
+        100%;
+
+    min-height:
+        43px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    padding:
+        10px 13px;
+
+    border:
+        1px solid
+        #201d1f;
+
+    border-radius:
+        999px;
+
+    background:
+        white;
+
+    color:
+        #201d1f;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+
+.obi-product-open span {
+    transition:
+        transform .2s ease;
+}
+
+
+.obi-product-open:hover {
+    background:
+        #171717;
+
+    color:
+        white;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.obi-product-open:hover span {
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   EMPTY CATEGORY
+========================================================= */
+
+.no-products-message {
+    padding:
+        70px 20px;
+
+    text-align:
+        center;
+
+    color:
+        #756770;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 700px) {
+
+    .obi-shop-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+        gap:
+            38px 18px;
+    }
+
+
+    .obi-shop-products {
+        padding:
+            50px 24px 110px;
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1050px) {
+
+    .obi-shop-hero {
+        padding:
+            100px 30px 70px;
+    }
+
+
+    .obi-shop-filters {
+        max-width:
+            1250px;
+
+        margin:
+            auto;
+
+        justify-content:
+            center;
+    }
+
+
+    .obi-shop-grid {
+        grid-template-columns:
+            repeat(
+                4,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+        gap:
+            50px 22px;
+    }
+
+
+    .obi-shop-products {
+        padding:
+            60px 30px 130px;
+    }
+
+
+    .obi-product-heading h2 {
+        font-size:
+            17px;
+    }
+
+
+    .obi-product-description {
+        font-size:
+            12px;
+    }
+
+}
+/* =========================================================
+   PRODUCT QUICK VIEW OVERLAY
+========================================================= */
+
+.product-modal-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        80;
+
+    background:
+        rgba(
+            20,
+            15,
+            18,
+            .48
+        );
+
+    backdrop-filter:
+        blur(5px);
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+
+}
+
+
+.product-modal-overlay.open {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+}
+
+
+
+/* =========================================================
+   PRODUCT MODAL
+========================================================= */
+
+.product-modal {
+
+    position:
+        fixed;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    z-index:
+        90;
+
+    max-height:
+        92dvh;
+
+    overflow-y:
+        auto;
+
+    border-radius:
+        28px 28px 0 0;
+
+    background:
+        #fffdfb;
+
+    box-shadow:
+        0 -20px 70px
+        rgba(
+            20,
+            10,
+            16,
+            .2
+        );
+
+    transform:
+        translateY(105%);
+
+    visibility:
+        hidden;
+
+    transition:
+        transform .38s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        ),
+        visibility .38s ease;
+
+}
+
+
+.product-modal.open {
+
+    transform:
+        translateY(0);
+
+    visibility:
+        visible;
+
+}
+
+
+body.product-modal-open {
+
+    overflow:
+        hidden;
+
+}
+
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.product-modal-close {
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    right:
+        14px;
+
+    z-index:
+        5;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    color:
+        #171717;
+
+    font-size:
+        27px;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 20px
+        rgba(
+            0,
+            0,
+            0,
+            .08
+        );
+
+}
+
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.product-modal-layout {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+}
+
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.product-modal-visual {
+
+    position:
+        relative;
+
+    min-height:
+        360px;
+
+    overflow:
+        hidden;
+
+    background:
+        #f4e8ef;
+
+}
+
+
+.product-modal-visual img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    min-height:
+        360px;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    opacity:
+        1;
+
+    transition:
+        opacity .18s ease;
+
+}
+
+
+.product-modal-visual img.changing {
+
+    opacity:
+        .15;
+
+}
+
+
+.product-modal-preview-label {
+
+    position:
+        absolute;
+
+    left:
+        16px;
+
+    bottom:
+        16px;
+
+    padding:
+        8px 12px;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .9
+        );
+
+    color:
+        #352a30;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.3px;
+
+    backdrop-filter:
+        blur(8px);
+
+}
+
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.product-modal-content {
+
+    padding:
+        34px 20px 38px;
+
+}
+
+
+.product-modal-eyebrow {
+
+    margin:
+        0 0 10px;
+
+    color:
+        #b04482;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.8px;
+
+}
+
+
+.product-modal-content h2 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        #171717;
+
+    font-size:
+        clamp(
+            31px,
+            8vw,
+            50px
+        );
+
+    line-height:
+        .95;
+
+}
+
+
+.product-modal-price {
+
+    margin:
+        0 0 18px;
+
+    color:
+        #171717;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+
+}
+
+
+.product-modal-description {
+
+    max-width:
+        470px;
+
+    margin:
+        0 0 30px;
+
+    color:
+        #77666f;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.65;
+
+}
+
+
+
+/* =========================================================
+   SHADE SECTION
+========================================================= */
+
+.product-modal-shade-section {
+
+    padding-top:
+        23px;
+
+    border-top:
+        1px solid
+        #eadfe5;
+
+}
+
+
+.product-modal-shade-section[hidden] {
+
+    display:
+        none;
+
+}
+
+
+.product-modal-shade-heading {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.product-modal-shade-heading span:first-child {
+
+    color:
+        #2a2427;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.5px;
+
+}
+
+
+.product-modal-shade-heading span:last-child {
+
+    color:
+        #99858f;
+
+    font-size:
+        11px;
+
+}
+
+
+
+/* =========================================================
+   SHADE BUTTONS
+========================================================= */
+
+.product-modal-shades {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        9px;
+
+}
+
+
+.product-modal-shade {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        7px 11px 7px 7px;
+
+    border:
+        1px solid
+        #ddd0d7;
+
+    border-radius:
+        999px;
+
+    background:
+        white;
+
+    color:
+        #2c2529;
+
+    cursor:
+        pointer;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+
+}
+
+
+.product-modal-shade-colour {
+
+    width:
+        25px;
+
+    height:
+        25px;
+
+    flex-shrink:
+        0;
+
+    border-radius:
+        50%;
+
+    border:
+        2px solid
+        white;
+
+    box-shadow:
+        0 0 0 1px
+        rgba(
+            0,
+            0,
+            0,
+            .15
+        );
+
+}
+
+
+.product-modal-shade-name {
+
+    font-size:
+        11px;
+
+    font-weight:
+        700;
+
+}
+
+
+.product-modal-shade:hover {
+
+    border-color:
+        #fb70c3;
+
+}
+
+
+.product-modal-shade.selected {
+
+    border-color:
+        #171717;
+
+    background:
+        #171717;
+
+    color:
+        white;
+
+}
+
+
+.product-modal-selected-shade {
+
+    margin:
+        15px 0 0;
+
+    color:
+        #805f71;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+}
+
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.product-modal-actions {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr;
+
+    gap:
+        10px;
+
+    margin-top:
+        30px;
+
+}
+
+
+.modal-add-to-cart,
+.modal-buy-now {
+
+    width:
+        100%;
+
+    min-height:
+        50px;
+
+    padding:
+        13px 20px;
+
+    border-radius:
+        999px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+
+}
+
+
+.modal-add-to-cart {
+
+    border:
+        1px solid
+        #171717;
+
+    background:
+        white;
+
+    color:
+        #171717;
+
+}
+
+
+.modal-buy-now {
+
+    border:
+        1px solid
+        #171717;
+
+    background:
+        #171717;
+
+    color:
+        white;
+
+}
+
+
+.modal-add-to-cart:not(:disabled):hover,
+.modal-buy-now:not(:disabled):hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.modal-add-to-cart:disabled,
+.modal-buy-now:disabled {
+
+    opacity:
+        .35;
+
+    cursor:
+        not-allowed;
+
+}
+
+
+
+/* =========================================================
+   DESKTOP MODAL
+========================================================= */
+
+@media (min-width: 800px) {
+
+    .product-modal {
+
+        top:
+            50%;
+
+        bottom:
+            auto;
+
+        left:
+            50%;
+
+        right:
+            auto;
+
+        width:
+            min(
+                960px,
+                calc(
+                    100vw - 60px
+                )
+            );
+
+        max-height:
+            min(
+                720px,
+                calc(
+                    100vh - 60px
+                )
+            );
+
+        border-radius:
+            24px;
+
+        transform:
+            translate(
+                -50%,
+                -46%
+            )
+            scale(.97);
+
+        opacity:
+            0;
+
+        transition:
+            transform .3s ease,
+            opacity .3s ease,
+            visibility .3s ease;
+
+    }
+
+
+    .product-modal.open {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1);
+
+        opacity:
+            1;
+
+    }
+
+
+    .product-modal-layout {
+
+        grid-template-columns:
+            1.05fr
+            .95fr;
+
+        min-height:
+            620px;
+
+    }
+
+
+    .product-modal-visual {
+
+        min-height:
+            620px;
+
+    }
+
+
+    .product-modal-visual img {
+
+        min-height:
+            620px;
+
+    }
+
+
+    .product-modal-content {
+
+        padding:
+            70px 48px 45px;
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .product-modal-actions {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+/* =========================================================
+   SHADE PREVIEW PHOTO INFORMATION
+========================================================= */
+
+.product-modal-photo-note {
+
+    position:
+        absolute;
+
+    left:
+        16px;
+
+    right:
+        16px;
+
+    bottom:
+        57px;
+
+    z-index:
+        2;
+
+    width:
+        fit-content;
+
+    max-width:
+        calc(100% - 32px);
+
+    margin:
+        0;
+
+    padding:
+        7px 10px;
+
+    border-radius:
+        8px;
+
+    background:
+        rgba(
+            20,
+            16,
+            18,
+            .67
+        );
+
+    color:
+        white;
+
+    font-size:
+        9px;
+
+    line-height:
+        1.4;
+
+    backdrop-filter:
+        blur(7px);
+}
+/* =========================================================
+   PRODUCT MODAL - MOBILE POLISH
+========================================================= */
+
+@media (max-width: 799px) {
+
+    .product-modal-visual {
+        width: 100%;
+
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+
+        display: block;
+
+        overflow: hidden;
+
+        background: #f7eef3;
+    }
+
+
+    .product-modal-visual img {
+        width: 100%;
+
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+
+        display: block;
+
+        object-fit: contain !important;
+        object-position: center center !important;
+
+        transform: none !important;
+    }
+
+}
+
+
+    /* -------------------------
+       CONTENT
+    ------------------------- */
+
+    .product-modal-content {
+        padding:
+            28px
+            18px
+            0;
+    }
+
+
+    .product-modal-content h2 {
+        font-size:
+            clamp(
+                30px,
+                9vw,
+                42px
+            );
+    }
+
+
+    .product-modal-description {
+        margin-bottom: 24px;
+    }
+
+
+    /* -------------------------
+       SHADE STRIP
+    ------------------------- */
+
+    .product-modal-shades {
+        display: flex;
+
+        flex-wrap: nowrap;
+
+        gap: 9px;
+
+        overflow-x: auto;
+
+        padding:
+            3px
+            2px
+            12px;
+
+        scroll-snap-type:
+            x proximity;
+
+        -webkit-overflow-scrolling:
+            touch;
+
+        scrollbar-width:
+            none;
+    }
+
+
+    .product-modal-shades::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .product-modal-shade {
+        flex-shrink: 0;
+
+        scroll-snap-align:
+            start;
+    }
+
+
+    /* -------------------------
+       STICKY PURCHASE AREA
+    ------------------------- */
+
+    .product-modal-actions {
+        position: sticky;
+
+        bottom: 0;
+
+        z-index: 8;
+
+        margin:
+            28px
+            -18px
+            0;
+
+        padding:
+            14px
+            18px
+            calc(
+                14px +
+                env(
+                    safe-area-inset-bottom
+                )
+            );
+
+        background:
+            rgba(
+                255,
+                253,
+                251,
+                .97
+            );
+
+        border-top:
+            1px solid
+            #eadfe5;
+
+        backdrop-filter:
+            blur(12px);
+    }
+
+
+    .modal-add-to-cart,
+    .modal-buy-now {
+        min-height: 52px;
+    }
+
+.product-modal-selected-shade {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    color: #6c264d;
+
+    font-weight: 800;
+}
+.product-modal-shade.selected
+.product-modal-shade-colour {
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 4px #171717;
+}
+@media (max-width: 799px) {
+
+    .product-modal-close {
+        position: fixed;
+
+        top:
+            calc(
+                8vh +
+                12px
+            );
+
+        right: 14px;
+    }
+
+}
+body.product-modal-open {
+    overflow: hidden;
+
+    overscroll-behavior:
+        none;
+}
+/* =========================================================
+   FIX MOBILE SHADE STRIP
+========================================================= */
+
+
+
+    /* Extra space after the final shade */
+
+    .product-modal-shades::after {
+        content: "";
+
+        flex:
+            0 0 8px;
+    }
+/* =========================================================
+   OBI PRODUCT MODAL - CLEAN MOBILE VERSION
+========================================================= */
+
+@media (max-width: 799px) {
+
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* ------------------------------
+       MODAL SHEET
+    ------------------------------ */
+
+    .product-modal {
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        max-width: 100%;
+
+        height: 92dvh;
+        max-height: 92dvh;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        border-radius: 26px 26px 0 0;
+
+        box-sizing: border-box;
+    }
+
+
+    .product-modal-layout {
+        width: 100%;
+
+        display: block;
+
+        overflow: hidden;
+    }
+
+
+    /* ------------------------------
+       CLOSE BUTTON
+    ------------------------------ */
+
+    .product-modal-close {
+        position: absolute;
+
+        top: 12px;
+        right: 12px;
+
+        width: 42px;
+        height: 42px;
+
+        z-index: 20;
+    }
+
+
+    /* ------------------------------
+       PRODUCT IMAGE
+    ------------------------------ */
+
+    .product-modal-visual {
+        position: relative;
+
+        width: 100%;
+        height: 330px;
+        min-height: 330px;
+        max-height: 330px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        background: #f7eef3;
+    }
+
+
+    .product-modal-visual img {
+        width: 100%;
+        height: 100%;
+
+        min-height: 0;
+
+        display: block;
+
+        object-fit: contain;
+        object-position: center;
+
+        transform: none;
+
+        transition: opacity .18s ease;
+    }
+
+
+    .product-modal-visual img.changing {
+        opacity: .2;
+    }
+
+
+    /* ------------------------------
+       IMAGE LABELS
+    ------------------------------ */
+
+    .product-modal-preview-label {
+        left: 14px;
+        bottom: 14px;
+
+        max-width: calc(100% - 28px);
+    }
+
+
+    .product-modal-photo-note {
+        left: 14px;
+        bottom: 54px;
+
+        max-width: calc(100% - 28px);
+    }
+
+
+    /* ------------------------------
+       CONTENT
+    ------------------------------ */
+
+    .product-modal-content {
+        width: 100%;
+
+        padding: 26px 18px 30px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+
+    .product-modal-eyebrow {
+        margin: 0 0 10px;
+
+        font-size: 9px;
+    }
+
+
+    .product-modal-content h2 {
+        width: 100%;
+
+        margin: 0 0 8px;
+
+        font-size: 34px;
+        line-height: 1;
+
+        letter-spacing: -1px;
+
+        overflow-wrap: anywhere;
+    }
+
+
+    .product-modal-price {
+        margin-bottom: 14px;
+    }
+
+
+    .product-modal-description {
+        margin-bottom: 24px;
+
+        font-size: 13px;
+    }
+
+
+    /* ------------------------------
+       SHADE AREA
+    ------------------------------ */
+
+    .product-modal-shade-section {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+
+    .product-modal-shade-heading {
+        width: 100%;
+
+        margin-bottom: 13px;
+    }
+
+
+    /* ------------------------------
+       HORIZONTAL SHADE SCROLLER
+    ------------------------------ */
+
+    .product-modal-shades {
+        width: 100%;
+
+        display: flex;
+        flex-wrap: nowrap;
+
+        gap: 9px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        padding:
+            4px
+            18px
+            12px
+            2px;
+
+        box-sizing: border-box;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+
+        scroll-behavior: auto;
+    }
+
+
+    .product-modal-shades::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .product-modal-shade {
+        flex: 0 0 auto;
+
+        min-width: max-content;
+
+        white-space: nowrap;
+
+        scroll-snap-align: none;
+    }
+
+
+    .product-modal-shade-name {
+        white-space: nowrap;
+    }
+
+
+    /* Give final shade breathing room */
+
+    .product-modal-shades::after {
+        content: "";
+
+        flex: 0 0 12px;
+    }
+
+
+    .product-modal-selected-shade {
+        margin: 12px 0 0;
+
+        min-height: 18px;
+
+        color: #6c264d;
+
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+
+    /* ------------------------------
+       PURCHASE BUTTONS
+    ------------------------------ */
+
+    .product-modal-actions {
+        position: static;
+
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+
+        margin: 25px 0 0;
+        padding: 0;
+
+        box-sizing: border-box;
+
+        background: transparent;
+
+        border: none;
+    }
+
+
+    .modal-add-to-cart,
+    .modal-buy-now {
+        width: 100%;
+
+        min-height: 50px;
+    }
+
+}
+.product-modal,
+.product-modal * {
+    box-sizing: border-box;
+}

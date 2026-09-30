@@ -29,22 +29,17 @@
         <nav class="navbar">
 
             <a
-                href="index.html"
-                class="logo"
-            >
+    href="index.html"
+    class="logo"
+>
 
-                <img
-                    src="images/brand/logo.webp"
-                    alt="Obi Cosmetics logo"
-                    class="brand-logo"
-                >
+    <img
+        src="images/brand/obi-wordmark.jpeg"
+        alt="Obi Cosmetics"
+        class="brand-wordmark"
+    >
 
-                <span>
-                    Obi Cosmetics
-                </span>
-
-            </a>
-
+</a>
 
             <div class="nav-actions">
 
@@ -190,80 +185,297 @@
     </header>
 
 
-    <main>
+    <main class="obi-shop-page">
 
-        <section class="shop-header">
 
-            <p class="section-label">
-                Obi Cosmetics
+    <!-- ========================================
+         SHOP HERO
+    ========================================= -->
+
+    <section class="obi-shop-hero">
+
+        <p class="obi-shop-eyebrow">
+            ✦ OBI COSMETICS ✦
+        </p>
+
+        <h1 id="shop-title">
+            Shop All
+        </h1>
+
+        <p
+            id="shop-description"
+            class="obi-shop-description"
+        >
+            Find something for your mood.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         CATEGORY FILTERS
+    ========================================= -->
+
+    <section
+        class="obi-shop-filter-section"
+        aria-label="Shop categories"
+    >
+
+        <div class="obi-shop-filters">
+
+            <a
+                href="shop.html"
+                class="obi-shop-filter"
+                data-category="all"
+            >
+                All
+            </a>
+
+            <a
+                href="shop.html?category=lip-gloss"
+                class="obi-shop-filter"
+                data-category="lip-gloss"
+            >
+                Gloss
+            </a>
+
+            <a
+                href="shop.html?category=lip-oil"
+                class="obi-shop-filter"
+                data-category="lip-oil"
+            >
+                Lip Oils
+            </a>
+
+            <a
+                href="shop.html?category=lip-liner"
+                class="obi-shop-filter"
+                data-category="lip-liner"
+            >
+                Liners
+            </a>
+
+            <a
+                href="shop.html?category=blush"
+                class="obi-shop-filter"
+                data-category="blush"
+            >
+                Blush
+            </a>
+
+            <a
+                href="shop.html?category=liquid-lipstick"
+                class="obi-shop-filter"
+                data-category="liquid-lipstick"
+            >
+                Lipstick
+            </a>
+
+            <a
+                href="shop.html?category=body-care"
+                class="obi-shop-filter"
+                data-category="body-care"
+            >
+                Body Care
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PRODUCTS
+    ========================================= -->
+
+    <section class="obi-shop-products">
+
+        <div class="obi-shop-products-top">
+
+            <p id="shop-result-count">
+                Products
             </p>
 
-            <h1 id="shop-title">
-                Shop All
-            </h1>
-
-            <p id="shop-description">
-                Explore the Obi Cosmetics collection.
-            </p>
-
-        </section>
+        </div>
 
 
-        <section class="shop-category-nav">
-
-            <a href="shop.html">
-               All
-            </a>
-
-            <a href="shop.html?category=lip-gloss">
-              Lip Glosses
-           </a>
-
-            <a href="shop.html?category=lip-oil">
-               Lip Oils
-            </a>
-
-           <a href="shop.html?category=lip-liner">
-              Lip Liners
-            </a>
-
-           <a href="shop.html?category=blush">
-              Blush
-            </a>
-
-           <a href="shop.html?category=liquid-lipstick">
-             Liquid Lipsticks
-          </a>
-
-           <a href="shop.html?category=body-care">
-               Body Care
-          </a>
-
-        </section>
+        <div
+            id="product-grid"
+            class="obi-shop-grid"
+        >
+        </div>
 
 
-        <section class="products-section">
+        <p
+            id="no-products-message"
+            class="no-products-message"
+            hidden
+        >
+            No products are available in this
+            category yet.
+        </p>
+
+    </section>
+
+
+</main>
+
+<!-- ========================================
+     PRODUCT QUICK VIEW
+======================================== -->
+
+<div
+    id="product-modal-overlay"
+    class="product-modal-overlay"
+></div>
+
+
+<section
+    id="product-modal"
+    class="product-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="product-modal-title"
+>
+
+    <button
+        id="close-product-modal"
+        class="product-modal-close"
+        type="button"
+        aria-label="Close product"
+    >
+        ×
+    </button>
+
+
+    <div class="product-modal-layout">
+
+
+        <!-- IMAGE / SHADE PREVIEW -->
+
+        <div class="product-modal-visual">
+
+            <img
+                id="product-modal-image"
+                src=""
+                alt=""
+            >
 
             <div
-                id="product-grid"
-                class="product-grid"
-            >
-            </div>
+    id="product-modal-preview-label"
+    class="product-modal-preview-label"
+>
+    PRODUCT PHOTO
+</div>
+<p
+    id="product-modal-photo-note"
+    class="product-modal-photo-note"
+>
+    Product shown for reference.
+</p>
+        </div>
 
-            <p
-                id="no-products-message"
-                class="no-products-message"
-                hidden
-            >
-                No products are available in this
-                category yet.
+
+
+        <!-- PRODUCT DETAILS -->
+
+        <div class="product-modal-content">
+
+            <p class="product-modal-eyebrow">
+                ✦ OBI COSMETICS ✦
             </p>
 
-        </section>
 
-    </main>
+            <h2 id="product-modal-title">
+            </h2>
 
 
+            <p
+                id="product-modal-price"
+                class="product-modal-price"
+            >
+            </p>
+
+
+            <p
+                id="product-modal-description"
+                class="product-modal-description"
+            >
+            </p>
+
+
+
+            <!-- SHADES -->
+
+            <div
+                id="product-modal-shade-section"
+                class="product-modal-shade-section"
+            >
+
+                <div class="product-modal-shade-heading">
+
+                    <span>
+                        CHOOSE YOUR SHADE
+                    </span>
+
+                    <span
+                        id="product-modal-shade-count"
+                    >
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="product-modal-shades"
+                    class="product-modal-shades"
+                >
+                </div>
+
+
+                <p
+                    id="product-modal-selected-shade"
+                    class="product-modal-selected-shade"
+                >
+                    Select a shade
+                </p>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="product-modal-actions">
+
+                <button
+                    id="modal-add-to-cart"
+                    class="modal-add-to-cart"
+                    type="button"
+                >
+                    Add to Cart
+                </button>
+
+
+                <button
+                    id="modal-buy-now"
+                    class="modal-buy-now"
+                    type="button"
+                >
+                    Buy Now
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
     <div
         id="cart-overlay"
         class="cart-overlay"

@@ -1,352 +1,113 @@
-const productGrid = document.getElementById("product-grid");
+const productGrid =
+    document.getElementById("product-grid");
 
-products.forEach(function (product) {
 
-    const shadeHTML = product.shades
-        .map(function (shade) {
-            return `
-                <button
-                    class="shade-swatch"
-                    style="background-color: ${shade.color}"
-                    data-shade="${shade.name}"
-                    aria-label="${shade.name}">
-                </button>
-            `;
-        })
-        .join("");
+const featuredProducts =
+    products.filter(function (product) {
 
-    productGrid.innerHTML += `
-        <article class="product-card">
+        return product.featured === true;
 
-            <div class="product-image">
+    });
 
-               <img
-                 src="${product.image}"
-                 alt="${product.name}"
-                  loading="lazy"
-                >
 
-            </div>
+featuredProducts.forEach(
+    function (product) {
 
-            <h3>${product.name}</h3>
+        const hasShades =
+            Array.isArray(product.shades) &&
+            product.shades.length > 0;
 
-            <p class="product-price">
-                LE ${product.price}
-            </p>
 
-            <div class="shade-section">
+        const shadeHTML =
+            hasShades
+                ? product.shades
+                    .map(function (shade) {
 
-                <p class="shade-label">
-                    ${product.shades.length} colours
-                </p>
+                        return `
+                            <button
+                                class="shade-swatch"
+                                style="background-color: ${shade.color}"
+                                data-shade="${shade.name}"
+                                aria-label="${shade.name}">
+                            </button>
+                        `;
 
-                <div class="shade-list">
-                    ${shadeHTML}
+                    })
+                    .join("")
+                : "";
+
+
+        productGrid.innerHTML += `
+            <article class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                    >
+
                 </div>
 
-                <p class="selected-shade">
-                    Select a shade
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+
+                <p class="product-price">
+                    LE ${product.price}
                 </p>
 
-            </div>
 
-            <div class="product-actions">
+                ${
+                    hasShades
+                        ? `
+                            <div class="shade-section">
 
-              <button
-                  class="add-to-cart-button"
-                  data-product-id="${product.id}">
-                  Add to Cart
-              </button>
+                                <p class="shade-label">
+                                    ${product.shades.length}
+                                    colours
+                                </p>
 
-              <button
-                 class="buy-now-button"
-                  data-product-id="${product.id}">
-                  Buy Now
-              </button>
-
-            </div>
-
-        </article>
-    `;
-}
-);
-
-    openCart();
-
- function renderCart() {
-
-    if (cart.length === 0) {
-
-        cartItemsContainer.innerHTML = `
-            <div class="empty-cart">
-
-                <p>
-                    Your cart is empty.
-                </p>
-
-            </div>
-        `;
-
-
-        cartSubtotalElement.textContent =
-            "LE 0";
-
-
-        return;
-    }
-
-
-    cartItemsContainer.innerHTML = "";
-
-
-    let subtotal = 0;
-
-
-    cart.forEach(
-        function (item, index) {
-
-            const product =
-                products.find(
-                    function (product) {
-
-                        return (
-                            product.id ===
-                            item.productId
-                        );
-
-                    }
-                );
-
-
-            if (!product) {
-                return;
-            }
-
-
-            const shade =
-                product.shades.find(
-                    function (shade) {
-
-                        return (
-                            shade.name ===
-                            item.shade
-                        );
-
-                    }
-                );
-
-
-            const itemTotal =
-                product.price *
-                item.quantity;
-
-
-            subtotal += itemTotal;
-
-
-            cartItemsContainer.innerHTML += `
-                <article class="cart-item">
-
-                    <div class="cart-item-top">
-
-                        <div>
-
-                            <h3>
-                                ${product.name}
-                            </h3>
-
-
-                            <div class="cart-item-details">
-
-                                <div class="cart-shade">
-
-                                    ${
-                                        shade
-                                            ? `
-                                        <span
-                                            class="cart-shade-color"
-                                            style="background-color: ${shade.color}">
-                                        </span>
-                                        `
-                                            : ""
-                                    }
-
-                                    <span>
-                                        ${item.shade}
-                                    </span>
-
+                                <div class="shade-list">
+                                    ${shadeHTML}
                                 </div>
 
-
-                                <p>
-                                    LE ${product.price} each
+                                <p class="selected-shade">
+                                    Select a shade
                                 </p>
 
                             </div>
-
-                        </div>
-
-
-                        <strong>
-                            LE ${itemTotal}
-                        </strong>
-
-                    </div>
+                        `
+                        : ""
+                }
 
 
-                    <div class="cart-quantity">
+                <div class="product-actions">
 
-                        <button
-                            class="decrease-cart-item"
-                            data-index="${index}">
-                            −
-                        </button>
-
-                        <span>
-                            ${item.quantity}
-                        </span>
-
-                        <button
-                            class="increase-cart-item"
-                            data-index="${index}">
-                            +
-                        </button>
-
-                    </div>
+                    <button
+                        class="add-to-cart-button"
+                        data-product-id="${product.id}"
+                        type="button"
+                    >
+                        Add to Cart
+                    </button>
 
 
                     <button
-                        class="remove-cart-item"
-                        data-index="${index}">
-                        Remove
+                        class="buy-now-button"
+                        data-product-id="${product.id}"
+                        type="button"
+                    >
+                        Buy Now
                     </button>
 
-                </article>
-            `;
+                </div>
 
-        }
-    );
-
-
-    cartSubtotalElement.textContent =
-        "LE " + subtotal;
-
-}
-
-cartItemsContainer.addEventListener(
-    "click",
-    function (event) {
-
-        const increaseButton =
-            event.target.closest(
-                ".increase-cart-item"
-            );
-
-
-        const decreaseButton =
-            event.target.closest(
-                ".decrease-cart-item"
-            );
-
-
-        const removeButton =
-            event.target.closest(
-                ".remove-cart-item"
-            );
-
-
-        if (increaseButton) {
-
-            const index =
-                Number(
-                    increaseButton.dataset.index
-                );
-
-
-            cart[index].quantity += 1;
-
-
-            saveCart();
-
-            renderCart();
-
-            updateCartCount();
-
-        }
-
-
-        if (decreaseButton) {
-
-            const index =
-                Number(
-                    decreaseButton.dataset.index
-                );
-
-
-            if (cart[index].quantity > 1) {
-
-                cart[index].quantity -= 1;
-
-            }
-
-
-            saveCart();
-
-            renderCart();
-
-            updateCartCount();
-
-        }
-
-
-        if (removeButton) {
-
-            const index =
-                Number(
-                    removeButton.dataset.index
-                );
-
-
-            cart.splice(index, 1);
-
-
-            saveCart();
-
-            renderCart();
-
-            updateCartCount();
-
-        }
+            </article>
+        `;
 
     }
 );
-
-const cartCheckoutButton =
-    document.getElementById("cart-checkout-button");
-
-
-cartCheckoutButton.addEventListener(
-    "click",
-    function () {
-
-        if (cart.length === 0) {
-
-            alert("Your cart is empty.");
-
-            return;
-        }
-
-        sessionStorage.setItem(
-            "checkoutMode",
-            "cart"
-        );
-
-        window.location.href =
-            "checkout.html";
-
-    }
-);
-
-renderCart();
-
-updateCartCount();
