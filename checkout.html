@@ -173,7 +173,39 @@
         <h1>
             Checkout
         </h1>
+<div class="checkout-market-card">
 
+    <span
+        id="checkout-market-flag"
+        class="checkout-market-flag"
+    >
+        🇪🇬
+    </span>
+
+
+    <div class="checkout-market-info">
+
+        <span>
+            Shopping in
+        </span>
+
+        <strong
+            id="checkout-market-name"
+        >
+            Egypt
+        </strong>
+
+    </div>
+
+
+    <span
+        id="checkout-market-currency"
+        class="checkout-market-currency"
+    >
+        EGP
+    </span>
+
+</div>
 
 
         <!-- ORDER SUMMARY -->
@@ -288,42 +320,38 @@
 
 
 
-                <!-- CITY -->
+                <!-- DELIVERY REGION -->
 
-                <label for="customer-city">
-                    City
-                </label>
+<label for="customer-region">
+    Delivery Region
+</label>
 
-                <select
-                    id="customer-city"
-                    required
-                >
+<select
+    id="customer-region"
+    required
+>
 
-                    <option value="">
-                        Select your city
-                    </option>
+    <option value="">
+        Select delivery region
+    </option>
 
-                </select>
+</select>
 
 
 
-                <!-- AREA -->
+<!-- CITY / GOVERNORATE -->
 
-                <label for="customer-area">
-                    Area / Neighborhood
-                </label>
+<label for="customer-city">
+    City / Governorate
+</label>
 
-                <select
-                    id="customer-area"
-                    required
-                    disabled
-                >
-
-                    <option value="">
-                        Select your area
-                    </option>
-
-                </select>
+<input
+    type="text"
+    id="customer-city"
+    placeholder="Enter your city or governorate"
+    autocomplete="address-level2"
+    required
+>
 
 
 
@@ -382,8 +410,7 @@
     <!-- Product database -->
     <script src="products.js"></script>
 
-    <!-- Delivery cities and fees -->
-    <script src="delivery.js"></script>
+   <script src="market.js"></script>
 
     <!-- Menu behaviour -->
     <script src="menu.js"></script>

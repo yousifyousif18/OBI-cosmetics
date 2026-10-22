@@ -42,7 +42,115 @@
 </a>
 
             <div class="nav-actions">
+<!-- MARKET / COUNTRY SELECTOR -->
 
+<div
+    id="market-selector"
+    class="market-selector"
+>
+
+    <button
+        id="market-selector-button"
+        class="market-selector-button"
+        type="button"
+        aria-label="Choose shopping country"
+    >
+
+        <span
+            id="market-current-flag"
+            class="market-current-flag"
+        >
+            🇪🇬
+        </span>
+
+        <span
+            id="market-current-currency"
+            class="market-current-currency"
+        >
+            EGP
+        </span>
+
+        <span
+            class="market-selector-chevron"
+            aria-hidden="true"
+        >
+            ▾
+        </span>
+
+    </button>
+
+
+    <div
+        id="market-selector-menu"
+        class="market-selector-menu"
+    >
+
+        <button
+            type="button"
+            data-market="EGY"
+        >
+            <span>🇪🇬</span>
+
+            <span class="market-option-name">
+                Egypt
+            </span>
+
+            <strong>
+                EGP
+            </strong>
+        </button>
+
+
+        <button
+            type="button"
+            data-market="UAE"
+        >
+            <span>🇦🇪</span>
+
+            <span class="market-option-name">
+                UAE
+            </span>
+
+            <strong>
+                AED
+            </strong>
+        </button>
+
+
+        <button
+            type="button"
+            data-market="KSA"
+        >
+            <span>🇸🇦</span>
+
+            <span class="market-option-name">
+                KSA
+            </span>
+
+            <strong>
+                SAR
+            </strong>
+        </button>
+
+
+        <button
+            type="button"
+            data-market="QAT"
+        >
+            <span>🇶🇦</span>
+
+            <span class="market-option-name">
+                Qatar
+            </span>
+
+            <strong>
+                QAR
+            </strong>
+        </button>
+
+    </div>
+
+</div>
                 <button
                     id="menu-button"
                     class="menu-button"
@@ -159,6 +267,9 @@
                         Body Care
                     </a>
 
+                    <a href="shop.html?category=hair-care">
+    Hair Care
+</a>
                 </div>
 
             </div>
@@ -189,27 +300,103 @@
 
 
     <!-- ========================================
-         SHOP HERO
-    ========================================= -->
+     NORMAL SHOP HERO
+========================================= -->
 
-    <section class="obi-shop-hero">
+<section
+    id="default-shop-hero"
+    class="obi-shop-hero"
+>
 
-        <p class="obi-shop-eyebrow">
-            ✦ OBI COSMETICS ✦
+    <p class="obi-shop-eyebrow">
+        ✦ OBI COSMETICS ✦
+    </p>
+
+
+    <h1 id="shop-title">
+        Shop All
+    </h1>
+
+
+    <p
+        id="shop-description"
+        class="obi-shop-description"
+    >
+        Find something for your mood.
+    </p>
+
+</section>
+
+
+<!-- ========================================
+     BODY CARE CAMPAIGN HERO
+========================================= -->
+
+<section
+    id="body-care-hero"
+    class="obi-body-care-hero"
+    hidden
+>
+
+    <!-- IMAGE -->
+
+    <div class="obi-body-care-hero-image">
+
+        <img
+            src="images/products/body-care/body-care-hero.webp"
+            alt="Obi Cosmetics body care collection"
+        >
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div class="obi-body-care-hero-content">
+
+        <p class="obi-body-care-eyebrow">
+            ✦ OBI BODY CARE ✦
         </p>
 
-        <h1 id="shop-title">
-            Shop All
+
+        <h1>
+            Soft Skin.
+            <span>
+                Glossy Energy.
+            </span>
         </h1>
 
-        <p
-            id="shop-description"
-            class="obi-shop-description"
-        >
-            Find something for your mood.
+
+        <p class="obi-body-care-description">
+            Nourish, hydrate and soften with
+            Obi body essentials made for your
+            everyday glow.
         </p>
 
-    </section>
+
+        <p class="obi-body-care-benefits">
+            NOURISH
+            <span>•</span>
+            HYDRATE
+            <span>•</span>
+            GLOW
+        </p>
+
+
+        <a
+            href="#product-grid"
+            class="obi-body-care-hero-button"
+        >
+            Explore Body Care
+
+            <span>
+                ↓
+            </span>
+        </a>
+
+    </div>
+
+</section>
 
 
 
@@ -280,6 +467,13 @@
                 Body Care
             </a>
 
+            <a
+    href="shop.html?category=hair-care"
+    class="obi-shop-filter"
+    data-category="hair-care"
+>
+    Hair Care
+</a>
         </div>
 
     </section>
@@ -356,122 +550,245 @@
 
         <!-- IMAGE / SHADE PREVIEW -->
 
-        <div class="product-modal-visual">
+        <div class="product-modal-media">
 
-            <img
-                id="product-modal-image"
-                src=""
-                alt=""
-            >
+    <!-- MAIN PRODUCT IMAGE -->
 
-            <div
-    id="product-modal-preview-label"
-    class="product-modal-preview-label"
->
-    PRODUCT PHOTO
-</div>
-<p
-    id="product-modal-photo-note"
-    class="product-modal-photo-note"
->
-    Product shown for reference.
-</p>
+    <div class="product-modal-visual">
+
+        <img
+            id="product-modal-image"
+            src=""
+            alt=""
+        >
+
+
+        <div
+            id="product-modal-preview-label"
+            class="product-modal-preview-label"
+        >
+            PRODUCT PHOTO
         </div>
+
+
+        <p
+            id="product-modal-photo-note"
+            class="product-modal-photo-note"
+        >
+            Product shown for reference.
+        </p>
+
+    </div>
+
+
+    <!-- PRODUCT IMAGE GALLERY -->
+
+    <div
+        id="product-modal-gallery"
+        class="product-modal-gallery"
+        hidden
+    >
+    </div>
+
+</div>
 
 
 
         <!-- PRODUCT DETAILS -->
+<div class="product-modal-content">
 
-        <div class="product-modal-content">
-
-            <p class="product-modal-eyebrow">
-                ✦ OBI COSMETICS ✦
-            </p>
-
-
-            <h2 id="product-modal-title">
-            </h2>
+    <p class="product-modal-eyebrow">
+        ✦ OBI COSMETICS ✦
+    </p>
 
 
-            <p
-                id="product-modal-price"
-                class="product-modal-price"
+    <div class="product-modal-title-row">
+
+        <h2 id="product-modal-title"></h2>
+
+        <p
+            id="product-modal-price"
+            class="product-modal-price"
+        ></p>
+
+    </div>
+
+
+    <!-- ========================================
+         SHADES — MOVED UP
+    ========================================= -->
+
+    <div
+        id="product-modal-shade-section"
+        class="product-modal-shade-section"
+    >
+
+        <div class="product-modal-shade-heading">
+
+            <span>
+                CHOOSE YOUR SHADE
+            </span>
+
+            <span
+                id="product-modal-shade-count"
+            ></span>
+
+        </div>
+
+
+        <div class="product-modal-shades-shell">
+
+            <button
+                id="shade-scroll-prev"
+                class="shade-scroll-button shade-scroll-prev"
+                type="button"
+                aria-label="Previous shades"
             >
-            </p>
+                ‹
+            </button>
 
+
+            <div
+                id="product-modal-shades"
+                class="product-modal-shades"
+            ></div>
+
+
+            <button
+                id="shade-scroll-next"
+                class="shade-scroll-button shade-scroll-next"
+                type="button"
+                aria-label="More shades"
+            >
+                ›
+            </button>
+
+        </div>
+
+
+        <p
+            id="product-modal-selected-shade"
+            class="product-modal-selected-shade"
+        >
+            Select a shade
+        </p>
+
+    </div>
+
+
+
+    <!-- ========================================
+         PURCHASE — MOVED UP
+    ========================================= -->
+
+    <div class="product-modal-actions">
+
+        <button
+            id="modal-add-to-cart"
+            class="modal-add-to-cart"
+            type="button"
+        >
+            Add to Cart
+        </button>
+
+
+        <button
+            id="modal-buy-now"
+            class="modal-buy-now"
+            type="button"
+        >
+            Buy Now
+        </button>
+
+    </div>
+
+
+
+    <!-- ========================================
+         DESCRIPTION
+    ========================================= -->
+
+    <div class="product-modal-more">
+
+        <button
+            class="product-modal-more-button"
+            type="button"
+            id="product-details-toggle"
+            aria-expanded="false"
+        >
+            <span>
+                Product Details
+            </span>
+
+            <span class="product-details-plus">
+                +
+            </span>
+        </button>
+
+
+        <div
+            id="product-details-content"
+            class="product-modal-more-content"
+            hidden
+        >
 
             <p
                 id="product-modal-description"
                 class="product-modal-description"
-            >
-            </p>
+            ></p>
 
-
-
-            <!-- SHADES -->
 
             <div
-                id="product-modal-shade-section"
-                class="product-modal-shade-section"
+                id="product-modal-details"
+                class="product-modal-details"
             >
 
-                <div class="product-modal-shade-heading">
+                <p
+                    id="product-modal-tagline"
+                    class="product-modal-tagline"
+                ></p>
 
-                    <span>
-                        CHOOSE YOUR SHADE
-                    </span>
 
-                    <span
-                        id="product-modal-shade-count"
-                    >
-                    </span>
+                <div
+                    id="product-modal-benefits-section"
+                    class="product-modal-benefits-section"
+                >
+
+                    <h3>
+                        BENEFITS
+                    </h3>
+
+                    <ul
+                        id="product-modal-benefits"
+                        class="product-modal-benefits"
+                    ></ul>
 
                 </div>
 
 
                 <div
-                    id="product-modal-shades"
-                    class="product-modal-shades"
+                    id="product-modal-usage-section"
+                    class="product-modal-usage-section"
                 >
+
+                    <h3>
+                        HOW TO USE
+                    </h3>
+
+                    <p
+                        id="product-modal-usage"
+                        class="product-modal-usage"
+                    ></p>
+
                 </div>
 
-
-                <p
-                    id="product-modal-selected-shade"
-                    class="product-modal-selected-shade"
-                >
-                    Select a shade
-                </p>
-
             </div>
-
-
-
-            <!-- ACTIONS -->
-
-            <div class="product-modal-actions">
-
-                <button
-                    id="modal-add-to-cart"
-                    class="modal-add-to-cart"
-                    type="button"
-                >
-                    Add to Cart
-                </button>
-
-
-                <button
-                    id="modal-buy-now"
-                    class="modal-buy-now"
-                    type="button"
-                >
-                    Buy Now
-                </button>
-
-            </div>
-
 
         </div>
+
+    </div>
+
+</div>
 
     </div>
 
@@ -559,6 +876,7 @@
 
 
     <script src="products.js"></script>
+    <script src="market.js"></script>
     <script src="menu.js"></script>
    <script src="shop.js"></script>
    <script src="store.js"></script>

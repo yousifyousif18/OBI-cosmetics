@@ -10,7 +10,16 @@ const shopTitle =
 
 const shopDescription =
     document.getElementById("shop-description");
+const defaultShopHero =
+    document.getElementById(
+        "default-shop-hero"
+    );
 
+
+const bodyCareHero =
+    document.getElementById(
+        "body-care-hero"
+    );
 const noProductsMessage =
     document.getElementById(
         "no-products-message"
@@ -31,10 +40,25 @@ const urlParameters =
         window.location.search
     );
 
+
 const selectedCategory =
-    urlParameters.get("category");
+    urlParameters.get(
+        "category"
+    );
 
 
+const selectedProductParameter =
+    urlParameters.get(
+        "product"
+    );
+
+
+const selectedProductId =
+    selectedProductParameter
+        ? Number(
+            selectedProductParameter
+        )
+        : null;
 /* =========================================
    CATEGORY INFORMATION
 ========================================= */
@@ -75,6 +99,12 @@ const categoryInformation = {
         title: "Body Care",
         description:
             "A little Obi care beyond the lips."
+    },
+
+    "hair-care": {
+        title: "Hair Care",
+        description:
+            "Nourish, soften and care for your hair with Obi."
     }
 
 };
@@ -90,9 +120,7 @@ let productsToDisplay =
 
 if (
     selectedCategory &&
-    categoryInformation[
-        selectedCategory
-    ]
+    categoryInformation[selectedCategory]
 ) {
 
     productsToDisplay =
@@ -118,12 +146,53 @@ if (
         categoryInformation[
             selectedCategory
         ].description;
-
 }
 
-
 /* =========================================
-   ACTIVE CATEGORY BUTTON
+   SPECIAL CATEGORY HERO
+========================================= */
+
+if (
+    selectedCategory ===
+    "body-care"
+) {
+
+    if (defaultShopHero) {
+
+        defaultShopHero.hidden =
+            true;
+
+    }
+
+
+    if (bodyCareHero) {
+
+        bodyCareHero.hidden =
+            false;
+
+    }
+
+}
+else {
+
+    if (defaultShopHero) {
+
+        defaultShopHero.hidden =
+            false;
+
+    }
+
+
+    if (bodyCareHero) {
+
+        bodyCareHero.hidden =
+            true;
+
+    }
+
+}
+/* =========================================
+   ACTIVE CATEGORY
 ========================================= */
 
 const categoryFilters =
@@ -179,6 +248,35 @@ if (shopResultCount) {
         productsToDisplay.length +
         " " +
         productWord;
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+function getProductPrice(
+    product
+) {
+
+    const price =
+        getProductNumericPrice(
+            product
+        );
+
+
+    if (
+        typeof price === "number"
+    ) {
+
+        return formatMoney(
+            price
+        );
+
+    }
+
+
+    return "Price coming soon";
 
 }
 
@@ -194,7 +292,8 @@ if (
     noProductsMessage.hidden =
         false;
 
-} else {
+}
+else {
 
     noProductsMessage.hidden =
         true;
@@ -252,8 +351,9 @@ if (
 
                         </div>
 
-
-                        <span class="obi-product-option-count">
+                        <span
+                            class="obi-product-option-count"
+                        >
                             ${optionText}
                         </span>
 
@@ -269,10 +369,21 @@ if (
                             </h2>
 
                             <p class="obi-product-price">
-                                LE ${product.price}
+                                ${getProductPrice(product)}
                             </p>
 
                         </div>
+
+
+                        ${
+                            product.tagline
+                                ? `
+                                    <p class="obi-product-tagline">
+                                        ${product.tagline}
+                                    </p>
+                                `
+                                : ""
+                        }
 
 
                         <p class="obi-product-description">
@@ -290,6 +401,7 @@ if (
                             <span>
                                 →
                             </span>
+
                         </button>
 
                     </div>
@@ -304,7 +416,7 @@ if (
 
 
 /* =========================================
-   PRODUCT QUICK VIEW
+   PRODUCT MODAL ELEMENTS
 ========================================= */
 
 const productModal =
@@ -326,7 +438,10 @@ const modalImage =
     document.getElementById(
         "product-modal-image"
     );
-
+const modalGallery =
+    document.getElementById(
+        "product-modal-gallery"
+    );
 const modalTitle =
     document.getElementById(
         "product-modal-title"
@@ -371,7 +486,8 @@ const modalBuyNow =
     document.getElementById(
         "modal-buy-now"
     );
-    const modalPreviewLabel =
+
+const modalPreviewLabel =
     document.getElementById(
         "product-modal-preview-label"
     );
@@ -381,14 +497,235 @@ const modalPhotoNote =
         "product-modal-photo-note"
     );
 
+const modalTagline =
+    document.getElementById(
+        "product-modal-tagline"
+    );
 
-let currentModalProduct = null;
+const modalBenefitsSection =
+    document.getElementById(
+        "product-modal-benefits-section"
+    );
 
-let currentModalShade = null;
+const modalBenefits =
+    document.getElementById(
+        "product-modal-benefits"
+    );
+
+const modalUsageSection =
+    document.getElementById(
+        "product-modal-usage-section"
+    );
+
+const modalUsage =
+    document.getElementById(
+        "product-modal-usage"
+    );
 
 
 /* =========================================
-   OPEN PRODUCT
+   SHADE ARROWS
+========================================= */
+
+const shadeScrollPrev =
+    document.getElementById(
+        "shade-scroll-prev"
+    );
+
+const shadeScrollNext =
+    document.getElementById(
+        "shade-scroll-next"
+    );
+
+
+/* =========================================
+   CURRENT PRODUCT
+========================================= */
+
+let currentModalProduct =
+    null;
+
+let currentModalShade =
+    null;
+
+let shadeRowHasNudged =
+    false;
+
+
+/* =========================================
+   SHADE ARROW STATE
+========================================= */
+
+function updateShadeScrollButtons() {
+
+    if (
+        !modalShades ||
+        !shadeScrollPrev ||
+        !shadeScrollNext
+    ) {
+
+        return;
+
+    }
+
+
+    const maxScroll =
+        modalShades.scrollWidth -
+        modalShades.clientWidth;
+
+
+    const hasOverflow =
+        maxScroll > 5;
+
+
+    shadeScrollPrev.hidden =
+        !hasOverflow;
+
+    shadeScrollNext.hidden =
+        !hasOverflow;
+
+
+    if (!hasOverflow) {
+
+        return;
+
+    }
+
+
+    shadeScrollPrev.disabled =
+        modalShades.scrollLeft <= 5;
+
+
+    shadeScrollNext.disabled =
+        modalShades.scrollLeft >=
+        maxScroll - 5;
+
+}
+
+
+/* =========================================
+   SHADE ARROW EVENTS
+========================================= */
+
+if (
+    shadeScrollPrev &&
+    shadeScrollNext
+) {
+
+    shadeScrollPrev.addEventListener(
+        "click",
+        function () {
+
+            modalShades.scrollBy({
+                left: -260,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+
+    shadeScrollNext.addEventListener(
+        "click",
+        function () {
+
+            modalShades.scrollBy({
+                left: 260,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+
+    modalShades.addEventListener(
+        "scroll",
+        updateShadeScrollButtons
+    );
+
+}
+
+/* =========================================
+   PRODUCT IMAGE GALLERY
+========================================= */
+
+function renderProductGallery(
+    product
+) {
+
+    if (!modalGallery) {
+
+        return;
+    }
+
+
+    const gallery =
+        Array.isArray(
+            product.gallery
+        )
+            ? product.gallery
+            : [];
+
+
+    modalGallery.innerHTML =
+        "";
+
+
+    /*
+        Do not show gallery controls
+        for products with only one image.
+    */
+
+    if (
+        gallery.length <= 1
+    ) {
+
+        modalGallery.hidden =
+            true;
+
+        return;
+    }
+
+
+    modalGallery.hidden =
+        false;
+
+
+    gallery.forEach(
+        function (
+            galleryImage,
+            index
+        ) {
+
+            modalGallery.innerHTML += `
+                <button
+                    class="
+                        product-modal-gallery-thumb
+                        ${index === 0 ? "active" : ""}
+                    "
+                    type="button"
+                    data-gallery-index="${index}"
+                    aria-label="View ${galleryImage.label || "product image"}"
+                >
+
+                    <img
+                        src="${galleryImage.src}"
+                        alt="${galleryImage.alt || product.name}"
+                    >
+
+                    <span>
+                        ${galleryImage.label || "Photo"}
+                    </span>
+
+                </button>
+            `;
+
+        }
+    );
+
+}
+/* =========================================
+   OPEN PRODUCT MODAL
 ========================================= */
 
 function openProductModal(
@@ -408,6 +745,12 @@ function openProductModal(
 
 
     if (!product) {
+
+        console.error(
+            "Product not found:",
+            productId
+        );
+
         return;
     }
 
@@ -419,12 +762,16 @@ function openProductModal(
         null;
 
 
+    /* =========================================
+       BASIC PRODUCT INFORMATION
+    ========================================= */
+
     modalTitle.textContent =
         product.name;
 
 
     modalPrice.textContent =
-        "LE " + product.price;
+        getProductPrice(product);
 
 
     modalDescription.textContent =
@@ -437,12 +784,111 @@ function openProductModal(
 
     modalImage.alt =
         product.name;
+renderProductGallery(
+    product
+);
 
-modalPreviewLabel.textContent =
-    "PRODUCT PHOTO";
+    modalPreviewLabel.textContent =
+        "PRODUCT PHOTO";
 
-modalPhotoNote.textContent =
-    "Product shown for reference.";
+
+    modalPhotoNote.textContent =
+        "Product shown for reference.";
+
+
+    /* =========================================
+       TAGLINE
+    ========================================= */
+
+    if (product.tagline) {
+
+        modalTagline.textContent =
+            product.tagline;
+
+        modalTagline.hidden =
+            false;
+
+    }
+    else {
+
+        modalTagline.textContent =
+            "";
+
+        modalTagline.hidden =
+            true;
+
+    }
+
+
+    /* =========================================
+       BENEFITS
+    ========================================= */
+
+    if (
+        Array.isArray(
+            product.benefits
+        ) &&
+        product.benefits.length > 0
+    ) {
+
+        modalBenefits.innerHTML =
+            product.benefits
+                .map(
+                    function (benefit) {
+
+                        return `
+                            <li>
+                                ${benefit}
+                            </li>
+                        `;
+
+                    }
+                )
+                .join("");
+
+
+        modalBenefitsSection.hidden =
+            false;
+
+    }
+    else {
+
+        modalBenefits.innerHTML =
+            "";
+
+        modalBenefitsSection.hidden =
+            true;
+
+    }
+
+
+    /* =========================================
+       HOW TO USE
+    ========================================= */
+
+    if (product.usage) {
+
+        modalUsage.textContent =
+            product.usage;
+
+        modalUsageSection.hidden =
+            false;
+
+    }
+    else {
+
+        modalUsage.textContent =
+            "";
+
+        modalUsageSection.hidden =
+            true;
+
+    }
+
+
+    /* =========================================
+       PRODUCT OPTIONS
+    ========================================= */
 
     const hasShades =
         Array.isArray(
@@ -450,6 +896,36 @@ modalPhotoNote.textContent =
         ) &&
         product.shades.length > 0;
 
+
+    const hasPrice =
+        typeof getProductNumericPrice(product) === "number";
+
+
+    /* Reset button text */
+
+    if (hasPrice) {
+
+        modalAddToCart.textContent =
+            "Add to Cart";
+
+        modalBuyNow.textContent =
+            "Buy Now";
+
+    }
+    else {
+
+        modalAddToCart.textContent =
+            "Price Coming Soon";
+
+        modalBuyNow.textContent =
+            "Not Available Yet";
+
+    }
+
+
+    /* =========================================
+       PRODUCT HAS SHADES
+    ========================================= */
 
     if (hasShades) {
 
@@ -472,6 +948,10 @@ modalPhotoNote.textContent =
 
         modalShades.innerHTML =
             "";
+
+
+        modalShades.scrollLeft =
+            0;
 
 
         product.shades.forEach(
@@ -511,6 +991,11 @@ modalPhotoNote.textContent =
         );
 
 
+        /*
+            Customer must select
+            a shade first.
+        */
+
         modalAddToCart.disabled =
             true;
 
@@ -518,6 +1003,12 @@ modalPhotoNote.textContent =
             true;
 
     }
+
+
+    /* =========================================
+       PRODUCT HAS NO SHADES
+    ========================================= */
+
     else {
 
         modalShadeSection.hidden =
@@ -529,21 +1020,44 @@ modalPhotoNote.textContent =
 
 
         modalAddToCart.disabled =
-            false;
+            !hasPrice;
+
 
         modalBuyNow.disabled =
-            false;
+            !hasPrice;
+
+
+        if (shadeScrollPrev) {
+
+            shadeScrollPrev.hidden =
+                true;
+
+        }
+
+
+        if (shadeScrollNext) {
+
+            shadeScrollNext.hidden =
+                true;
+
+        }
 
     }
 
+
+    /* =========================================
+       OPEN MODAL
+    ========================================= */
 
     productModal.classList.add(
         "open"
     );
 
+
     productModalOverlay.classList.add(
         "open"
     );
+
 
     productModal.setAttribute(
         "aria-hidden",
@@ -551,15 +1065,81 @@ modalPhotoNote.textContent =
     );
 
 
-    document.body.classList.add(
-        "product-modal-open"
-    );
+    document.documentElement.classList.add(
+    "product-modal-open"
+);
+
+document.body.classList.add(
+    "product-modal-open"
+);
+
+    /* =========================================
+       SHADE INTRO ANIMATION
+    ========================================= */
+
+    if (hasShades) {
+
+        setTimeout(
+            function () {
+
+                updateShadeScrollButtons();
+
+
+                const hasOverflow =
+                    modalShades.scrollWidth >
+                    modalShades.clientWidth;
+
+
+                if (
+                    hasOverflow &&
+                    !shadeRowHasNudged
+                ) {
+
+                    shadeRowHasNudged =
+                        true;
+
+
+                    /*
+                        Move a little to the right
+                        so the customer sees that
+                        more shades are available.
+                    */
+
+                    modalShades.scrollTo({
+                        left: 75,
+                        behavior: "smooth"
+                    });
+
+
+                    /*
+                        Then return to the start.
+                    */
+
+                    setTimeout(
+                        function () {
+
+                            modalShades.scrollTo({
+                                left: 0,
+                                behavior: "smooth"
+                            });
+
+                        },
+                        500
+                    );
+
+                }
+
+            },
+            250
+        );
+
+    }
 
 }
 
 
 /* =========================================
-   CLOSE PRODUCT
+   CLOSE PRODUCT MODAL
 ========================================= */
 
 function closeProductModal() {
@@ -567,6 +1147,7 @@ function closeProductModal() {
     productModal.classList.remove(
         "open"
     );
+
 
     productModalOverlay.classList.remove(
         "open"
@@ -579,6 +1160,11 @@ function closeProductModal() {
     );
 
 
+    document.documentElement.classList.remove(
+        "product-modal-open"
+    );
+
+
     document.body.classList.remove(
         "product-modal-open"
     );
@@ -587,7 +1173,7 @@ function closeProductModal() {
 
 
 /* =========================================
-   OPEN BUTTONS
+   OPEN PRODUCT BUTTONS
 ========================================= */
 
 const openProductButtons =
@@ -618,24 +1204,191 @@ openProductButtons.forEach(
 
     }
 );
+/* =========================================
+   AUTO-OPEN PRODUCT FROM CART
+========================================= */
 
 
+/* =========================================
+   PRODUCT GALLERY CLICK
+========================================= */
+
+if (modalGallery) {
+
+    modalGallery.addEventListener(
+        "click",
+        function (event) {
+
+            const galleryButton =
+                event.target.closest(
+                    ".product-modal-gallery-thumb"
+                );
+
+
+            if (
+                !galleryButton ||
+                !currentModalProduct
+            ) {
+
+                return;
+            }
+
+
+            const gallery =
+                Array.isArray(
+                    currentModalProduct.gallery
+                )
+                    ? currentModalProduct.gallery
+                    : [];
+
+
+            const galleryIndex =
+                Number(
+                    galleryButton.dataset
+                        .galleryIndex
+                );
+
+
+            const galleryImage =
+                gallery[
+                    galleryIndex
+                ];
+
+
+            if (!galleryImage) {
+
+                return;
+            }
+
+
+            /* Remove old active thumbnail */
+
+            const galleryButtons =
+                modalGallery.querySelectorAll(
+                    ".product-modal-gallery-thumb"
+                );
+
+
+            galleryButtons.forEach(
+                function (button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            /* Activate selected thumbnail */
+
+            galleryButton.classList.add(
+                "active"
+            );
+
+
+            /* Animate main image */
+
+            modalImage.classList.add(
+                "changing"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    modalImage.src =
+                        galleryImage.src;
+
+
+                    modalImage.alt =
+                        galleryImage.alt ||
+                        currentModalProduct.name;
+
+
+                    modalPreviewLabel.textContent =
+                        (
+                            galleryImage.label ||
+                            "Product Photo"
+                        ).toUpperCase();
+
+
+                    if (
+                        galleryImage.label ===
+                        "Texture"
+                    ) {
+
+                        modalPhotoNote.textContent =
+                            "A closer look at the product texture.";
+
+                    }
+                    else if (
+                        galleryImage.label ===
+                        "On Skin"
+                    ) {
+
+                        modalPhotoNote.textContent =
+                            "See how the product looks during application.";
+
+                    }
+                    else if (
+                        galleryImage.label ===
+                        "Lifestyle"
+                    ) {
+
+                        modalPhotoNote.textContent =
+                            "Obi Body Care collection.";
+
+                    }
+                    else {
+
+                        modalPhotoNote.textContent =
+                            "Product shown for reference.";
+
+                    }
+
+
+                    modalImage.classList.remove(
+                        "changing"
+                    );
+
+                },
+                130
+            );
+
+        }
+    );
+
+}
 /* =========================================
    CLOSE EVENTS
 ========================================= */
 
-closeProductModalButton
-    .addEventListener(
-        "click",
-        closeProductModal
-    );
+closeProductModalButton.addEventListener(
+    "click",
+    function (event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        closeProductModal();
+
+    }
+);
 
 
-productModalOverlay
-    .addEventListener(
-        "click",
-        closeProductModal
-    );
+
+
+if (productModalOverlay) {
+
+    productModalOverlay
+        .addEventListener(
+            "click",
+            closeProductModal
+        );
+
+}
 
 
 document.addEventListener(
@@ -675,6 +1428,7 @@ modalShades.addEventListener(
             !shadeButton ||
             !currentModalProduct
         ) {
+
             return;
         }
 
@@ -694,6 +1448,7 @@ modalShades.addEventListener(
 
 
         if (!shade) {
+
             return;
         }
 
@@ -701,6 +1456,8 @@ modalShades.addEventListener(
         currentModalShade =
             shade.name;
 
+
+        /* Remove previous selection */
 
         const allShadeButtons =
             modalShades.querySelectorAll(
@@ -715,6 +1472,7 @@ modalShades.addEventListener(
                     "selected"
                 );
 
+
                 button.setAttribute(
                     "aria-pressed",
                     "false"
@@ -723,6 +1481,8 @@ modalShades.addEventListener(
             }
         );
 
+
+        /* Select current shade */
 
         shadeButton.classList.add(
             "selected"
@@ -740,80 +1500,24 @@ modalShades.addEventListener(
             shade.name;
 
 
-        /*
-            FUTURE REAL-LIPS IMAGE
-
-            If lipImage exists for a shade,
-            show it.
-
-            Otherwise keep the normal
-            product image.
-        */
+        /* =========================================
+           SHADE IMAGE
+        ========================================= */
 
         const nextImage =
             shade.lipImage ||
             currentModalProduct.image;
 
 
-       const hasLipPreview =
-    Boolean(shade.lipImage);
+        const hasLipPreview =
+            Boolean(
+                shade.lipImage
+            );
 
 
-modalImage.classList.add(
-    "changing"
-);
-
-
-setTimeout(
-    function () {
-
-        modalImage.src =
-            nextImage;
-
-
-        if (hasLipPreview) {
-
-            modalImage.alt =
-                currentModalProduct.name +
-                " in " +
-                shade.name +
-                " shown on lips";
-
-
-            modalPreviewLabel.textContent =
-                "ON LIPS · " +
-                shade.name.toUpperCase();
-
-
-            modalPhotoNote.textContent =
-                "Shade shown on lips.";
-
-        }
-        else {
-
-            modalImage.alt =
-                currentModalProduct.name;
-
-
-            modalPreviewLabel.textContent =
-                "PRODUCT PHOTO";
-
-
-            modalPhotoNote.textContent =
-                "Lip preview for " +
-                shade.name +
-                " will be added soon.";
-
-        }
-
-
-        modalImage.classList.remove(
+        modalImage.classList.add(
             "changing"
         );
-
-    },
-    130
-);
 
 
         setTimeout(
@@ -823,10 +1527,40 @@ setTimeout(
                     nextImage;
 
 
-                modalImage.alt =
-                    currentModalProduct.name +
-                    " - " +
-                    shade.name;
+                if (hasLipPreview) {
+
+                    modalImage.alt =
+                        currentModalProduct.name +
+                        " in " +
+                        shade.name +
+                        " shown for reference";
+
+
+                    modalPreviewLabel.textContent =
+                        "SHADE PREVIEW · " +
+                        shade.name.toUpperCase();
+
+
+                    modalPhotoNote.textContent =
+                        "Shade shown for reference.";
+
+                }
+                else {
+
+                    modalImage.alt =
+                        currentModalProduct.name;
+
+
+                    modalPreviewLabel.textContent =
+                        "PRODUCT PHOTO";
+
+
+                    modalPhotoNote.textContent =
+                        "Lip preview for " +
+                        shade.name +
+                        " will be added soon.";
+
+                }
 
 
                 modalImage.classList.remove(
@@ -838,11 +1572,20 @@ setTimeout(
         );
 
 
+        /* =========================================
+           ENABLE BUY BUTTONS
+        ========================================= */
+
+        const hasPrice =
+           typeof getProductNumericPrice(currentModalProduct) === "number";
+
+
         modalAddToCart.disabled =
-            false;
+            !hasPrice;
+
 
         modalBuyNow.disabled =
-            false;
+            !hasPrice;
 
     }
 );
@@ -860,6 +1603,15 @@ modalAddToCart.addEventListener(
             !currentModalProduct ||
             !currentModalShade
         ) {
+
+            return;
+        }
+
+
+        if (
+            typeof getProductNumericPrice(currentModalProduct) !== "number"
+        ) {
+
             return;
         }
 
@@ -888,8 +1640,18 @@ modalBuyNow.addEventListener(
             !currentModalProduct ||
             !currentModalShade
         ) {
+
             return;
         }
+
+if (
+    typeof getProductNumericPrice(
+        currentModalProduct
+    ) !== "number"
+) {
+
+    return;
+}
 
 
         const buyNowItem = {
@@ -925,3 +1687,119 @@ modalBuyNow.addEventListener(
 
     }
 );
+/* =========================================
+   PRODUCT DETAILS ACCORDION
+========================================= */
+
+const productDetailsToggle =
+    document.getElementById(
+        "product-details-toggle"
+    );
+
+
+const productDetailsContent =
+    document.getElementById(
+        "product-details-content"
+    );
+
+
+if (
+    productDetailsToggle &&
+    productDetailsContent
+) {
+
+    productDetailsToggle.addEventListener(
+        "click",
+        function () {
+
+            const isOpen =
+                productDetailsToggle
+                    .getAttribute(
+                        "aria-expanded"
+                    ) === "true";
+
+
+            productDetailsToggle
+                .setAttribute(
+                    "aria-expanded",
+                    String(!isOpen)
+                );
+
+
+            productDetailsContent.hidden =
+                isOpen;
+
+        }
+    );
+
+}
+/* =========================================
+   OPEN PRODUCT FROM CART URL
+   MUST STAY AT BOTTOM OF SHOP.JS
+========================================= */
+
+function openProductFromURL() {
+
+    if (
+        !selectedProductId ||
+        !Number.isFinite(
+            selectedProductId
+        )
+    ) {
+        return;
+    }
+
+
+    const selectedProduct =
+        products.find(
+            function (product) {
+
+                return (
+                    product.id ===
+                    selectedProductId
+                );
+
+            }
+        );
+
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    /* Remove product parameter first */
+
+    const cleanURL =
+        new URL(
+            window.location.href
+        );
+
+
+    cleanURL.searchParams.delete(
+        "product"
+    );
+
+
+    window.history.replaceState(
+        {},
+        "",
+        cleanURL.pathname +
+        cleanURL.search +
+        cleanURL.hash
+    );
+
+
+    /* Then open the product */
+
+    openProductModal(
+        selectedProductId
+    );
+
+}
+
+
+/* Run only after all shop.js
+   controls have been connected */
+
+openProductFromURL();

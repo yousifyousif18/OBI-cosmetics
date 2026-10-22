@@ -1,111 +1,225 @@
-const checkoutMode =
-    sessionStorage.getItem("checkoutMode");
+/* =========================================================
+   OBI CHECKOUT
+========================================================= */
 
+
+const checkoutMode =
+    sessionStorage.getItem(
+        "checkoutMode"
+    );
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const checkoutItems =
-    document.getElementById("checkout-items");
-
+    document.getElementById(
+        "checkout-items"
+    );
 
 
 const checkoutSubtotal =
-    document.getElementById("checkout-subtotal");
+    document.getElementById(
+        "checkout-subtotal"
+    );
+
 
 const checkoutDelivery =
-    document.getElementById("checkout-delivery");
+    document.getElementById(
+        "checkout-delivery"
+    );
+
 
 const checkoutTotal =
-    document.getElementById("checkout-total");
+    document.getElementById(
+        "checkout-total"
+    );
 
-const citySelect =
-    document.getElementById("customer-city");
 
-const areaSelect =
-    document.getElementById("customer-area");
+const regionSelect =
+    document.getElementById(
+        "customer-region"
+    );
+
+
+const cityInput =
+    document.getElementById(
+        "customer-city"
+    );
+
 
 const checkoutForm =
-    document.getElementById("checkout-form");
+    document.getElementById(
+        "checkout-form"
+    );
 
+
+const marketFlag =
+    document.getElementById(
+        "checkout-market-flag"
+    );
+
+
+const marketName =
+    document.getElementById(
+        "checkout-market-name"
+    );
+
+
+const marketCurrency =
+    document.getElementById(
+        "checkout-market-currency"
+    );
+
+
+
+/* =========================================================
+   MARKET
+========================================================= */
+
+const selectedMarketCode =
+    getSelectedMarketCode();
+
+
+const selectedMarket =
+    getSelectedMarket();
+
+
+if (marketFlag) {
+
+    marketFlag.textContent =
+        selectedMarket.flag;
+
+}
+
+
+if (marketName) {
+
+    marketName.textContent =
+        selectedMarket.name;
+
+}
+
+
+if (marketCurrency) {
+
+    marketCurrency.textContent =
+        selectedMarket.currency;
+
+}
+
+
+
+/* =========================================================
+   ORDER DATA
+========================================================= */
 
 let orderItems = [];
 
 let subtotal = 0;
-let deliveryFee = 0;
 
-let selectedCity = "";
+let deliveryFee = null;
 
-let selectedArea = "";
+let selectedRegion = "";
 
 
-/* =========================================
+
+/* =========================================================
    BUY NOW CHECKOUT
-========================================= */
+========================================================= */
 
-if (checkoutMode === "buyNow") {
+if (
+    checkoutMode ===
+    "buyNow"
+) {
 
     const buyNowItem =
         JSON.parse(
-            sessionStorage.getItem("buyNowItem")
+            sessionStorage.getItem(
+                "buyNowItem"
+            )
         );
 
 
     if (!buyNowItem) {
 
-        window.location.href = "index.html";
+        window.location.href =
+            "shop.html";
 
     } else {
 
-        orderItems.push(buyNowItem);
+        orderItems.push(
+            buyNowItem
+        );
 
     }
 
 }
 
 
-/* =========================================
-   CART CHECKOUT
-========================================= */
 
-else if (checkoutMode === "cart") {
+/* =========================================================
+   CART CHECKOUT
+========================================================= */
+
+else if (
+    checkoutMode ===
+    "cart"
+) {
 
     const cart =
         JSON.parse(
-            localStorage.getItem("cart")
+            localStorage.getItem(
+                getCartStorageKey()
+            )
         ) || [];
 
 
-    if (cart.length === 0) {
+    if (
+        cart.length === 0
+    ) {
 
-        alert("Your cart is empty.");
+        alert(
+            "Your cart is empty."
+        );
 
-        window.location.href = "index.html";
+
+        window.location.href =
+            "shop.html";
 
     } else {
 
-        orderItems = cart;
+        orderItems =
+            cart;
 
     }
 
 }
 
 
-/* =========================================
+
+/* =========================================================
    INVALID CHECKOUT
-========================================= */
+========================================================= */
 
 else {
 
-    window.location.href = "index.html";
+    window.location.href =
+        "shop.html";
 
 }
 
 
-/* =========================================
+
+/* =========================================================
    DISPLAY ORDER
-========================================= */
+========================================================= */
 
 function displayOrder() {
 
-    checkoutItems.innerHTML = "";
+    checkoutItems.innerHTML =
+        "";
 
     subtotal = 0;
 
@@ -127,16 +241,56 @@ function displayOrder() {
 
 
             if (!product) {
+
                 return;
+
+            }
+
+
+            const productPrice =
+                getProductNumericPrice(
+                    product
+                );
+
+
+            if (
+                typeof productPrice
+                    !== "number"
+            ) {
+
+                return;
+
             }
 
 
             const itemTotal =
-                product.price *
+                productPrice *
                 item.quantity;
 
 
-            subtotal += itemTotal;
+            subtotal +=
+                itemTotal;
+
+
+            const shadeText =
+                (
+                    item.shade &&
+                    item.shade !==
+                        "Not applicable"
+                )
+
+                ?
+
+                `
+                    <p>
+                        Shade:
+                        ${item.shade}
+                    </p>
+                `
+
+                :
+
+                "";
 
 
             checkoutItems.innerHTML += `
@@ -146,20 +300,24 @@ function displayOrder() {
                         ${product.name}
                     </h3>
 
+                    ${shadeText}
+
                     <p>
-                        Shade: ${item.shade}
+                        Quantity:
+                        ${item.quantity}
                     </p>
 
                     <p>
-                        Quantity: ${item.quantity}
-                    </p>
-
-                    <p>
-                        LE ${product.price} each
+                        ${formatMoney(
+                            productPrice
+                        )}
+                        each
                     </p>
 
                     <strong>
-                        LE ${itemTotal}
+                        ${formatMoney(
+                            itemTotal
+                        )}
                     </strong>
 
                 </div>
@@ -170,161 +328,392 @@ function displayOrder() {
 
 
     checkoutSubtotal.textContent =
-    "LE " + subtotal;
+        formatMoney(
+            subtotal
+        );
 
 
-checkoutDelivery.textContent =
-    "Select area";
-
-
-checkoutTotal.textContent =
-    "--";
+    updateFinalTotal();
 
 }
 
 
-displayOrder();
-Object.keys(deliveryZones).forEach(
-    function (city) {
 
-        const option =
-            document.createElement("option");
+/* =========================================================
+   DELIVERY OPTIONS
+========================================================= */
 
-        option.value = city;
+function populateDeliveryOptions() {
 
-        option.textContent = city;
+    const options =
+        getDeliveryOptions();
 
-        citySelect.appendChild(option);
+
+    regionSelect.innerHTML = `
+        <option value="">
+            Select delivery region
+        </option>
+    `;
+
+
+    options.forEach(
+        function (deliveryOption) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                deliveryOption.name;
+
+
+            option.textContent =
+                (
+                    deliveryOption.name +
+                    " — " +
+                    formatMoney(
+                        deliveryOption.fee
+                    )
+                );
+
+
+            regionSelect.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    /*
+        UAE / Qatar / Saudi currently
+        have only one delivery option.
+
+        Select it automatically.
+    */
+
+    if (
+        options.length === 1
+    ) {
+
+        selectedRegion =
+            options[0].name;
+
+
+        deliveryFee =
+            options[0].fee;
+
+
+        regionSelect.value =
+            selectedRegion;
+
+
+        updateFinalTotal();
 
     }
 
+}
+
+
+
+/* =========================================================
+   DELIVERY REGION CHANGE
+========================================================= */
+
+regionSelect.addEventListener(
+    "change",
+    function () {
+
+        selectedRegion =
+            regionSelect.value;
+
+
+        if (
+            !selectedRegion
+        ) {
+
+            deliveryFee = null;
+
+            updateFinalTotal();
+
+            return;
+
+        }
+
+
+        deliveryFee =
+            getDeliveryPrice(
+                selectedRegion
+            );
+
+
+        updateFinalTotal();
+
+    }
 );
 
-/* =========================================
-   CHECKOUT FORM
-========================================= */
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+function updateFinalTotal() {
+
+    if (
+        typeof deliveryFee
+            !== "number"
+    ) {
+
+        checkoutDelivery.textContent =
+            "Select region";
+
+
+        checkoutTotal.textContent =
+            "--";
+
+
+        return;
+
+    }
+
+
+    const finalTotal =
+        subtotal +
+        deliveryFee;
+
+
+    checkoutDelivery.textContent =
+        formatMoney(
+            deliveryFee
+        );
+
+
+    checkoutTotal.textContent =
+        formatMoney(
+            finalTotal
+        );
+
+}
+
+
+
+/* =========================================================
+   WHATSAPP CHECKOUT
+========================================================= */
 
 checkoutForm.addEventListener(
     "submit",
     function (event) {
 
         event.preventDefault();
+
+
         if (
-    !selectedCity ||
-    !selectedArea
+            !selectedRegion ||
+            typeof deliveryFee
+                !== "number"
         ) {
 
-        alert(
-        "Please select your delivery city and area."
-        );
+            alert(
+                "Please select your delivery region."
+            );
 
-    return;
-}
-         const finalTotal =
-           subtotal + deliveryFee;
+            return;
+
+        }
+
 
         const name =
             document
-                .getElementById("customer-name")
+                .getElementById(
+                    "customer-name"
+                )
                 .value
                 .trim();
 
 
         const phone =
             document
-                .getElementById("customer-phone")
+                .getElementById(
+                    "customer-phone"
+                )
+                .value
+                .trim();
+
+
+        const city =
+            cityInput
                 .value
                 .trim();
 
 
         const address =
             document
-                .getElementById("customer-address")
+                .getElementById(
+                    "customer-address"
+                )
                 .value
                 .trim();
 
 
-        let orderMessage = "";
+        const finalTotal =
+            subtotal +
+            deliveryFee;
 
 
-        orderItems.forEach(
-            function (item) {
+       let orderMessage = "";
 
-                const product =
-                    products.find(
-                        function (product) {
 
-                            return (
-                                product.id ===
-                                item.productId
-                            );
+orderItems.forEach(
+    function (item, index) {
 
-                        }
+        const product =
+            products.find(
+                function (product) {
+
+                    return (
+                        product.id ===
+                        item.productId
                     );
 
-
-                if (!product) {
-                    return;
                 }
+            );
 
 
-                const itemTotal =
-                    product.price *
-                    item.quantity;
+        if (!product) {
+            return;
+        }
 
 
-                orderMessage += `
-${product.name}
-Shade: ${item.shade}
-Quantity: ${item.quantity}
-Price: LE ${product.price}
-Item total: LE ${itemTotal}
+        const productPrice =
+            getProductNumericPrice(
+                product
+            );
+
+
+        if (
+            typeof productPrice !==
+            "number"
+        ) {
+            return;
+        }
+
+
+        const itemTotal =
+            productPrice *
+            item.quantity;
+
+
+        orderMessage += `
+*${index + 1}. ${product.name}*
+${(
+    item.shade &&
+    item.shade !== "Not applicable"
+)
+    ? `Shade: ${item.shade}\n`
+    : ""
+}Quantity: ${item.quantity}
+Price: ${formatMoney(productPrice)}
+Item Total: *${formatMoney(itemTotal)}*
 
 `;
 
-            }
-        );
+    }
+);
 
 
-        const message = `
-Hi there, I would like to place the following order from Obi Cosmetics.
+    const message = `
+*OBI COSMETICS — NEW ORDER*
 
-ORDER DETAILS
+━━━━━━━━━━━━━━
+*ORDER INFORMATION*
+━━━━━━━━━━━━━━
+
+*Market:* ${selectedMarket.name}
+*Currency:* ${selectedMarket.currency}
+
+━━━━━━━━━━━━━━
+*ORDER ITEMS*
+━━━━━━━━━━━━━━
 
 ${orderMessage}
+━━━━━━━━━━━━━━
+*ORDER SUMMARY*
+━━━━━━━━━━━━━━
 
-SUBTOTAL: LE ${subtotal}
+Subtotal: *${formatMoney(subtotal)}*
+Delivery: *${formatMoney(deliveryFee)}*
 
-DELIVERY
+*TOTAL: ${formatMoney(finalTotal)}*
 
-City: ${selectedCity}
-Area: ${selectedArea}
-Delivery Fee: LE ${deliveryFee}
+━━━━━━━━━━━━━━
+*DELIVERY DETAILS*
+━━━━━━━━━━━━━━
 
-FINAL TOTAL: LE ${finalTotal}
+*Delivery Region:*
+${selectedRegion}
 
-CUSTOMER DETAILS
+*City / Governorate:*
+${city}
 
-Name: ${name}
-Phone: ${phone}
-
-Exact Delivery Address:
+*Exact Address:*
 ${address}
 
-Please confirm the order and delivery details.
+━━━━━━━━━━━━━━
+*CUSTOMER DETAILS*
+━━━━━━━━━━━━━━
+
+*Name:* ${name}
+*Phone:* ${phone}
+
+━━━━━━━━━━━━━━
+
+_Please confirm the order and delivery details._
 `;
-
-
-        const encodedMessage =
-            encodeURIComponent(message);
 
 
         const whatsappNumber =
-            "601169390811";
+            selectedMarket.whatsapp;
+
+
+        /*
+            Saudi Arabia uses
+            a different WhatsApp number.
+
+            Until you give me that
+            number, Saudi checkout
+            will safely stop here.
+        */
+
+        if (
+            !whatsappNumber
+        ) {
+
+            alert(
+                "Saudi Arabia WhatsApp checkout is not configured yet."
+            );
+
+            return;
+
+        }
+
+
+        const encodedMessage =
+            encodeURIComponent(
+                message
+            );
 
 
         const whatsappURL =
-            `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            (
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                encodedMessage
+            );
 
 
         window.location.href =
@@ -333,126 +722,12 @@ Please confirm the order and delivery details.
     }
 );
 
-citySelect.addEventListener(
-    "change",
-    function () {
-
-        selectedCity =
-            citySelect.value;
 
 
-        selectedArea = "";
+/* =========================================================
+   INITIALIZE CHECKOUT
+========================================================= */
 
-        deliveryFee = 0;
+displayOrder();
 
-
-        areaSelect.innerHTML = `
-            <option value="">
-                Select your area
-            </option>
-        `;
-
-
-        checkoutDelivery.textContent =
-            "Select area";
-
-
-        checkoutTotal.textContent =
-            "--";
-
-
-        if (!selectedCity) {
-
-            areaSelect.disabled = true;
-
-            return;
-        }
-
-
-        areaSelect.disabled = false;
-
-
-        const areas =
-            deliveryZones[selectedCity];
-
-
-        areas.forEach(
-            function (area) {
-
-                const option =
-                    document.createElement("option");
-
-
-                option.value =
-                    area.name;
-
-
-                option.textContent =
-                    `${area.name} — LE ${area.fee}`;
-
-
-                areaSelect.appendChild(option);
-
-            }
-        );
-
-    }
-);
-areaSelect.addEventListener(
-    "change",
-    function () {
-
-        selectedArea =
-            areaSelect.value;
-
-
-        if (!selectedArea) {
-
-            deliveryFee = 0;
-
-            checkoutDelivery.textContent =
-                "Select area";
-
-            checkoutTotal.textContent =
-                "--";
-
-            return;
-        }
-
-
-        const area =
-            deliveryZones[selectedCity]
-                .find(
-                    function (area) {
-
-                        return (
-                            area.name ===
-                            selectedArea
-                        );
-
-                    }
-                );
-
-
-        deliveryFee =
-            area.fee;
-
-
-        updateFinalTotal();
-
-    }
-);
-function updateFinalTotal() {
-
-    const finalTotal =
-        subtotal + deliveryFee;
-
-
-    checkoutDelivery.textContent =
-        "LE " + deliveryFee;
-
-
-    checkoutTotal.textContent =
-        "LE " + finalTotal;
-
-}
+populateDeliveryOptions();

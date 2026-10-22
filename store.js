@@ -176,7 +176,9 @@ buyNowButtons.forEach(function (button) {
 
 let cart =
     JSON.parse(
-        localStorage.getItem("cart")
+        localStorage.getItem(
+            getCartStorageKey()
+        )
     ) || [];
 
 
@@ -302,9 +304,9 @@ continueShoppingButton.addEventListener(
 function saveCart() {
 
     localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
+    getCartStorageKey(),
+    JSON.stringify(cart)
+);
 
 }
 
@@ -500,25 +502,22 @@ function renderCart() {
 
         cartItemsContainer.innerHTML = `
             <div class="empty-cart">
-
                 <p>
                     Your cart is empty.
                 </p>
-
             </div>
         `;
 
 
         cartSubtotalElement.textContent =
-            "LE 0";
+            formatMoney(0);
 
 
         return;
     }
 
 
-    cartItemsContainer.innerHTML =
-        "";
+    cartItemsContainer.innerHTML = "";
 
 
     let subtotal = 0;
@@ -541,7 +540,6 @@ function renderCart() {
 
 
             if (!product) {
-
                 return;
             }
 
@@ -570,106 +568,149 @@ function renderCart() {
             }
 
 
+            const productPrice =
+                getProductNumericPrice(
+                    product
+                );
+
+
             const itemTotal =
-                product.price *
+                productPrice *
                 item.quantity;
 
 
-            subtotal +=
-                itemTotal;
+            subtotal += itemTotal;
 
 
             cartItemsContainer.innerHTML += `
                 <article class="cart-item">
 
-                    <div class="cart-item-top">
-
-                        <div>
-
-                            <h3>
-                                ${product.name}
-                            </h3>
+                    <div class="cart-product-row">
 
 
-                            <div class="cart-item-details">
+                        <!-- PRODUCT IMAGE -->
 
-                                ${
-                                    item.shade !==
-                                    "Not applicable"
-                                        ? `
-                                        <div class="cart-shade">
+                     <a
+    href="shop.html?category=${product.category}&product=${product.id}"
+    class="cart-product-image cart-product-link"
+    aria-label="View ${product.name}"
+>
 
-                                            ${
-                                                shade
-                                                    ? `
-                                                    <span
-                                                        class="cart-shade-color"
-                                                        style="background-color: ${shade.color}">
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                                loading="lazy"
+                            >
+
+                        </a>
+
+
+                        <!-- PRODUCT INFORMATION -->
+
+                        <div class="cart-product-info">
+
+
+                            <div class="cart-item-top">
+
+
+                                <div>
+
+                                    <h3>
+                                        ${product.name}
+                                    </h3>
+
+
+                                    <div class="cart-item-details">
+
+                                        ${
+                                            item.shade !==
+                                            "Not applicable"
+                                                ? `
+                                                <div class="cart-shade">
+
+                                                    ${
+                                                        shade
+                                                            ? `
+                                                            <span
+                                                                class="cart-shade-color"
+                                                                style="background-color: ${shade.color}">
+                                                            </span>
+                                                            `
+                                                            : ""
+                                                    }
+
+                                                    <span>
+                                                        ${item.shade}
                                                     </span>
-                                                    `
-                                                    : ""
-                                            }
 
-                                            <span>
-                                                ${item.shade}
-                                            </span>
-
-                                        </div>
-                                        `
-                                        : ""
-                                }
+                                                </div>
+                                                `
+                                                : ""
+                                        }
 
 
-                                <p>
-                                    LE ${product.price} each
-                                </p>
+                                        <p>
+                                            ${formatMoney(productPrice)} each
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <strong>
+                                    ${formatMoney(itemTotal)}
+                                </strong>
+
 
                             </div>
 
+
+                            <!-- QUANTITY -->
+
+                            <div class="cart-quantity">
+
+                                <button
+                                    class="decrease-cart-item"
+                                    data-index="${index}"
+                                    type="button"
+                                    aria-label="Decrease quantity"
+                                >
+                                    −
+                                </button>
+
+
+                                <span>
+                                    ${item.quantity}
+                                </span>
+
+
+                                <button
+                                    class="increase-cart-item"
+                                    data-index="${index}"
+                                    type="button"
+                                    aria-label="Increase quantity"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+
+                            <!-- REMOVE -->
+
+                            <button
+                                class="remove-cart-item"
+                                data-index="${index}"
+                                type="button"
+                            >
+                                Remove
+                            </button>
+
+
                         </div>
 
-
-                        <strong>
-                            LE ${itemTotal}
-                        </strong>
-
                     </div>
-
-
-                    <div class="cart-quantity">
-
-                        <button
-                            class="decrease-cart-item"
-                            data-index="${index}"
-                            type="button"
-                        >
-                            −
-                        </button>
-
-
-                        <span>
-                            ${item.quantity}
-                        </span>
-
-
-                        <button
-                            class="increase-cart-item"
-                            data-index="${index}"
-                            type="button"
-                        >
-                            +
-                        </button>
-
-                    </div>
-
-
-                    <button
-                        class="remove-cart-item"
-                        data-index="${index}"
-                        type="button"
-                    >
-                        Remove
-                    </button>
 
                 </article>
             `;
@@ -679,7 +720,9 @@ function renderCart() {
 
 
     cartSubtotalElement.textContent =
-        "LE " + subtotal;
+        formatMoney(
+            subtotal
+        );
 
 }
 
