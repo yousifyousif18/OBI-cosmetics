@@ -8,8 +8,6 @@ const productGrid =
 const shopTitle =
     document.getElementById("shop-title");
 
-const shopDescription =
-    document.getElementById("shop-description");
 const defaultShopHero =
     document.getElementById(
         "default-shop-hero"
@@ -66,45 +64,31 @@ const selectedProductId =
 const categoryInformation = {
 
     "lip-gloss": {
-        title: "Lip Glosses",
-        description:
-            "Gloss, shine and colour for every mood."
+        title: "Lip Glosses"
     },
 
     "lip-oil": {
-        title: "Lip Oils",
-        description:
-            "Soft shine and lightweight lip colour."
+        title: "Lip Oils"
     },
 
     "lip-liner": {
-        title: "Lip Liners",
-        description:
-            "Shape, define and create your lip look."
+        title: "Lip Liners"
     },
 
     "blush": {
-        title: "Blush",
-        description:
-            "Add a little colour to your everyday look."
+        title: "Blush"
     },
 
     "liquid-lipstick": {
-        title: "Liquid Lipsticks",
-        description:
-            "Colour that makes the look yours."
+        title: "Liquid Lipsticks"
     },
 
     "body-care": {
-        title: "Body Care",
-        description:
-            "A little Obi care beyond the lips."
+        title: "Body Care"
     },
 
     "hair-care": {
-        title: "Hair Care",
-        description:
-            "Nourish, soften and care for your hair with Obi."
+        title: "Hair Care"
     }
 
 };
@@ -135,17 +119,10 @@ if (
             }
         );
 
-
-    shopTitle.textContent =
-        categoryInformation[
-            selectedCategory
-        ].title;
+shopTitle.textContent =
+    categoryInformation[selectedCategory].title;
 
 
-    shopDescription.textContent =
-        categoryInformation[
-            selectedCategory
-        ].description;
 }
 
 /* =========================================
@@ -522,7 +499,16 @@ const modalUsage =
         "product-modal-usage"
     );
 
+const modalSpecsSection =
+    document.getElementById(
+        "product-modal-specs-section"
+    );
 
+
+const modalNetWeight =
+    document.getElementById(
+        "product-modal-net-weight"
+    );
 /* =========================================
    SHADE ARROWS
 ========================================= */
@@ -794,7 +780,27 @@ renderProductGallery(
 
     modalPhotoNote.textContent =
         "Product shown for reference.";
+if (product.netWeight) {
 
+    modalNetWeight.textContent =
+        "Net Weight: " +
+        product.netWeight;
+
+
+    modalSpecsSection.hidden =
+        false;
+
+}
+else {
+
+    modalNetWeight.textContent =
+        "";
+
+
+    modalSpecsSection.hidden =
+        true;
+
+}
 
     /* =========================================
        TAGLINE
@@ -915,7 +921,7 @@ renderProductGallery(
     else {
 
         modalAddToCart.textContent =
-            "Price Coming Soon";
+            "Coming Soon!";
 
         modalBuyNow.textContent =
             "Not Available Yet";

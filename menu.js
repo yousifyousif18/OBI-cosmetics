@@ -74,3 +74,98 @@ if (shopMenuButton && shopSubmenu) {
     );
 
 }
+/* =========================================================
+   CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (!mobileMenu || !menuButton) {
+            return;
+        }
+
+
+        const clickedInsideMenu =
+            mobileMenu.contains(event.target);
+
+        const clickedMenuButton =
+            menuButton.contains(event.target);
+
+
+        if (
+            mobileMenu.classList.contains("open") &&
+            !clickedInsideMenu &&
+            !clickedMenuButton
+        ) {
+
+            mobileMenu.classList.remove("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+
+            /* Close shop submenu too */
+
+            if (shopSubmenu) {
+                shopSubmenu.classList.remove("open");
+            }
+
+
+            /* Reset + symbol */
+
+            if (shopMenuButton) {
+
+                const symbol =
+                    shopMenuButton.querySelector(
+                        "span:last-child"
+                    );
+
+                if (symbol) {
+                    symbol.textContent = "+";
+                }
+
+            }
+
+        }
+
+    }
+);
+/* =========================================================
+   CLOSE MENU AFTER CLICKING A LINK
+========================================================= */
+
+if (mobileMenu) {
+
+    const mobileMenuLinks =
+        mobileMenu.querySelectorAll("a");
+
+
+    mobileMenuLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    mobileMenu.classList.remove("open");
+
+                    if (menuButton) {
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}

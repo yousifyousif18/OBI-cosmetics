@@ -19,9 +19,9 @@ const products = [
 
         prices: {
     EGY: 180,
-    UAE: 25,
-    KSA: 25,
-    QAT: 25
+    UAE: 20,
+    KSA: 20,
+    QAT: 20
 },
 
         image:
@@ -166,9 +166,9 @@ const products = [
 
         prices: {
     EGY: 200,
-    UAE: 28,
-    KSA: 30,
-    QAT: 28
+    UAE: 25,
+    KSA: 25,
+    QAT: 25
 },
 
         image:
@@ -183,7 +183,63 @@ const products = [
         description:
             "Lightweight lip oil for shine and moisture.",
 
-        shades: []
+        shades: [
+
+    {
+        name: "Cherry",
+
+        color: "#8F183A",
+
+        lipImage:
+            "images/shades/lip-oil/cherry.webp"
+    },
+
+    {
+        name: "Chocolate",
+
+        color: "#7A3E2E",
+
+        lipImage:
+            "images/shades/lip-oil/chocolate.webp"
+    },
+
+    {
+        name: "Glitter",
+
+        color: "#F2E7DF",
+
+        lipImage:
+            "images/shades/lip-oil/glitter.webp"
+    },
+
+    {
+        name: "Hot Red",
+
+        color: "#cf0e0e",
+
+        lipImage:
+            "images/shades/lip-oil/hot-red.webp"
+    },
+
+    {
+        name: "Pink",
+
+        color: "#E98AA6",
+
+        lipImage:
+            "images/shades/lip-oil/pink.webp"
+    },
+
+    {
+        name: "Watermelon",
+
+        color: "#ff0022",
+
+        lipImage:
+            "images/shades/lip-oil/watermelon.webp"
+    }
+
+]
     },
 
 
@@ -200,24 +256,72 @@ const products = [
         category: "blush",
 
        prices: {
-    EGY: 200,
+    EGY: 320,
     UAE: 30,
     KSA: 30,
     QAT: 30
 },
 
         image:
-            "images/products/blush.webp",
-        tagline: "",
+            "images/products/blush/blush.webp",
+          tagline:
+        "SILKY • BUILDABLE • LONG WEAR",
 
-        benefits: [],
+    benefits: [
+        "Silky, smooth texture",
+        "Buildable colour for a soft or more defined look",
+        "Designed for long wear",
+        "Easy to layer and blend"
+    ],
 
-        usage: "",
+    usage:
+        "Apply a small amount to the cheeks and blend. Build gradually until you reach your preferred colour intensity.",
 
-        description:
-            "Obi Cosmetics blush for a soft touch of colour.",
+    description:
+        "A silky, buildable blush made to bring soft, flattering colour to your cheeks with a comfortable long-wear finish.",
 
-        shades: []
+    netWeight:
+        "5 g / 0.17 oz",
+
+        shades: [
+
+    {
+        name: "Bella Pink",
+
+        
+color: "#F08AA3",
+        lipImage:
+            "images/shades/blush/bella-pink.webp"
+    },
+
+    {
+        name: "Sweet Cheeks",
+color: "#E61E6E",
+       
+
+        lipImage:
+            "images/shades/blush/sweet-cheeks.webp"
+    },
+
+    {
+        name: "Cherish",
+color: "#F06F63",
+        
+
+        lipImage:
+            "images/shades/blush/cherish.webp"
+    },
+
+    {
+        name: "Coral Crush",
+
+         color: "#F37A34",
+
+        lipImage:
+            "images/shades/blush/coral-crush.webp"
+    }
+
+]
     },
 
 
@@ -226,34 +330,81 @@ const products = [
        LIQUID LIPSTICK
     ===================================================== */
 
-    {
-        id: 4,
+   {
+    id: 4,
 
-        name: "Liquid Lipstick",
+    name: "Liquid Lipstick",
 
-        category: "liquid-lipstick",
+    category: "liquid-lipstick",
 
-        prices: {
-    EGY: 300,
-    UAE: 38,
-    KSA: 40,
-    QAT: 38
+   prices: {
+    EGY: 250,
+    UAE: 25,
+    KSA: 25,
+    QAT: 25
 },
 
-        image:
-            "images/products/liquid-lipstick.webp",
+    image:
+        "images/products/liquid-lipstick.webp",
 
-        tagline: "",
+    tagline:
+        "MATTE • SMOOTH • BOLD",
 
-        benefits: [],
+    description:
+        "Obi Cosmetics Liquid Matte Lipstick.",
 
-        usage: "",
+    benefits: [],
 
-        description:
-            "Obi Cosmetics liquid lipstick.",
+    usage: "",
 
-        shades: []
-    },
+    /*showInShadeParade: false,*/
+
+    shades: [
+
+        {
+            name: "M04 Wine",
+            color: "#A20F2D",
+            lipImage:
+                "images/shades/liquid-lipstick/m04-wine.webp"
+        },
+
+        {
+            name: "M13 Cinnamon",
+            color: "#C66E5D",
+            lipImage:
+                "images/shades/liquid-lipstick/m13-cinnamon.webp"
+        },
+
+        {
+            name: "M18 Vinyl",
+            color: "#C72E65",
+            lipImage:
+                "images/shades/liquid-lipstick/m18-vinyl.webp"
+        },
+
+        {
+            name: "M26 Gorgeous",
+            color: "#D60059",
+            lipImage:
+                "images/shades/liquid-lipstick/m26-gorgeous.webp"
+        },
+
+        {
+            name: "M33 Velvet Berry",
+            color: "#8E1231",
+            lipImage:
+                "images/shades/liquid-lipstick/m33-velvet-berry.webp"
+        },
+
+        {
+            name: "M37 Adel 19",
+            color: "#B65F49",
+            lipImage:
+                "images/shades/liquid-lipstick/m37-adel-19.webp"
+        }
+
+    ]
+},
 
 
 
@@ -276,7 +427,7 @@ const products = [
 },
 
         image:
-            "images/products/body-oil.webp",
+            "images/products/body-care/body-oil/body-oil.webp",
         tagline:
             "NOURISH • SOFTEN • GLOW",
 
@@ -311,10 +462,10 @@ const products = [
         category: "lip-liner",
 
         prices: {
-    EGY: 200,
-    UAE: 25,
-    KSA: 25,
-    QAT: 25
+    EGY: 180,
+    UAE: 20,
+    KSA: 20,
+    QAT: 20
 },
 
         image:
@@ -374,10 +525,10 @@ const products = [
         category: "lip-liner",
 
        prices: {
-    EGY: 300,
-    UAE: 35,
-    KSA: 35,
-    QAT: 35
+    EGY: 220,
+    UAE: 25,
+    KSA: 25,
+    QAT: 25
 },
 
         image:
@@ -392,35 +543,32 @@ const products = [
         benefits: [],
 
         usage: "",
+showInShadeParade: false,
 
-        shades: [
+shades: [
 
-            {
-                name: "01 Nude",
-                color: "#81331D"
-            },
+    {
+        name: "#4",
+        color: "#8D284D",
+         lipImage:
+            "images/shades/lip-liner-rollup/4.webp"
+    },
 
-            {
-                name: "02 Rose",
-                color: "#BA0F89"
-            },
+    {
+        name: "#10",
+        color: "#765148",
+         lipImage:
+            "images/shades/lip-liner-rollup/10.webp"
+    },
 
-            {
-                name: "03 Pink",
-                color: "#9E6524"
-            },
+    {
+        name: "#23",
+        color: "#563025",
+         lipImage:
+            "images/shades/lip-liner-rollup/23.webp"
+    }
 
-            {
-                name: "04 Mauve",
-                color: "#9B6676"
-            },
-
-            {
-                name: "05 Berry",
-                color: "#35ECCB"
-            }
-
-        ]
+]
     },
 
 
@@ -437,10 +585,10 @@ const products = [
         category: "body-care",
 
         prices: {
-    EGY: 350,
-    UAE: 45,
-    KSA: 48,
-    QAT: 45
+    EGY: 300,
+    UAE: null,
+    KSA: null,
+    QAT: null
 },
 
      image:
@@ -515,31 +663,60 @@ gallery: [
         category: "body-care",
 
         prices: {
-    EGY: 280,
-    UAE: 38,
-    KSA: 40,
-    QAT: 38
+    EGY: 250,
+    UAE: null,
+    KSA: null,
+    QAT: null
 },
-
-       image:
+ image:
     "images/products/body-care/body-lotion/body-lotion.webp",
 
-        tagline:
-            "HYDRATE • SMOOTH • SOFTEN",
+gallery: [
 
-        description:
-            "Lightweight everyday body hydration designed to keep skin feeling soft, smooth and comfortable.",
+    {
+        src:
+            "images/products/body-care/body-lotion/body-lotion.webp",
 
-        benefits: [
-            "Provides everyday hydration",
-            "Helps keep skin soft & smooth",
-            "Lightweight and easy to absorb",
-            "Leaves skin feeling comfortable and moisturized",
-            "Ideal for daily use"
-        ],
+        label:
+            "Product",
 
-        usage:
-            "Perfect for everyday, all-over body care.",
+        alt:
+            "Obi Cosmetics Body Lotion"
+    },
+
+    {
+        src:
+            "images/products/body-care/body-lotion/body-lotion-back.webp",
+
+        label:
+            "Details",
+
+        alt:
+            "Obi Cosmetics Body Lotion product details"
+    }
+
+],
+       tagline:
+        "DEEP HYDRATION • SOFT & SMOOTH SKIN • LONG-LASTING MOISTURE",
+
+    benefits: [
+        "Helps deeply hydrate the skin",
+        "Leaves skin feeling soft and smooth",
+        "Provides long-lasting moisture",
+        "Formulated with Urea for added hydration"
+    ],
+
+    usage:
+        "Apply to clean skin and massage gently until absorbed. For extra nourishment, follow with Obi Body Butter.",
+
+    description:
+        "A nourishing body lotion with Urea designed to deeply hydrate and leave your skin soft, smooth and healthy-looking.",
+
+    volume:
+        "300 ml",
+
+    origin:
+        "Made in Egypt",
 
         shades: []
     },
@@ -558,14 +735,14 @@ gallery: [
         category: "hair-care",
 
        prices: {
-    EGY: 300,
-    UAE: 40,
-    KSA: 42,
-    QAT: 40
+    EGY: 350,
+    UAE: 60,
+    KSA: 60,
+    QAT: 60
 },
 
        image:
-    "images/products/hair-care/hair-cream/hair-cream.webp",
+    "images/products/hair-care/hair-cream.webp",
 
         tagline:
             "NOURISH • SOFTEN • SMOOTH",
@@ -602,14 +779,14 @@ gallery: [
         category: "hair-care",
 
         prices: {
-    EGY: 330,
-    UAE: 42,
-    KSA: 45,
-    QAT: 42
+    EGY: 350,
+    UAE: 50,
+    KSA: 50,
+    QAT: 50
 },
 
         image:
-            "images/products/hair-oil.webp",
+            "images/products/hair-care/hair-oil.webp",
 
         tagline:
             "GROW • STRENGTHEN • NOURISH",
