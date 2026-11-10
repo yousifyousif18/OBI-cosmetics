@@ -72,8 +72,6 @@ const marketCurrency =
         "checkout-market-currency"
     );
 
-
-
 /* =========================================================
    MARKET
 ========================================================= */
@@ -82,35 +80,59 @@ const selectedMarketCode =
     getSelectedMarketCode();
 
 
-const selectedMarket =
-    getSelectedMarket();
+if (!selectedMarketCode) {
 
-
-if (marketFlag) {
-
-    marketFlag.textContent =
-        selectedMarket.flag;
+    window.location.href =
+        "shop.html";
 
 }
 
 
-if (marketName) {
+const selectedMarket =
+    OBI_MARKETS[
+        selectedMarketCode
+    ];
+    if (
+    selectedMarket &&
+    marketFlag
+) {
+
+    marketFlag.src =
+        selectedMarket.flag;
+
+    marketFlag.alt =
+        selectedMarket.name +
+        " flag";
+}
+
+
+if (
+    selectedMarket &&
+    marketName
+) {
 
     marketName.textContent =
         selectedMarket.name;
-
 }
 
 
-if (marketCurrency) {
+if (
+    selectedMarket &&
+    marketCurrency
+) {
 
     marketCurrency.textContent =
         selectedMarket.currency;
-
 }
+const deliveryLabel =
+    document.getElementById(
+        "delivery-option-label"
+    );
 
-
-
+const cityLabel =
+    document.getElementById(
+        "city-label"
+    );
 /* =========================================================
    ORDER DATA
 ========================================================= */
@@ -337,24 +359,166 @@ function displayOrder() {
 
 }
 
-
-
-/* =========================================================
-   DELIVERY OPTIONS
-========================================================= */
-
 function populateDeliveryOptions() {
+
+    const delivery =
+        getMarketDeliveryData();
 
     const options =
         getDeliveryOptions();
 
 
-    regionSelect.innerHTML = `
-        <option value="">
-            Select delivery region
-        </option>
-    `;
+    if (
+        !regionSelect ||
+        !delivery
+    ) {
+        return;
+    }
 
+
+    /* ========================================
+       CHANGE LABELS BY DELIVERY TYPE
+    ======================================== */
+
+    let placeholderText =
+        "Select delivery";
+
+
+    if (
+        delivery.mode === "carrier"
+    ) {
+
+        placeholderText =
+            "Select delivery option";
+
+
+        if (deliveryLabel) {
+
+            deliveryLabel.textContent =
+                "Delivery Option";
+
+        }
+
+
+        if (cityLabel) {
+
+            cityLabel.textContent =
+                "City";
+
+        }
+
+
+        if (cityInput) {
+
+            cityInput.placeholder =
+                "Enter your city";
+
+        }
+
+    }
+
+
+    else if (
+        delivery.mode === "regions"
+    ) {
+
+        placeholderText =
+            "Select delivery region";
+
+
+        if (deliveryLabel) {
+
+            deliveryLabel.textContent =
+                "Delivery Region";
+
+        }
+
+
+        if (cityLabel) {
+
+            cityLabel.textContent =
+                "City / Governorate";
+
+        }
+
+
+        if (cityInput) {
+
+            cityInput.placeholder =
+                "Enter your city or governorate";
+
+        }
+
+    }
+
+
+    else {
+
+        placeholderText =
+            "Select delivery";
+
+
+        if (deliveryLabel) {
+
+            deliveryLabel.textContent =
+                "Delivery";
+
+        }
+
+
+        if (cityLabel) {
+
+            cityLabel.textContent =
+                "City";
+
+        }
+
+
+        if (cityInput) {
+
+            cityInput.placeholder =
+                "Enter your city";
+
+        }
+
+    }
+
+
+    /* ========================================
+       CLEAR + CREATE PLACEHOLDER
+    ======================================== */
+
+    regionSelect.innerHTML =
+        "";
+
+
+    const placeholder =
+        document.createElement(
+            "option"
+        );
+
+
+    placeholder.value =
+        "";
+
+    placeholder.textContent =
+        placeholderText;
+
+    placeholder.disabled =
+        true;
+
+    placeholder.selected =
+        true;
+
+
+    regionSelect.appendChild(
+        placeholder
+    );
+
+
+    /* ========================================
+       ADD DELIVERY OPTIONS
+    ======================================== */
 
     options.forEach(
         function (deliveryOption) {
@@ -370,12 +534,10 @@ function populateDeliveryOptions() {
 
 
             option.textContent =
-                (
-                    deliveryOption.name +
-                    " — " +
-                    formatMoney(
-                        deliveryOption.fee
-                    )
+                deliveryOption.name +
+                " — " +
+                formatMoney(
+                    deliveryOption.fee
                 );
 
 
@@ -388,10 +550,11 @@ function populateDeliveryOptions() {
 
 
     /*
-        UAE / Qatar / Saudi currently
-        have only one delivery option.
+       Only auto-select when there is
+       ONE delivery option.
 
-        Select it automatically.
+       Saudi has RedBox + SMSA,
+       therefore customer must choose.
     */
 
     if (
@@ -415,7 +578,6 @@ function populateDeliveryOptions() {
     }
 
 }
-
 
 
 /* =========================================================
@@ -467,9 +629,15 @@ function updateFinalTotal() {
             !== "number"
     ) {
 
-        checkoutDelivery.textContent =
-            "Select region";
+      const delivery =
+    getMarketDeliveryData();
 
+
+checkoutDelivery.textContent =
+    delivery &&
+    delivery.mode === "carrier"
+        ? "Select delivery option"
+        : "Select region";
 
         checkoutTotal.textContent =
             "--";
@@ -517,9 +685,16 @@ checkoutForm.addEventListener(
                 !== "number"
         ) {
 
-            alert(
-                "Please select your delivery region."
-            );
+           const delivery =
+    getMarketDeliveryData();
+
+
+alert(
+    delivery &&
+    delivery.mode === "carrier"
+        ? "Please select your delivery option."
+        : "Please select your delivery region."
+);
 
             return;
 
@@ -624,7 +799,20 @@ Item Total: *${formatMoney(itemTotal)}*
     }
 );
 
+const delivery =
+    getMarketDeliveryData();
 
+
+const deliveryFieldName =
+    delivery.mode === "carrier"
+        ? "Delivery Option"
+        : "Delivery Region";
+
+
+const cityFieldName =
+    delivery.mode === "carrier"
+        ? "City"
+        : "City / Governorate";
     const message = `
 *OBI COSMETICS — NEW ORDER*
 
@@ -653,10 +841,10 @@ Delivery: *${formatMoney(deliveryFee)}*
 *DELIVERY DETAILS*
 ━━━━━━━━━━━━━━
 
-*Delivery Region:*
+*${deliveryFieldName}:*
 ${selectedRegion}
 
-*City / Governorate:*
+*${cityFieldName}:*
 ${city}
 
 *Exact Address:*

@@ -292,7 +292,12 @@ cartOverlay.addEventListener(
 
 continueShoppingButton.addEventListener(
     "click",
-    closeCart
+    function () {
+
+        window.location.href =
+            "shop.html";
+
+    }
 );
 
 
@@ -500,23 +505,31 @@ function renderCart() {
 
     if (cart.length === 0) {
 
-        cartItemsContainer.innerHTML = `
-            <div class="empty-cart">
-                <p>
-                    Your cart is empty.
-                </p>
-            </div>
-        `;
+    cartItemsContainer.innerHTML = `
+        <div class="empty-cart">
+
+            <p>
+                Your cart is empty.
+            </p>
+
+            <a
+                href="shop.html"
+                class="empty-cart-shop-button"
+            >
+                Go to Shop
+                <span>→</span>
+            </a>
+
+        </div>
+    `;
 
 
-        cartSubtotalElement.textContent =
-            formatMoney(0);
+    cartSubtotalElement.textContent =
+        "0";
 
 
-        return;
-    }
-
-
+    return;
+}
     cartItemsContainer.innerHTML = "";
 
 

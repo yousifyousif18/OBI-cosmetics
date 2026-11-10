@@ -14,183 +14,191 @@
 
 const OBI_MARKETS = {
 
-    EGY: {
+   EGY: {
 
-        code: "EGY",
+    code:
+        "EGY",
 
-        name: "Egypt",
+    name:
+        "Egypt",
 
-        flag: "🇪🇬",
+    flag:
+        "images/flags/egypt.webp",
 
-        currency: "EGP",
+    currency:
+        "EGP",
 
-        locale: "en-EG",
+    locale:
+        "en-EG",
 
+    whatsapp:
+        "601169390811",
 
-        /*
-            Egypt, UAE and Qatar
-            use the same WhatsApp number.
-        */
+    delivery: {
 
-        whatsapp:
-            "601169390811",
+        mode:
+            "regions",
 
+        options: [
 
-        delivery: {
+            {
+                name:
+                    "Cairo (including Giza)",
 
-            mode: "regions",
+                fee:
+                    75
+            },
 
-            options: [
+            {
+                name:
+                    "Other Governorates",
 
-                {
-                    name:
-                        "Cairo (including Giza)",
+                fee:
+                    100
+            }
 
-                    fee: 75
-                },
+        ]
 
-                {
-                    name:
-                        "Other Governorates",
+    }
 
-                    fee: 100
-                }
-
-            ]
-
-        }
-
-    },
+},
 
 
 
     UAE: {
 
-        code: "UAE",
+    code: "UAE",
 
-        name:
-            "United Arab Emirates",
+    name:
+        "United Arab Emirates",
 
-        flag: "🇦🇪",
+    flag:
+        "images/flags/uae.webp",
 
-        currency: "AED",
+    currency: "AED",
 
-        locale: "en-AE",
+    locale: "en-AE",
 
-        whatsapp:
-            "601169390811",
+    whatsapp:
+        "601169390811",
 
+    delivery: {
 
-        delivery: {
+        mode: "flat",
 
-            mode: "flat",
+        options: [
 
-            options: [
+            {
+                name:
+                    "United Arab Emirates",
 
-                {
-                    name:
-                        "United Arab Emirates",
+                fee: 30
+            }
 
-                    fee: 30
-                }
+        ]
 
-            ]
+    }
 
-        }
-
-    },
-
-
-
-    KSA: {
-
-        code: "KSA",
-
-        name:
-            "Saudi Arabia",
-
-        flag: "🇸🇦",
-
-        currency: "SAR",
-
-        locale: "en-SA",
+},
 
 
-        /*
-            ADD THE SAUDI WHATSAPP
-            NUMBER HERE LATER.
-        */
 
-        whatsapp: "249966579441",
+   KSA: {
 
+    code: "KSA",
 
-        /*
-            TEMPORARY TEST DELIVERY FEE.
+    name:
+        "Saudi Arabia",
 
-            Replace this when the real
-            Saudi delivery price is confirmed.
-        */
+    flag:
+        "images/flags/ksa.webp",
 
-        delivery: {
+    currency:
+        "SAR",
 
-            mode: "flat",
+    locale:
+        "en-SA",
 
-            temporary: true,
+    whatsapp:
+        "201023536726",
 
-            options: [
+    delivery: {
 
-                {
-                    name:
-                        "Saudi Arabia",
+        mode:
+            "carrier",
 
-                    fee: 30
-                }
+        options: [
 
-            ]
+            {
+                name:
+                    "RedBox",
 
-        }
+                fee:
+                    20
+            },
 
-    },
+            {
+                name:
+                    "SMSA",
+
+                fee:
+                    35
+            }
+
+        ]
+
+    }
+
+},
 
 
 
     QAT: {
 
-        code: "QAT",
+    code:
+        "QAT",
 
-        name: "Qatar",
+    name:
+        "Qatar",
 
-        flag: "🇶🇦",
+    flag:
+        "images/flags/qatar.webp",
 
-        currency: "QAR",
+    currency:
+        "QAR",
 
-        locale: "en-QA",
+    locale:
+        "en-QA",
 
-        whatsapp:
-            "601169390811",
+    whatsapp:
+        "601169390811",
 
+    delivery: {
 
-        delivery: {
+        mode:
+            "flat",
 
-            mode: "flat",
+        options: [
 
-            options: [
+            {
+                name:
+                    "Qatar",
 
-                {
-                    name:
-                        "Qatar",
+                fee:
+                    25
+            }
 
-                    fee: 25
-                }
-
-            ]
-
-        }
+        ]
 
     }
 
+}
+
 };
 
+/* =========================================================
+   SELECTED MARKET
+========================================================= */
 /* =========================================================
    SELECTED MARKET
 ========================================================= */
@@ -202,8 +210,8 @@ const OBI_MARKET_STORAGE_KEY =
 function getSelectedMarketCode() {
 
     const savedMarket =
-        localStorage.getItem(
-            OBI_MARKET_STORAGE_KEY
+        sessionStorage.getItem(
+            "obiSelectedMarket"
         );
 
 
@@ -217,14 +225,25 @@ function getSelectedMarketCode() {
     }
 
 
-    return "EGY";
+    return null;
 }
 
 
 function getSelectedMarket() {
 
+    const marketCode =
+        getSelectedMarketCode();
+
+
+    if (!marketCode) {
+
+        return null;
+
+    }
+
+
     return OBI_MARKETS[
-        getSelectedMarketCode()
+        marketCode
     ];
 
 }
@@ -237,44 +256,66 @@ function setSelectedMarket(
     if (
         !OBI_MARKETS[marketCode]
     ) {
-
         return;
     }
 
 
-    localStorage.setItem(
-        OBI_MARKET_STORAGE_KEY,
+    sessionStorage.setItem(
+        "obiSelectedMarket",
         marketCode
     );
-
 }
+
 
 
 /* =========================================================
    PRICE HELPERS
 ========================================================= */
 
-function getProductNumericPrice(product) {
+function getProductNumericPrice(
+    product
+) {
 
     const marketCode =
         getSelectedMarketCode();
 
 
-    if (
-        !product ||
-        !product.prices ||
-        typeof product.prices[marketCode] !== "number"
-    ) {
+    if (!marketCode) {
 
         return null;
+
     }
 
 
-    return product.prices[
-        marketCode
-    ];
+    if (
+        !product ||
+        !product.prices
+    ) {
+
+        return null;
+
+    }
+
+
+    const price =
+        product.prices[
+            marketCode
+        ];
+
+
+    if (
+        typeof price !== "number"
+    ) {
+
+        return null;
+
+    }
+
+
+    return price;
 
 }
+
 
 
 function formatMoney(
@@ -285,10 +326,26 @@ function formatMoney(
         getSelectedMarket();
 
 
+    /*
+        If no region has been selected,
+        return a plain number.
+    */
+
+    if (!market) {
+
+        return String(
+            amount
+        );
+
+    }
+
+
     return new Intl.NumberFormat(
         market.locale,
         {
-            style: "currency",
+            style:
+                "currency",
+
             currency:
                 market.currency,
 
@@ -305,14 +362,25 @@ function formatMoney(
 }
 
 
+
 /* =========================================================
    DELIVERY HELPERS
 ========================================================= */
 
 function getMarketDeliveryData() {
 
-    return getSelectedMarket()
-        .delivery;
+    const market =
+        getSelectedMarket();
+
+
+    if (!market) {
+
+        return null;
+
+    }
+
+
+    return market.delivery;
 
 }
 
@@ -377,20 +445,35 @@ function getDeliveryPrice(
 }
 
 
+
 /* =========================================================
    MARKET-SPECIFIC CART
 ========================================================= */
 
 function getCartStorageKey() {
 
+    const marketCode =
+        getSelectedMarketCode();
+
+
+    /*
+        Before a region is chosen,
+        use a temporary empty-cart key.
+    */
+
+    if (!marketCode) {
+
+        return "cart_unselected";
+
+    }
+
+
     return (
         "cart_" +
-        getSelectedMarketCode()
+        marketCode
     );
 
 }
-
-
 /* =========================================================
    MIGRATE EXISTING OLD CART TO EGYPT
 ========================================================= */
@@ -436,173 +519,344 @@ migrateLegacyCart();
    COUNTRY SELECTOR
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+/* =========================================
+   MARKET SELECTOR
+========================================= */
 
-        const selector =
-            document.getElementById(
-                "market-selector"
+const marketSelector =
+    document.getElementById(
+        "market-selector"
+    );
+
+const marketSelectorButton =
+    document.getElementById(
+        "market-selector-button"
+    );
+
+const marketSelectorMenu =
+    document.getElementById(
+        "market-selector-menu"
+    );
+
+const marketCurrentFlag =
+    document.getElementById(
+        "market-current-flag"
+    );
+
+const marketCurrentCurrency =
+    document.getElementById(
+        "market-current-currency"
+    );
+
+const marketOptions =
+    document.querySelectorAll(
+        "#market-selector-menu [data-market]"
+    );
+
+
+/* =========================================
+   MARKET DISPLAY DATA
+========================================= */
+
+const marketDisplay = {
+
+    EGY: {
+        flag: "images/flags/egypt.webp",
+        currency: "EGP"
+    },
+
+    UAE: {
+        flag: "images/flags/uae.webp",
+        currency: "AED"
+    },
+
+    KSA: {
+        flag: "images/flags/ksa.webp",
+        currency: "SAR"
+    },
+
+    QAT: {
+        flag: "images/flags/qatar.webp",
+        currency: "QAR"
+    }
+
+};
+
+/* =========================================
+   UPDATE SELECTOR DISPLAY
+========================================= */
+
+function updateMarketSelectorDisplay() {
+
+    if (
+        !marketSelector ||
+        !marketCurrentFlag ||
+        !marketCurrentCurrency
+    ) {
+        return;
+    }
+
+
+   const selectedMarket =
+    getSelectedMarketCode();
+
+
+    /* NO REGION SELECTED */
+
+    if (
+    !selectedMarket ||
+    !marketDisplay[selectedMarket]
+) {
+
+    marketCurrentFlag.src =
+        "images/flags/globe.webp";
+
+    marketCurrentFlag.alt =
+        "";
+
+    marketCurrentCurrency.textContent =
+        "Select Region";
+
+    marketSelector.classList.add(
+        "needs-selection"
+    );
+
+    marketOptions.forEach(
+        function (option) {
+
+            option.classList.remove(
+                "active"
             );
 
-
-        const selectorButton =
-            document.getElementById(
-                "market-selector-button"
-            );
-
-
-        const selectorMenu =
-            document.getElementById(
-                "market-selector-menu"
-            );
-
-
-        const currentFlag =
-            document.getElementById(
-                "market-current-flag"
-            );
-
-
-        const currentCurrency =
-            document.getElementById(
-                "market-current-currency"
-            );
-
-
-        if (
-            !selector ||
-            !selectorButton ||
-            !selectorMenu
-        ) {
-
-            return;
         }
+    );
+
+    return;
+}
 
 
-        const market =
-            getSelectedMarket();
+    /* REGION HAS BEEN SELECTED */
+
+    const market =
+    marketDisplay[selectedMarket];
+
+marketCurrentFlag.src =
+    market.flag;
+
+marketCurrentFlag.alt =
+    "";
+
+marketCurrentCurrency.textContent =
+    market.currency;
+
+marketSelector.classList.remove(
+    "needs-selection"
+);
 
 
-        if (currentFlag) {
+    marketOptions.forEach(
+        function (option) {
 
-            currentFlag.textContent =
-                market.flag;
+            option.classList.toggle(
+                "active",
+                option.dataset.market ===
+                selectedMarket
+            );
 
         }
+    );
+
+}
 
 
-        if (currentCurrency) {
+/* =========================================
+   OPEN / CLOSE SELECTOR
+========================================= */
 
-            currentCurrency.textContent =
-                market.currency;
+if (
+    marketSelector &&
+    marketSelectorButton
+) {
+
+    marketSelectorButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+
+            const isOpen =
+                marketSelector.classList.toggle(
+                    "open"
+                );
+const header =
+    document.querySelector(
+        "header"
+    );
+
+
+if (
+    marketSelector.classList.contains(
+        "open"
+    )
+) {
+
+    header?.classList.add(
+        "header-locked"
+    );
+
+}
+else {
+
+    header?.classList.remove(
+        "header-locked"
+    );
+
+}
+
+            marketSelectorButton.setAttribute(
+                "aria-expanded",
+                isOpen
+                    ? "true"
+                    : "false"
+            );
 
         }
+    );
+
+}
 
 
-        selectorButton.addEventListener(
+/* =========================================
+   SELECT REGION
+========================================= */
+
+marketOptions.forEach(
+    function (option) {
+
+        option.addEventListener(
             "click",
             function (event) {
 
                 event.stopPropagation();
 
-                selector.classList.toggle(
-                    "open"
-                );
 
-            }
-        );
-
-
-        const marketButtons =
-            selectorMenu.querySelectorAll(
-                "[data-market]"
-            );
-
-
-        marketButtons.forEach(
-            function (button) {
-
-                const buttonMarket =
-                    button.dataset.market;
+                const selectedMarket =
+                    option.dataset.market;
 
 
                 if (
-                    buttonMarket ===
-                    getSelectedMarketCode()
+                    !marketDisplay[
+                        selectedMarket
+                    ]
                 ) {
-
-                    button.classList.add(
-                        "active"
-                    );
-
+                    return;
                 }
 
+setSelectedMarket(
+    selectedMarket
+);
 
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const newMarket =
-                            button.dataset.market;
+                updateMarketSelectorDisplay();
 
 
-                        if (
-                            newMarket ===
-                            getSelectedMarketCode()
-                        ) {
+                if (marketSelector) {
 
-                            selector.classList.remove(
-                                "open"
-                            );
-
-                            return;
-
-                        }
-
-
-                        setSelectedMarket(
-                            newMarket
-                        );
-
-
-                        /*
-                           Reload intentionally.
-
-                           This refreshes:
-                           - prices
-                           - cart
-                           - currency
-                           - delivery market
-                        */
-
-                        window.location.reload();
-
-                    }
-                );
-
-            }
-        );
-
-
-        document.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    !selector.contains(
-                        event.target
-                    )
-                ) {
-
-                    selector.classList.remove(
+                    marketSelector.classList.remove(
                         "open"
                     );
+document
+    .querySelector(
+        "header"
+    )
+    ?.classList.remove(
+        "header-locked"
+    );
+                }
+
+
+                if (marketSelectorButton) {
+
+                    marketSelectorButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
                 }
+
+
+            /* Update shop without reloading */
+
+if (
+    typeof applyCategory === "function"
+) {
+    applyCategory(
+        currentCategory,
+        false
+    );
+}
+
+
+if (
+    typeof renderCart === "function"
+) {
+    renderCart();
+}
 
             }
         );
 
     }
 );
+
+
+/* =========================================
+   CLICK OUTSIDE TO CLOSE
+========================================= */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (!marketSelector) {
+            return;
+        }
+
+
+        if (
+            !marketSelector.contains(
+                event.target
+            )
+        ) {
+
+            marketSelector.classList.remove(
+                "open"
+            );
+document
+    .querySelector(
+        "header"
+    )
+    ?.classList.remove(
+        "header-locked"
+    );
+
+            if (marketSelectorButton) {
+
+                marketSelectorButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   INITIAL DISPLAY
+========================================= */
+
+updateMarketSelectorDisplay();

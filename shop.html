@@ -44,6 +44,10 @@
             <div class="nav-actions">
 <!-- MARKET / COUNTRY SELECTOR -->
 
+<!-- ========================================
+     MARKET / COUNTRY SELECTOR
+========================================= -->
+
 <div
     id="market-selector"
     class="market-selector"
@@ -53,22 +57,23 @@
         id="market-selector-button"
         class="market-selector-button"
         type="button"
-        aria-label="Choose shopping country"
+        aria-label="Choose shopping region"
+        aria-expanded="false"
     >
 
-        <span
-            id="market-current-flag"
-            class="market-current-flag"
-        >
-            🇪🇬
-        </span>
+        <img
+    id="market-current-flag"
+    class="market-current-flag"
+    src="images/flags/globe.webp"
+    alt=""
+>
 
-        <span
-            id="market-current-currency"
-            class="market-current-currency"
-        >
-            EGP
-        </span>
+<span
+    id="market-current-currency"
+    class="market-current-currency"
+>
+    Select Region
+</span>
 
         <span
             class="market-selector-chevron"
@@ -89,7 +94,12 @@
             type="button"
             data-market="EGY"
         >
-            <span>🇪🇬</span>
+
+            <img
+    class="market-option-flag"
+    src="images/flags/egypt.webp"
+    alt="Egypt flag"
+>
 
             <span class="market-option-name">
                 Egypt
@@ -98,38 +108,51 @@
             <strong>
                 EGP
             </strong>
+
         </button>
 
 
-        <button
-            type="button"
-            data-market="UAE"
-        >
-            <span>🇦🇪</span>
+       <button
+    type="button"
+    data-market="UAE"
+>
 
-            <span class="market-option-name">
-                UAE
-            </span>
+    <img
+        class="market-option-flag"
+        src="images/flags/uae.webp"
+        alt="UAE flag"
+    >
 
-            <strong>
-                AED
-            </strong>
-        </button>
+    <span class="market-option-name">
+        UAE
+    </span>
+
+    <strong>
+        AED
+    </strong>
+
+</button>
 
 
         <button
             type="button"
             data-market="KSA"
         >
-            <span>🇸🇦</span>
+
+           <img
+    class="market-option-flag"
+    src="images/flags/ksa.webp"
+    alt="Saudi Arabia flag"
+>
 
             <span class="market-option-name">
-                KSA
+                Saudi Arabia
             </span>
 
             <strong>
                 SAR
             </strong>
+
         </button>
 
 
@@ -137,7 +160,12 @@
             type="button"
             data-market="QAT"
         >
-            <span>🇶🇦</span>
+
+            <img
+    class="market-option-flag"
+    src="images/flags/qatar.webp"
+    alt="Qatar flag"
+>
 
             <span class="market-option-name">
                 Qatar
@@ -146,6 +174,7 @@
             <strong>
                 QAR
             </strong>
+
         </button>
 
     </div>
@@ -283,8 +312,8 @@
                 Delivery
             </a>
 
-            <a href="faq.html">
-                FAQ
+            <a href="obi-love.html">
+                OBI Love
             </a>
 
             <a href="contact.html">
@@ -343,17 +372,35 @@
 
 
 
+<!-- ========================================
+     CATEGORY FILTERS WITH SCROLL ARROWS
+========================================= -->
 
-    <!-- ========================================
-         CATEGORY FILTERS
-    ========================================= -->
+<section
+    class="obi-shop-filter-section"
+    aria-label="Shop categories"
+>
 
-    <section
-        class="obi-shop-filter-section"
-        aria-label="Shop categories"
-    >
+    <div class="categories-wrapper">
 
-        <div class="obi-shop-filters">
+        <!-- LEFT ARROW -->
+
+        <button
+            class="category-arrow category-arrow-left"
+            id="category-left"
+            type="button"
+            aria-label="Scroll categories left"
+        >
+            ‹
+        </button>
+
+
+        <!-- SCROLLABLE CATEGORIES -->
+
+        <div
+            class="obi-shop-filters categories-scroll"
+            id="categories-scroll"
+        >
 
             <a
                 href="shop.html"
@@ -363,6 +410,7 @@
                 All
             </a>
 
+
             <a
                 href="shop.html?category=lip-gloss"
                 class="obi-shop-filter"
@@ -370,6 +418,7 @@
             >
                 Gloss
             </a>
+
 
             <a
                 href="shop.html?category=lip-oil"
@@ -379,6 +428,7 @@
                 Lip Oils
             </a>
 
+
             <a
                 href="shop.html?category=lip-liner"
                 class="obi-shop-filter"
@@ -386,6 +436,7 @@
             >
                 Liners
             </a>
+
 
             <a
                 href="shop.html?category=blush"
@@ -395,6 +446,7 @@
                 Blush
             </a>
 
+
             <a
                 href="shop.html?category=liquid-lipstick"
                 class="obi-shop-filter"
@@ -402,6 +454,7 @@
             >
                 Lipstick
             </a>
+
 
             <a
                 href="shop.html?category=body-care"
@@ -411,18 +464,32 @@
                 Body Care
             </a>
 
+
             <a
-    href="shop.html?category=hair-care"
-    class="obi-shop-filter"
-    data-category="hair-care"
->
-    Hair Care
-</a>
+                href="shop.html?category=hair-care"
+                class="obi-shop-filter"
+                data-category="hair-care"
+            >
+                Hair Care
+            </a>
+
         </div>
 
-    </section>
 
+        <!-- RIGHT ARROW -->
 
+        <button
+            class="category-arrow category-arrow-right"
+            id="category-right"
+            type="button"
+            aria-label="Scroll categories right"
+        >
+            ›
+        </button>
+
+    </div>
+
+</section>
 
     <!-- ========================================
          PRODUCTS
@@ -792,9 +859,9 @@
                     Subtotal
                 </span>
 
-                <strong id="cart-subtotal">
-                    LE 0
-                </strong>
+               <strong id="cart-subtotal">
+    0
+</strong>
 
             </div>
 
@@ -813,7 +880,7 @@
                 class="continue-shopping-button"
                 type="button"
             >
-                Continue Shopping
+               Go to Shop
             </button>
 
         </div>
@@ -835,7 +902,6 @@
     <script src="menu.js"></script>
    <script src="shop.js"></script>
    <script src="store.js"></script>
-    <script src="obi-love.js"></script>
-</body>
 
+</body>
 </html>

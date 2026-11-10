@@ -7,17 +7,6 @@ const productGrid =
 
 const shopTitle =
     document.getElementById("shop-title");
-
-const defaultShopHero =
-    document.getElementById(
-        "default-shop-hero"
-    );
-
-
-const bodyCareHero =
-    document.getElementById(
-        "body-care-hero"
-    );
 const noProductsMessage =
     document.getElementById(
         "no-products-message"
@@ -93,83 +82,187 @@ const categoryInformation = {
 
 };
 
+/* =========================================
+   RESTORE CATEGORY SECTION POSITION
+========================================= */
 
+
+/* =========================================================
+   CATEGORY SCROLL ARROWS
+========================================================= */
+
+const categoriesScroll =
+    document.getElementById(
+        "categories-scroll"
+    );
+
+const categoryLeft =
+    document.getElementById(
+        "category-left"
+    );
+
+const categoryRight =
+    document.getElementById(
+        "category-right"
+    );
+
+
+if (
+    categoriesScroll &&
+    categoryLeft &&
+    categoryRight
+) {
+
+    /* =========================================
+       SCROLL DISTANCE
+    ========================================= */
+
+    function getCategoryScrollAmount() {
+
+        return Math.max(
+            220,
+            categoriesScroll.clientWidth * 0.55
+        );
+
+    }
+
+
+    /* =========================================
+       LEFT ARROW
+    ========================================= */
+
+    categoryLeft.addEventListener(
+        "click",
+        function () {
+
+            categoriesScroll.scrollBy({
+                left:
+                    -getCategoryScrollAmount(),
+
+                behavior:
+                    "smooth"
+            });
+
+        }
+    );
+
+
+    /* =========================================
+       RIGHT ARROW
+    ========================================= */
+
+    categoryRight.addEventListener(
+        "click",
+        function () {
+
+            categoriesScroll.scrollBy({
+                left:
+                    getCategoryScrollAmount(),
+
+                behavior:
+                    "smooth"
+            });
+
+        }
+    );
+
+
+    /* =========================================
+       UPDATE ARROW STATES
+    ========================================= */
+
+    function updateCategoryArrows() {
+
+        const maxScroll =
+            categoriesScroll.scrollWidth -
+            categoriesScroll.clientWidth;
+
+
+        const hasOverflow =
+            categoriesScroll.scrollWidth >
+            categoriesScroll.clientWidth + 5;
+
+
+        /*
+         If all categories fit on screen,
+         hide both arrows.
+        */
+
+        if (!hasOverflow) {
+
+            categoryLeft.style.display =
+                "none";
+
+            categoryRight.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        /*
+         Otherwise show arrows.
+        */
+
+        categoryLeft.style.display =
+            "flex";
+
+        categoryRight.style.display =
+            "flex";
+
+
+        /*
+         Disable left arrow at beginning.
+        */
+
+        categoryLeft.disabled =
+            categoriesScroll.scrollLeft <= 5;
+
+
+        /*
+         Disable right arrow at end.
+        */
+
+        categoryRight.disabled =
+            categoriesScroll.scrollLeft >=
+            maxScroll - 5;
+
+    }
+
+
+    /* =========================================
+       UPDATE WHILE SCROLLING
+    ========================================= */
+
+    categoriesScroll.addEventListener(
+        "scroll",
+        updateCategoryArrows
+    );
+
+
+    /* =========================================
+       UPDATE WHEN SCREEN SIZE CHANGES
+    ========================================= */
+
+    window.addEventListener(
+        "resize",
+        updateCategoryArrows
+    );
+
+
+    /* =========================================
+       INITIAL STATE
+    ========================================= */
+
+    updateCategoryArrows();
+
+}
 /* =========================================
    FILTER PRODUCTS
 ========================================= */
-
-let productsToDisplay =
-    products;
-
-
-if (
-    selectedCategory &&
-    categoryInformation[selectedCategory]
-) {
-
-    productsToDisplay =
-        products.filter(
-            function (product) {
-
-                return (
-                    product.category ===
-                    selectedCategory
-                );
-
-            }
-        );
-
-shopTitle.textContent =
-    categoryInformation[selectedCategory].title;
-
-
-}
-
 /* =========================================
-   SPECIAL CATEGORY HERO
-========================================= */
-
-if (
-    selectedCategory ===
-    "body-care"
-) {
-
-    if (defaultShopHero) {
-
-        defaultShopHero.hidden =
-            true;
-
-    }
-
-
-    if (bodyCareHero) {
-
-        bodyCareHero.hidden =
-            false;
-
-    }
-
-}
-else {
-
-    if (defaultShopHero) {
-
-        defaultShopHero.hidden =
-            false;
-
-    }
-
-
-    if (bodyCareHero) {
-
-        bodyCareHero.hidden =
-            true;
-
-    }
-
-}
-/* =========================================
-   ACTIVE CATEGORY
+   LIVE CATEGORY FILTERING
 ========================================= */
 
 const categoryFilters =
@@ -178,63 +271,206 @@ const categoryFilters =
     );
 
 
-categoryFilters.forEach(
-    function (filter) {
-
-        const filterCategory =
-            filter.dataset.category;
-
-
-        const isActive =
-            (
-                !selectedCategory &&
-                filterCategory === "all"
-            )
-            ||
-            (
-                selectedCategory ===
-                filterCategory
-            );
-
-
-        if (isActive) {
-
-            filter.classList.add(
-                "active"
-            );
-
-        }
-
-    }
-);
+let currentCategory =
+    selectedCategory &&
+    categoryInformation[selectedCategory]
+        ? selectedCategory
+        : null;
 
 
 /* =========================================
-   RESULT COUNT
+   GET PRODUCTS FOR CATEGORY
 ========================================= */
 
-if (shopResultCount) {
+function getProductsForCategory(
+    category
+) {
+
+    if (!category) {
+        return products;
+    }
+
+
+    return products.filter(
+        function (product) {
+
+            return (
+                product.category ===
+                category
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   UPDATE ACTIVE CATEGORY
+========================================= */
+
+function updateActiveCategory(
+    category
+) {
+
+    categoryFilters.forEach(
+        function (filter) {
+
+            const filterCategory =
+                filter.dataset.category;
+
+
+            const isActive =
+                (
+                    !category &&
+                    filterCategory === "all"
+                )
+                ||
+                (
+                    category ===
+                    filterCategory
+                );
+
+
+            filter.classList.toggle(
+                "active",
+                isActive
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   UPDATE SHOP TITLE
+========================================= */
+
+function updateShopTitle(
+    category
+) {
+
+    if (!shopTitle) {
+        return;
+    }
+
+
+    if (
+        category &&
+        categoryInformation[category]
+    ) {
+
+        shopTitle.textContent =
+            categoryInformation[
+                category
+            ].title;
+
+    }
+    else {
+
+        shopTitle.textContent =
+            "Shop All";
+
+    }
+
+}
+
+
+/* =========================================
+   UPDATE PRODUCT COUNT
+========================================= */
+
+function updateProductCount(
+    filteredProducts
+) {
+
+    if (!shopResultCount) {
+        return;
+    }
+
 
     const productWord =
-        productsToDisplay.length === 1
+        filteredProducts.length === 1
             ? "product"
             : "products";
 
 
     shopResultCount.textContent =
-        productsToDisplay.length +
+        filteredProducts.length +
         " " +
         productWord;
+
 }
+
+
+/* =========================================
+   UPDATE URL WITHOUT RELOAD
+========================================= */
+
+function updateCategoryURL(
+    category
+) {
+
+    const newURL =
+        new URL(
+            window.location.href
+        );
+
+
+    newURL.searchParams.delete(
+        "product"
+    );
+
+
+    if (category) {
+
+        newURL.searchParams.set(
+            "category",
+            category
+        );
+
+    }
+    else {
+
+        newURL.searchParams.delete(
+            "category"
+        );
+
+    }
+
+
+    window.history.pushState(
+        {},
+        "",
+        newURL.pathname +
+        newURL.search
+    );
+
+}
+
+/* =========================================
+   RESULT COUNT
+========================================= */
+
 
 
 /* =========================================
    PRICE
 ========================================= */
 
-function getProductPrice(
-    product
-) {
+function getProductPrice(product) {
+
+    const selectedMarket =
+        getSelectedMarketCode();
+
+
+    if (!selectedMarket) {
+
+        return "Select Region";
+
+    }
+
 
     const price =
         getProductNumericPrice(
@@ -253,30 +489,45 @@ function getProductPrice(
     }
 
 
-    return "Price coming soon";
-
+    return "Not Available";
 }
-
 
 /* =========================================
    RENDER PRODUCTS
 ========================================= */
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
 
-if (
-    productsToDisplay.length === 0
+function renderProducts(
+    filteredProducts
 ) {
 
-    noProductsMessage.hidden =
-        false;
+    productGrid.innerHTML =
+        "";
 
-}
-else {
+
+    if (
+        filteredProducts.length === 0
+    ) {
+
+        noProductsMessage.hidden =
+            false;
+
+        updateProductCount(
+            filteredProducts
+        );
+
+        return;
+
+    }
+
 
     noProductsMessage.hidden =
         true;
 
 
-    productsToDisplay.forEach(
+    filteredProducts.forEach(
         function (product) {
 
             const hasShades =
@@ -327,6 +578,7 @@ else {
                             >
 
                         </div>
+
 
                         <span
                             class="obi-product-option-count"
@@ -389,8 +641,103 @@ else {
         }
     );
 
+
+    updateProductCount(
+        filteredProducts
+    );
+
 }
 
+
+/* =========================================
+   APPLY CATEGORY
+========================================= */
+
+function applyCategory(
+    category,
+    updateURL = true
+) {
+
+    currentCategory =
+        category;
+
+
+    const filteredProducts =
+        getProductsForCategory(
+            category
+        );
+
+
+    updateShopTitle(
+        category
+    );
+
+
+    updateActiveCategory(
+        category
+    );
+
+
+    renderProducts(
+        filteredProducts
+    );
+
+
+    if (updateURL) {
+
+        updateCategoryURL(
+            category
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   CATEGORY CLICK EVENTS
+========================================= */
+
+categoryFilters.forEach(
+    function (filter) {
+
+        filter.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const selectedFilter =
+                    filter.dataset.category;
+
+
+                const category =
+                    selectedFilter === "all"
+                        ? null
+                        : selectedFilter;
+
+
+                applyCategory(
+                    category,
+                    true
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================
+   INITIAL SHOP RENDER
+========================================= */
+
+applyCategory(
+    currentCategory,
+    false
+);
 
 /* =========================================
    PRODUCT MODAL ELEMENTS
@@ -1176,45 +1523,38 @@ function closeProductModal() {
     );
 
 }
-
-
 /* =========================================
    OPEN PRODUCT BUTTONS
+   EVENT DELEGATION
 ========================================= */
 
-const openProductButtons =
-    document.querySelectorAll(
-        ".open-product-button"
-    );
+productGrid.addEventListener(
+    "click",
+    function (event) {
+
+        const button =
+            event.target.closest(
+                ".open-product-button"
+            );
 
 
-openProductButtons.forEach(
-    function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const productId =
-                    Number(
-                        button.dataset.productId
-                    );
+        if (!button) {
+            return;
+        }
 
 
-                openProductModal(
-                    productId
-                );
+        const productId =
+            Number(
+                button.dataset.productId
+            );
 
-            }
+
+        openProductModal(
+            productId
         );
 
     }
 );
-/* =========================================
-   AUTO-OPEN PRODUCT FROM CART
-========================================= */
-
-
 /* =========================================
    PRODUCT GALLERY CLICK
 ========================================= */

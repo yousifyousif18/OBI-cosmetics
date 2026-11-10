@@ -175,12 +175,12 @@
         </h1>
 <div class="checkout-market-card">
 
-    <span
+    <img
         id="checkout-market-flag"
         class="checkout-market-flag"
+        src=""
+        alt=""
     >
-        🇪🇬
-    </span>
 
 
     <div class="checkout-market-info">
@@ -192,7 +192,6 @@
         <strong
             id="checkout-market-name"
         >
-            Egypt
         </strong>
 
     </div>
@@ -202,7 +201,6 @@
         id="checkout-market-currency"
         class="checkout-market-currency"
     >
-        EGP
     </span>
 
 </div>
@@ -321,36 +319,34 @@
 
 
                 <!-- DELIVERY REGION -->
-
-<label for="customer-region">
+<label
+    id="delivery-option-label"
+    for="customer-region"
+>
     Delivery Region
 </label>
 
-<select
-    id="customer-region"
-    required
->
-
+<select id="customer-region">
     <option value="">
         Select delivery region
     </option>
-
 </select>
 
 
 
 <!-- CITY / GOVERNORATE -->
 
-<label for="customer-city">
+<label
+    id="city-label"
+    for="customer-city"
+>
     City / Governorate
 </label>
 
 <input
-    type="text"
     id="customer-city"
+    type="text"
     placeholder="Enter your city or governorate"
-    autocomplete="address-level2"
-    required
 >
 
 

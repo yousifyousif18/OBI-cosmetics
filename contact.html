@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        About Us | Obi Cosmetics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header>
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            <img
+                src="images/brand/obi-wordmark.jpeg"
+                alt="Obi Cosmetics"
+                class="brand-wordmark"
+            >
+        </a>
+
+        <div class="nav-actions">
+
+            <button
+                id="menu-button"
+                class="menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <button
+                id="open-cart-button"
+                class="cart-button"
+                type="button"
+                aria-label="Open shopping cart"
+            >
+
+                <svg
+                    class="cart-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="19" cy="20" r="1"></circle>
+                    <path d="M3 4h2l2.5 11h10l2-7H7"></path>
+                </svg>
+
+                <span
+                    id="cart-count"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+   </nav>
+
+<div
+    id="mobile-menu"
+    class="mobile-menu"
+>
+    <a href="shop.html">Shop</a>
+
+    <a href="about.html">About Us</a>
+
+    <a href="delivery.html">Delivery</a>
+
+    <a href="obi-love.html">Obi Love</a>
+
+    <a href="contact.html">Contact</a>
+</div>
+
+</header>
+
+<main class="contact-page">
+
+    <!-- ========================================
+         HERO
+    ========================================= -->
+
+    <section class="contact-hero">
+
+        <p class="contact-eyebrow">
+            ✦ TALK TO OBI ✦
+        </p>
+
+        <h1>
+            Need help?
+            <span>We’re here.</span>
+        </h1>
+
+        <p class="contact-hero-text">
+            Questions about products, shades, delivery
+            or your order? Reach out and we’ll help.
+        </p>
+
+    </section>
+
+
+    <!-- ========================================
+         QUICK CONTACT
+    ========================================= -->
+
+    <section class="contact-options">
+
+        <article class="contact-option-card contact-option-primary">
+
+            <span class="contact-option-label">
+                FASTEST
+            </span>
+
+            <h2>
+                WhatsApp Us
+            </h2>
+
+            <p>
+                The quickest way to ask about products,
+                delivery or an existing order.
+            </p>
+
+            <button
+                id="contact-whatsapp-button"
+                class="contact-card-button"
+                type="button"
+            >
+                Chat on WhatsApp
+                <span>→</span>
+            </button>
+
+        </article>
+
+
+        <article class="contact-option-card">
+
+            <span class="contact-option-label">
+                SOCIAL
+            </span>
+
+            <h2>
+                Instagram
+            </h2>
+
+            <p>
+                Follow OBI for new products, shades,
+                launches and beauty updates.
+            </p>
+
+            <a
+                href="#"
+                class="contact-card-button contact-card-button-light"
+                target="_blank"
+                rel="noopener"
+            >
+                Visit Instagram
+                <span>→</span>
+            </a>
+
+        </article>
+
+
+        <article class="contact-option-card">
+
+            <span class="contact-option-label">
+                ORDER HELP
+            </span>
+
+            <h2>
+                Existing Order?
+            </h2>
+
+            <p>
+                Contact us with your name, phone number
+                and order details so we can help faster.
+            </p>
+
+            <button
+                id="order-help-button"
+                class="contact-card-button contact-card-button-light"
+                type="button"
+            >
+                Get Order Help
+                <span>→</span>
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <!-- ========================================
+         MESSAGE FORM
+    ========================================= -->
+
+    <section class="contact-form-section">
+
+        <div class="contact-form-intro">
+
+            <p class="contact-eyebrow">
+                SEND A MESSAGE
+            </p>
+
+            <h2>
+                Tell us what
+                <span>you need.</span>
+            </h2>
+
+            <p>
+                Fill in the details below and we’ll
+                prepare your message for WhatsApp.
+            </p>
+
+        </div>
+
+
+        <form id="contact-form" class="contact-form">
+
+            <label for="contact-name">
+                Your Name
+            </label>
+
+            <input
+                id="contact-name"
+                type="text"
+                required
+                autocomplete="name"
+                placeholder="Enter your name"
+            >
+
+
+            <label for="contact-phone">
+                Phone Number
+            </label>
+
+            <input
+                id="contact-phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Enter your phone number"
+            >
+
+
+            <label for="contact-topic">
+                How can we help?
+            </label>
+
+            <select
+                id="contact-topic"
+                required
+            >
+
+                <option value="">
+                    Select a topic
+                </option>
+
+                <option value="Product question">
+                    Product Question
+                </option>
+
+                <option value="Shade help">
+                    Shade Help
+                </option>
+
+                <option value="Delivery question">
+                    Delivery Question
+                </option>
+
+                <option value="Order help">
+                    Order Help
+                </option>
+
+                <option value="Collaboration">
+                    Collaboration
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="contact-message">
+                Message
+            </label>
+
+            <textarea
+                id="contact-message"
+                rows="6"
+                required
+                placeholder="Tell us how we can help..."
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="contact-submit-button"
+            >
+                Continue on WhatsApp
+                <span>→</span>
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ========================================
+         FAQ
+    ========================================= -->
+
+    <section class="contact-faq">
+
+        <div class="contact-section-heading">
+
+            <p class="contact-eyebrow">
+                QUICK ANSWERS
+            </p>
+
+            <h2>
+                Before you message us.
+            </h2>
+
+        </div>
+
+
+        <div class="contact-faq-list">
+
+            <details>
+
+                <summary>
+                    How long does delivery take?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Delivery time depends on your market
+                    and delivery location. You can view
+                    the latest options and fees on our
+                    Delivery page.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Can you help me choose a shade?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Yes. Send us the product you are
+                    interested in and the shades you are
+                    considering through WhatsApp.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    How do I ask about an existing order?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Send your name, phone number and
+                    order details through WhatsApp so
+                    we can identify your order faster.
+                </p>
+
+            </details>
+
+
+            <details>
+
+                <summary>
+                    Where can I see delivery prices?
+                    <span>+</span>
+                </summary>
+
+                <p>
+                    Visit our Delivery page for the
+                    current delivery options and fees
+                    for Egypt, Saudi Arabia, UAE and Qatar.
+                </p>
+
+            </details>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         STAY CLOSE
+    ========================================= -->
+
+    <section class="contact-community">
+
+        <div>
+
+            <p class="contact-eyebrow">
+                STAY CLOSE TO OBI
+            </p>
+
+            <h2>
+                New drops.
+                <span>New shades. OBI updates.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="contact-community-actions">
+
+            <a
+                href="#"
+                class="contact-community-button"
+                target="_blank"
+                rel="noopener"
+            >
+                Follow on Instagram
+                <span>→</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="contact-community-button contact-community-secondary"
+                target="_blank"
+                rel="noopener"
+            >
+                Join WhatsApp Channel
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+</main>

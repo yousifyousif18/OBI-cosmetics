@@ -263,7 +263,7 @@ const products = [
 },
 
         image:
-            "images/products/blush/blush.webp",
+            "images/products/blush/blush-hero.webp",
           tagline:
         "SILKY • BUILDABLE • LONG WEAR",
 
@@ -454,62 +454,66 @@ color: "#F06F63",
        LIP LINER PENCIL
     ===================================================== */
 
-    {
-        id: 6,
+   {
+    id: 6,
 
-        name: "Lip Liner Pencil",
+    name: "Lip Liner Pencil",
 
-        category: "lip-liner",
+    category: "lip-liner",
 
-        prices: {
-    EGY: 180,
-    UAE: 20,
-    KSA: 20,
-    QAT: 20
-},
-
-        image:
-            "images/products/lip-liner-pencil.webp",
-
-        tagline:
-            "DEFINE • SHAPE • PERFECT",
-
-        description:
-            "Classic pencil lip liner for precise definition.",
-
-        benefits: [],
-
-        usage: "",
-
-        shades: [
-
-            {
-                name: "01 Nude",
-                color: "#81331D"
-            },
-
-            {
-                name: "02 Rose",
-                color: "#BA0F89"
-            },
-
-            {
-                name: "03 Pink",
-                color: "#9E6524"
-            },
-
-            {
-                name: "04 Mauve",
-                color: "#9B6676"
-            },
-
-            {
-                name: "05 Berry",
-                color: "#35ECCB"
-            }
-
-        ]
+    prices: {
+        EGY: 180,
+        UAE: 20,
+        KSA: 20,
+        QAT: 20
     },
+
+    image:
+        "images/products/lip-liner-pencil.webp",
+
+    tagline:
+        "CREAMY • PRECISE • EASY TO BLEND",
+
+    description:
+        "A smooth lip liner pencil designed to define, shape and enhance the lips with rich colour and precise application.",
+
+    benefits: [
+        "Creamy texture",
+        "Precise application",
+        "Easy to blend",
+        "Can be worn alone or with lipstick and gloss"
+    ],
+
+    usage:
+        "Outline the lips starting from the cupid’s bow, then continue toward the corners. Fill in the lips for a fuller colour base if desired.",
+
+    showInShadeParade: false,
+
+    shades: [
+
+        {
+            name: "#05",
+            color: "#6B4138",
+            lipImage:
+                "images/shades/lip-liner-pencil/shade-05.webp"
+        },
+
+        {
+            name: "#15",
+            color: "#A54F3A",
+            lipImage:
+                "images/shades/lip-liner-pencil/shade-15.webp"
+        },
+
+        {
+            name: "#21",
+            color: "#8A3E55",
+            lipImage:
+                "images/shades/lip-liner-pencil/shade-21.webp"
+        }
+
+    ]
+},
 
 
 

@@ -169,3 +169,306 @@ if (mobileMenu) {
     );
 
 }
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const header =
+            document.querySelector(
+                "header"
+            );
+
+        if (!header) {
+            return;
+        }
+
+
+        /* ========================================
+           HEADER HEIGHT
+        ======================================== */
+
+        function updateHeaderHeight() {
+
+            const height =
+                header.offsetHeight;
+
+            document.documentElement.style.setProperty(
+                "--obi-header-height",
+                height + "px"
+            );
+
+        }
+
+
+        updateHeaderHeight();
+
+
+        window.addEventListener(
+            "resize",
+            updateHeaderHeight
+        );
+
+
+        /* ========================================
+           SCROLL STATE
+        ======================================== */
+
+        let lastScrollY =
+            window.scrollY;
+
+        let downDistance =
+            0;
+
+
+        /* ========================================
+           CHECK OPEN MENUS
+        ======================================== */
+
+        function menuIsOpen() {
+
+            const market =
+                document.getElementById(
+                    "market-selector"
+                );
+
+
+            const mobileMenu =
+                document.querySelector(
+                    ".mobile-menu"
+                );
+
+
+            const marketOpen =
+                market &&
+                market.classList.contains(
+                    "open"
+                );
+
+
+            const mobileOpen =
+                mobileMenu &&
+                mobileMenu.classList.contains(
+                    "open"
+                );
+
+
+            return (
+                marketOpen ||
+                mobileOpen
+            );
+
+        }
+
+
+        /* ========================================
+           SCROLL HANDLER
+        ======================================== */
+
+        function handleHeaderScroll() {
+
+            const currentScrollY =
+                window.scrollY;
+
+
+            /* TOP OF PAGE */
+
+            if (
+                currentScrollY <= 5
+            ) {
+
+                header.classList.remove(
+                    "obi-header-hidden"
+                );
+
+                header.classList.remove(
+                    "obi-header-scrolled"
+                );
+
+                downDistance =
+                    0;
+
+                lastScrollY =
+                    currentScrollY;
+
+                return;
+
+            }
+
+
+            header.classList.add(
+                "obi-header-scrolled"
+            );
+
+
+            /* MENU OPEN */
+
+            if (
+                menuIsOpen()
+            ) {
+
+                header.classList.remove(
+                    "obi-header-hidden"
+                );
+
+                header.classList.add(
+                    "obi-header-locked"
+                );
+
+                downDistance =
+                    0;
+
+                lastScrollY =
+                    currentScrollY;
+
+                return;
+
+            }
+
+
+            header.classList.remove(
+                "obi-header-locked"
+            );
+
+
+            const difference =
+                currentScrollY -
+                lastScrollY;
+
+
+            /* ========================================
+               SCROLLING DOWN
+            ======================================== */
+
+            if (
+                difference > 0
+            ) {
+
+                downDistance +=
+                    difference;
+
+
+                if (
+                    downDistance >= 35 &&
+                    currentScrollY > 120
+                ) {
+
+                    header.classList.add(
+                        "obi-header-hidden"
+                    );
+
+                }
+
+            }
+
+
+            /* ========================================
+               SCROLLING UP
+            ======================================== */
+
+            else if (
+                difference < -2
+            ) {
+
+                header.classList.remove(
+                    "obi-header-hidden"
+                );
+
+                downDistance =
+                    0;
+
+            }
+
+
+            lastScrollY =
+                currentScrollY;
+
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            handleHeaderScroll,
+            {
+                passive: true
+            }
+        );
+
+
+        /* ========================================
+           WATCH MENUS
+        ======================================== */
+
+        const observer =
+            new MutationObserver(
+                function () {
+
+                    if (
+                        menuIsOpen()
+                    ) {
+
+                        header.classList.remove(
+                            "obi-header-hidden"
+                        );
+
+                        header.classList.add(
+                            "obi-header-locked"
+                        );
+
+                    }
+
+                    else {
+
+                        header.classList.remove(
+                            "obi-header-locked"
+                        );
+
+                    }
+
+                }
+            );
+
+
+        const market =
+            document.getElementById(
+                "market-selector"
+            );
+
+
+        const mobileMenu =
+            document.querySelector(
+                ".mobile-menu"
+            );
+
+
+        if (market) {
+
+            observer.observe(
+                market,
+                {
+                    attributes: true,
+                    attributeFilter: [
+                        "class"
+                    ]
+                }
+            );
+
+        }
+
+
+        if (mobileMenu) {
+
+            observer.observe(
+                mobileMenu,
+                {
+                    attributes: true,
+                    attributeFilter: [
+                        "class"
+                    ]
+                }
+            );
+
+        }
+
+    }
+);
