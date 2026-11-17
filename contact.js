@@ -72,9 +72,7 @@ function openContactWhatsApp(
         "https://wa.me/" +
         market.whatsapp +
         "?text=" +
-        encodeURIComponent(
-            message
-        );
+        encodeURIComponent(window.OBILanguage ? window.OBILanguage.translateOrderMessage(message) : message);
 
 
     window.location.href =
@@ -133,11 +131,21 @@ if (
 
 if (contactForm) {
 
+    contactForm.addEventListener("input", function (event) {
+        if (typeof event.target.setCustomValidity === "function") event.target.setCustomValidity("");
+    });
+
     contactForm.addEventListener(
         "submit",
         function (event) {
 
             event.preventDefault();
+
+            for (const id of ["contact-name", "contact-message"]) {
+                const field = document.getElementById(id);
+                field.setCustomValidity(field.value.trim() ? "" : (window.OBILanguage?.t("Please complete this field.") || "Please complete this field."));
+                if (!field.reportValidity()) return;
+            }
 
 
             const name =

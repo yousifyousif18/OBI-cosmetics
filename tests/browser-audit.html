@@ -1,0 +1,299 @@
+<!doctype html><meta charset="utf-8"><title>OBI local browser audit</title>
+<pre id="report">RUNNING</pre>
+<script>
+(async function () {
+    const root = new URL('../', location.href);
+    const results = [];
+    const width = Number(new URLSearchParams(location.search).get('width')) || 390;
+    let auditLanguage = 'en';
+    const cache = new Map();
+    const read = async name => {
+        if (!cache.has(name)) cache.set(name, await (await fetch(new URL(name, root))).text());
+        return cache.get(name);
+    };
+    const check = (name, passed, detail) => results.push({name, passed: !!passed, detail});
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+    let frame;
+    async function load(page, market = 'EGY', cart = []) {
+        if (frame) frame.remove();
+        sessionStorage.setItem('obiSelectedMarket', market);
+        sessionStorage.setItem('checkoutMode', 'cart');
+        localStorage.setItem('cart_' + market, typeof cart === 'string' ? cart : JSON.stringify(cart));
+        let html = await read(page);
+        const tags = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)];
+        for (const tag of tags) {
+            let script = await read(tag[1]);
+            script = script.replace(/window\.location\.href\s*=\s*([^;]+);/g, 'window.__navigations.push($1);');
+            html = html.replace(tag[0], '<script>' + script.replace(/<\/script/gi, '<\\/script') + '<' + '/script>');
+        }
+        const bootstrap = '<base href="' + root.href + '"><script>window.__errors=[];window.__navigations=[];window.__alerts=[];window.__history=[];history.pushState=(s,t,url)=>__history.push(url);history.replaceState=(s,t,url)=>__history.push(url);window.alert=m=>__alerts.push(m);window.addEventListener("error",e=>__errors.push(e.message));window.addEventListener("unhandledrejection",e=>__errors.push(String(e.reason)));<' + '/script>';
+        html = html.replace('<head>', '<head>' + bootstrap);
+        frame = document.createElement('iframe');
+        frame.style.cssText = `width:${width}px;height:900px;border:0`;
+        document.body.append(frame);
+        await new Promise(resolve => { frame.onload = resolve; frame.srcdoc = html; });
+        frame.contentWindow.__initialLanguage = frame.contentDocument.documentElement.lang;
+        if (auditLanguage === 'ar') frame.contentWindow.OBILanguage.set('ar');
+        await wait(160);
+        return frame.contentWindow;
+    }
+    try {
+        localStorage.removeItem('obiLanguage');
+        localStorage.removeItem('obiFavourites');
+        for (const page of ['index.html','about.html','shop.html','contact.html','delivery.html','obi-love.html','checkout.html']) {
+            const win = await load(page, 'EGY', page === 'checkout.html' ? [{productId:1,shade:'Nude',quantity:2}] : []);
+            const doc = win.document;
+            check(page + ': no JS errors', !win.__errors.length, win.__errors);
+            check(page + ': no horizontal overflow', doc.documentElement.scrollWidth <= width + 2, {width, actual:doc.documentElement.scrollWidth});
+            check(page + ': images loaded', ![...doc.images].some(img => img.complete && img.getAttribute('src') && !img.naturalWidth), [...doc.images].filter(img=>img.complete && img.getAttribute('src') && !img.naturalWidth).map(img=>img.getAttribute('src')));
+            for (const details of doc.querySelectorAll('details')) {
+                const symbol = details.querySelector('.question-toggle-symbol');
+                if (!symbol) continue;
+                details.open = true;
+                details.dispatchEvent(new win.Event('toggle'));
+                check(page + ': question shows minus when open', symbol.textContent === '\u2212');
+                details.open = false;
+                details.dispatchEvent(new win.Event('toggle'));
+                check(page + ': question shows plus when closed', symbol.textContent === '+');
+            }
+            const button = doc.getElementById('menu-button');
+            button.click();
+            check(page + ': menu opens', doc.getElementById('mobile-menu').classList.contains('open'));
+            let activated = false;
+            const outside = doc.createElement('button'); outside.onclick = () => activated = true; doc.body.append(outside);
+            outside.click();
+            check(page + ': first outside tap consumed', !activated && !doc.getElementById('mobile-menu').classList.contains('open'));
+            outside.click(); check(page + ': second outside tap works', activated);
+            const cartButton = doc.getElementById('open-cart-button');
+            if (cartButton) {
+                cartButton.click();
+                check(page + ': cart opens', doc.getElementById('cart-drawer')?.classList.contains('open'));
+                check(page + ': page scroll locked', win.getComputedStyle(doc.body).position === 'fixed');
+                doc.getElementById('close-cart-button')?.click();
+                check(page + ': scroll unlocks', !doc.body.classList.contains('cart-open'));
+            }
+        }
+        for (const market of ['EGY','UAE','KSA','QAT']) {
+            let win = await load('shop.html', market);
+            let doc = win.document;
+            win.openProductModal(1);
+            check(market + ': shade required', doc.getElementById('modal-add-to-cart').disabled);
+            doc.querySelector('.product-modal-shade').click();
+            check(market + ': shade enables purchase', !doc.getElementById('modal-add-to-cart').disabled);
+            doc.getElementById('modal-add-to-cart').click();
+            check(market + ': product added', JSON.parse(localStorage.getItem('cart_' + market)).length === 1);
+            doc.querySelector('.increase-cart-item').click();
+            check(market + ': cart increment', JSON.parse(localStorage.getItem('cart_' + market))[0].quantity === 2);
+            doc.querySelector('.remove-cart-item').click();
+            check(market + ': empty footer hidden', win.getComputedStyle(doc.querySelector('.cart-drawer-footer')).display === 'none');
+            win = await load('checkout.html', market, [{productId:1,shade:'Nude',quantity:2}]);
+            doc = win.document;
+            const select = doc.getElementById('customer-region');
+            select.selectedIndex = 1;
+            select.dispatchEvent(new win.Event('change'));
+            check(market + ': total calculated', !/NaN|--/.test(doc.getElementById('checkout-total').textContent), doc.getElementById('checkout-total').textContent);
+            for (const [id,value] of Object.entries({'customer-name':'Test Customer','customer-phone':'0123456789','customer-city':'Test City','customer-address':'Test Address'})) doc.getElementById(id).value = value;
+            doc.getElementById('checkout-form').dispatchEvent(new win.Event('submit', {cancelable:true}));
+            const url = win.__navigations.find(url => url.startsWith('https://wa.me/'));
+            check(market + ': WhatsApp draft prepared', !!url);
+            if (url) {
+                const message = new URL(url).searchParams.get('text');
+                check(market + ': WhatsApp order data', message.includes('Test Customer') && message.includes('Quantity: 2') && message.includes('Nude'));
+                const expected = ({EGY:435,UAE:70,KSA:60,QAT:65})[market];
+                check(market + ': exact total', win.getProductNumericPrice(win.eval('products[0]')) * 2 + win.getDeliveryPrice(select.value) === expected, expected);
+            }
+            check(market + ': checkout no JS errors', !win.__errors.length, win.__errors);
+        }
+        {
+            const win = await load('obi-love.html'); const doc = win.document;
+            const first = doc.querySelector('.obi-chat-gallery a');
+            first.click();
+            const dialog = doc.querySelector('.review-viewer');
+            check('Review viewer opens', dialog.open && dialog.querySelector('img').src === first.href);
+            dialog.querySelector('.review-viewer-next').click();
+            check('Review viewer next works', dialog.querySelector('.review-viewer-position').textContent === '2 / 7');
+            dialog.querySelector('.review-viewer-close').click();
+            await wait(20);
+            check('Review viewer closes and unlocks scroll', !dialog.open && !doc.documentElement.classList.contains('review-viewer-open'));
+        }
+        for (const badCart of ['{broken', [{productId:999,shade:'Nude',quantity:2}], [{productId:1,shade:'Nude',quantity:-2}], [{productId:1,shade:'<invalid>',quantity:1}]]) {
+            const win = await load('contact.html', 'EGY', badCart);
+            check('Invalid cart recovers: ' + JSON.stringify(badCart), !win.__errors.length && win.document.getElementById('cart-count').textContent.trim() === '0', win.__errors);
+        }
+        {
+            const win = await load('checkout.html', 'EGY', [{productId:1,shade:'Nude',quantity:1}]);
+            const doc = win.document;
+            const region = doc.getElementById('customer-region');
+            region.selectedIndex = 1; region.dispatchEvent(new win.Event('change'));
+            for (const id of ['customer-name','customer-phone','customer-city','customer-address']) doc.getElementById(id).value = '   ';
+            doc.getElementById('checkout-form').dispatchEvent(new win.Event('submit', {cancelable:true}));
+            check('Whitespace checkout blocked', !win.__navigations.some(url=>url.startsWith('https://wa.me/')));
+        }
+        {
+            const win = await load('contact.html'); const doc = win.document;
+            doc.getElementById('menu-button').click();
+            doc.dispatchEvent(new win.KeyboardEvent('keydown', {key:'Escape',bubbles:true}));
+            check('Escape closes menu', !doc.getElementById('mobile-menu').classList.contains('open'));
+            doc.getElementById('open-cart-button').click();
+            doc.dispatchEvent(new win.KeyboardEvent('keydown', {key:'Escape',bubbles:true}));
+            check('Escape closes cart', !doc.getElementById('cart-drawer').classList.contains('open'));
+        }
+        {
+            const win = await load('shop.html', 'EGY', [{productId:1,shade:'Nude',quantity:2}]);
+            const doc = win.document;
+            localStorage.setItem('cart_UAE', JSON.stringify([{productId:1,shade:'Nude',quantity:3}]));
+            doc.getElementById('market-selector-button').click();
+            doc.querySelector('#market-selector-menu [data-market="UAE"]').click();
+            check('Country switching loads the correct cart', doc.getElementById('cart-count').textContent.trim() === '3');
+            check('Country switching updates cart subtotal', doc.getElementById('cart-subtotal').textContent.includes('60'));
+            doc.getElementById('market-selector-button').click();
+            doc.dispatchEvent(new win.KeyboardEvent('keydown', {key:'Escape',bubbles:true}));
+            check('Escape closes country selector', !doc.getElementById('market-selector').classList.contains('open'));
+            check('Original country cart preserved', JSON.parse(localStorage.getItem('cart_EGY'))[0].quantity === 2);
+        }
+        {
+            let win = await load('shop.html'); let doc = win.document;
+            check('Shaded products have no whole-product heart', !doc.querySelector('.card-favourite[data-favourite-id="1"]'));
+            check('Outer product cards have no hearts', !doc.querySelector('.obi-product-card .product-favourite-button'));
+            win.openProductModal(1);
+            check('Shade strip has no moving hearts', !doc.querySelector('#product-modal-shades .product-favourite-button'));
+            check('Fixed heart waits for a shade selection', !doc.querySelector('#product-favourite-action button'));
+            const shadeButtons = doc.querySelectorAll('.product-modal-shade');
+            const firstShade = shadeButtons[0].getAttribute('aria-label');
+            const secondShade = shadeButtons[1].getAttribute('aria-label');
+            shadeButtons[0].click();
+            check('One heart appears outside the shade scroller', doc.querySelectorAll('#product-favourite-action button').length === 1 && !doc.querySelector('#product-favourite-action').closest('#product-modal-shades'));
+            doc.querySelector('#product-favourite-action button').click();
+            shadeButtons[1].click();
+            check('Fixed heart follows last chosen shade', doc.querySelector('#product-favourite-action button').dataset.favouriteShade === secondShade);
+            doc.querySelector('#product-favourite-action button').click();
+            check('Two shades save independently', win.OBIFavourites.count() === 2 && win.OBIFavourites.has(1,firstShade) && win.OBIFavourites.has(1,secondShade));
+            win.closeProductModal();
+            doc.getElementById('shop-favourites-toggle').click();
+            check('Each saved shade has its own favourite card', doc.querySelectorAll('.obi-product-card').length === 2);
+            const savedCard = Array.from(doc.querySelectorAll('.obi-product-card')).find(card=>card.querySelector('[data-saved-shade]')?.dataset.savedShade === secondShade);
+            const expectedPhoto = win.eval('products.find(p=>p.id===1).shades').find(shade=>shade.name === secondShade).lipImage;
+            check('Saved card shows exact shade photo', savedCard.querySelector('img').getAttribute('src') === expectedPhoto);
+            savedCard.querySelector('.obi-product-image-button').click();
+            check('Saved photo opens original product with saved shade', doc.getElementById('product-modal-title').textContent === 'Lip Gloss' && doc.querySelector('.product-modal-shade.selected').getAttribute('aria-label') === secondShade);
+            win.closeProductModal();
+            win = await load('shop.html', 'UAE'); doc = win.document;
+            check('Shade persists after reload and country change', win.OBIFavourites.has(1,secondShade));
+            doc.getElementById('shop-favourites-toggle').click();
+            doc.querySelector('.obi-product-image-button').click();
+            doc.querySelector('#product-favourite-action button').click();
+            win.closeProductModal();
+            check('Removing one saved card preserves the other', doc.querySelectorAll('.obi-product-card').length === 1 && win.OBIFavourites.count() === 1);
+            doc.querySelector('.obi-product-image-button').click();
+            doc.querySelector('#product-favourite-action button').click();
+            check('Last favourite removal shows empty state', doc.querySelectorAll('.obi-product-card').length === 0 && !doc.getElementById('no-products-message').hidden && doc.querySelector('[data-favourites-count]').textContent === '0');
+            win.closeProductModal();
+            doc.getElementById('shop-favourites-toggle').click();
+            win.openProductModal(11);
+            doc.querySelector('#product-favourite-action button').click();
+            check('No-option product shares saved state in modal', doc.querySelector('#product-favourite-action button').getAttribute('aria-pressed') === 'true');
+            localStorage.setItem('obiFavourites', JSON.stringify([1,11]));
+            win = await load('shop.html');
+            check('Legacy favourites do not guess shades', !win.OBIFavourites.has(1) && win.OBIFavourites.has(11));
+            localStorage.setItem('obiFavourites', '{broken');
+            win = await load('shop.html');
+            check('Malformed favourites recover safely', !win.__errors.length && win.OBIFavourites.count() === 0);
+            doc = win.document;
+            doc.querySelector('[data-category="lip-gloss"]').click();
+            check('Category filter activates', doc.querySelectorAll('.obi-product-card').length === 1);
+            doc.querySelector('[data-category="lip-gloss"]').click();
+            check('Second category click returns to Shop All', doc.getElementById('shop-title').textContent === 'Shop All' && doc.querySelector('[data-category="all"]').classList.contains('active') && doc.querySelectorAll('.obi-product-card').length > 1);
+            doc.querySelector('[data-category="lip-gloss"]').click();
+            doc.getElementById('shop-favourites-toggle').click();
+            doc.getElementById('shop-favourites-toggle').click();
+            check('Second Favourites click clears all filters', !win.OBIFavourites.onlyFavourites && doc.getElementById('shop-title').textContent === 'Shop All' && doc.querySelector('[data-category="all"]').classList.contains('active'));
+            check('Shop All URL clears favourite and category parameters', !/favourites|category/.test(win.__history[win.__history.length - 1]));
+        }
+        localStorage.setItem('obiLanguage', 'ar');
+        {
+            const win = await load('contact.html'); const doc = win.document;
+            check('English defaults despite previous Arabic preference', doc.documentElement.lang === 'en' && doc.querySelector('[data-language="en"]').getAttribute('aria-pressed') === 'true');
+            check('Language switch has AR left and EN right', doc.querySelector('.language-switch').firstElementChild.dataset.language === 'ar' && doc.querySelector('.language-switch').lastElementChild.dataset.language === 'en');
+            check('Arabic switch uses joined Arabic label', doc.querySelector('[data-language="ar"]').textContent === 'عربي');
+        }
+        auditLanguage = 'ar';
+        const untranslated = new Set();
+        function collectEnglish(doc, win) {
+            const walker = doc.createTreeWalker(doc.body, win.NodeFilter.SHOW_TEXT);
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                const value = node.textContent.replace(/\s+/g,' ').trim();
+                let copy = value.replace(/@obicorner|\b(?:EGP|AED|SAR|QAR)\b/g,'').toLowerCase();
+                const shades = win.eval('products').flatMap(product=>product.shades || []).map(shade=>shade.name.toLowerCase()).sort((a,b)=>b.length-a.length);
+                shades.forEach(shade=>copy = copy.replaceAll(shade,''));
+                if (!node.parentElement.closest('script, style, [data-no-translate], .logo, .obi-footer-logo, .obi-about-old-name') && /[a-z]{3}/i.test(copy)) untranslated.add(value);
+            }
+        }
+        for (const page of ['index.html','about.html','shop.html','contact.html','delivery.html','obi-love.html','checkout.html']) {
+            const win = await load(page, 'EGY', page === 'checkout.html' ? [{productId:1,shade:'Nude',quantity:1}] : []);
+            const doc = win.document;
+            check('Arabic ' + page + ': no JS errors', !win.__errors.length, win.__errors);
+            check('Arabic ' + page + ': original layout direction retained', doc.documentElement.lang === 'ar' && doc.documentElement.dir === 'ltr');
+            check(page + ': always starts in English before manual selection', win.__initialLanguage === 'en');
+            if (page === 'about.html') check('Arabic preserves original Obi Corner logo', doc.querySelector('.obi-about-old-name').textContent.replace(/\s+/g,' ').trim() === 'OBI CORNER');
+            const arabicLogo = doc.querySelector('.brand-wordmark').getBoundingClientRect();
+            check('Arabic ' + page + ': no horizontal overflow', doc.documentElement.scrollWidth <= width + 2, doc.documentElement.scrollWidth);
+            collectEnglish(doc, win);
+            doc.querySelector('.language-switch [data-language="en"]').click();
+            await wait(30);
+            check(page + ': language switch restores English', doc.documentElement.lang === 'en' && doc.getElementById('menu-button').getAttribute('aria-label') === 'Open navigation menu');
+            const englishLogo = doc.querySelector('.brand-wordmark').getBoundingClientRect();
+            check(page + ': logo size and placement unchanged', Math.abs(arabicLogo.x-englishLogo.x) < 1 && Math.abs(arabicLogo.width-englishLogo.width) < 1);
+            doc.querySelector('.language-switch [data-language="ar"]').click();
+            await wait(30);
+        }
+        {
+            const win = await load('shop.html'); const doc = win.document;
+            win.openProductModal(1);
+            await wait(30);
+            check('Arabic dynamic product name', doc.getElementById('product-modal-title').textContent === 'ملمع الشفاه');
+            check('Arabic keeps original shade names', doc.querySelector('.product-modal-shade-name').textContent.trim() === 'Nude');
+            check('Arabic keeps arrow direction', win.OBILanguage.t('Get Glossy →').endsWith('→'));
+            doc.querySelector('.product-modal-shade').click();
+            doc.querySelector('#product-favourite-action button').click();
+            await wait(30);
+            check('Arabic favourite saves original shade key', win.OBIFavourites.has(1,'Nude'));
+            check('Arabic dynamic save label', doc.querySelector('#product-favourite-action button').textContent.trim() === 'محفوظ');
+            check('Arabic order preserves customer-provided text', win.OBILanguage.translateOrderMessage('*Name:* Shop\n*Message:*\nShop') === '*الاسم:* Shop\n*الرسالة:* \nShop');
+            for (const product of win.eval('products')) {
+                win.openProductModal(product.id);
+                if (product.shades.length) doc.querySelector('.product-modal-shade').click();
+                doc.getElementById('product-details-toggle').setAttribute('aria-expanded','true');
+                await wait(160);
+                collectEnglish(doc, win);
+                win.closeProductModal();
+            }
+            check('Arabic all product details have no script errors', !win.__errors.length, win.__errors);
+            check('Page navigation resets language to English', !new URL(doc.querySelector('a[href*="about.html"]').href).searchParams.has('lang'));
+            win.openProductModal(1);
+            doc.querySelector('.product-modal-shade').click();
+            win.OBILanguage.set('en'); await wait(30);
+            check('English restored in dynamic product details', doc.getElementById('product-modal-title').textContent === 'Lip Gloss' && doc.querySelector('.product-modal-shade.selected').getAttribute('aria-label') === 'Nude');
+            win.OBILanguage.set('ar'); await wait(30);
+            check('Language switching preserves chosen shade', doc.querySelector('.product-modal-shade.selected').dataset.shadeIndex === '0' && doc.querySelector('#product-favourite-action button').dataset.favouriteShade === 'Nude');
+        }
+        for (const market of ['EGY','UAE','KSA','QAT']) {
+            const win = await load('checkout.html', market, [{productId:1,shade:'Nude',quantity:2}]); const doc = win.document;
+            const region = doc.getElementById('customer-region'); region.selectedIndex = 1; region.dispatchEvent(new win.Event('change'));
+            await wait(30);
+            const expectedTotal = win.getProductNumericPrice(win.eval('products[0]')) * 2 + win.getDeliveryPrice(region.value);
+            check('Arabic '+market+': price format stays in English', doc.getElementById('checkout-total').textContent === win.formatMoney(expectedTotal));
+            for (const [id,value] of Object.entries({'customer-name':'Test Shop Customer','customer-phone':'0123456789','customer-city':'Shop City','customer-address':'Shop Address'})) doc.getElementById(id).value = value;
+            doc.getElementById('checkout-form').dispatchEvent(new win.Event('submit', {cancelable:true}));
+            const url = win.__navigations.find(url=>url.startsWith('https://wa.me/'));
+            const message = url ? new URL(url).searchParams.get('text') : '';
+            check('Arabic '+market+': WhatsApp draft translated', message.includes('ملخص الطلب') && message.includes('ملمع الشفاه'));
+            check('Arabic '+market+': customer text unchanged', message.includes('Test Shop Customer') && message.includes('0123456789') && message.includes('Shop Address') && message.includes('Shop City'));
+        }
+        check('Arabic remaining English copy inventory', untranslated.size === 0, [...untranslated]);
+        localStorage.removeItem('obiLanguage');
+    } catch (error) { check('Audit completed', false, error.stack); }
+    if (frame) frame.remove();
+    document.getElementById('report').textContent = JSON.stringify({width, total:results.length, failures:results.filter(r=>!r.passed), results}, null, 2);
+}());
+</script>

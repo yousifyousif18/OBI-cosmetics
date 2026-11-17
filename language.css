@@ -1,0 +1,48 @@
+/* Language changes wording only; the site's layout and visual identity stay intact. */
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 999px;
+    background: rgba(255,255,255,.12);
+    direction: ltr;
+    flex-shrink: 0;
+}
+.language-switch button {
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 5px 7px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font: 700 11px/1 Arial, sans-serif;
+    cursor: pointer;
+    transition: color .18s ease, background-color .18s ease;
+}
+.language-switch button[aria-pressed="true"] {
+    background: #fff;
+    color: #96396f;
+    box-shadow: 0 2px 6px rgba(108,38,77,.1);
+}
+.language-switch button[data-language="ar"] {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    direction: rtl;
+}
+.language-switch button:focus-visible {
+    outline: 2px solid #6c264d;
+    outline-offset: 2px;
+}
+.navbar .logo { min-width: 0; }
+@media (max-width: 767px) {
+    .language-switch { padding: 2px; }
+    .language-switch button { min-width: 29px; min-height: 32px; padding: 5px; }
+}

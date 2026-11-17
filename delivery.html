@@ -10,13 +10,16 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Obi Cosmetics</title>
+    <title>Delivery &amp; Payment | Obi Cosmetics</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
 
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
 </head>
 
 
@@ -140,93 +143,30 @@
              DROPDOWN MENU
         ========================================= -->
 
-        <div
-            id="mobile-menu"
-            class="mobile-menu"
-        >
-
-
-            <!-- SHOP DROPDOWN -->
-
-            <div class="shop-menu-group">
-
-                <button
-                    id="shop-menu-button"
-                    class="shop-menu-button"
-                    type="button"
-                >
-
-                    <span>
-                        Shop
-                    </span>
-
-                    <span>
-                        +
-                    </span>
-
-                </button>
-
-
-                <div
-                    id="shop-submenu"
-                    class="shop-submenu"
-                >
-
-                    <a href="shop.html">
-                        Shop All
-                    </a>
-
-                    <a href="shop.html?category=lip-gloss">
-                        Lip Glosses
-                    </a>
-
-                    <a href="shop.html?category=lip-oil">
-                        Lip Oils
-                    </a>
-
-                    <a href="shop.html?category=lip-liner">
-                        Lip Liners
-                    </a>
-
-                    <a href="shop.html?category=blush">
-                        Blush
-                    </a>
-
-                    <a href="shop.html?category=liquid-lipstick">
-                        Liquid Lipsticks
-                    </a>
-
-                    <a href="shop.html?category=body-care">
-                        Body Care
-                    </a>
-
-                    <a href="shop.html?category=hair-care">
-    Hair Care
-</a>
-
-                </div>
-
-            </div>
-
-
-            <!-- OTHER PAGES -->
-
-            <a href="about.html">
-                About Us
-            </a>
-
-            <a href="delivery.html">
-                Delivery
-            </a>
-
-           <a href="obi-love.html">
-    OBI Love
-</a>
-            <a href="contact.html">
-                Contact
-            </a>
-
+        <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
         </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
 
     </header>
 
@@ -263,6 +203,8 @@
                 <span>↓</span>
             </a>
 
+            <a href="#payment-options" class="order-payment-jump">View Payment Options &darr;</a>
+
         </div>
 
 
@@ -270,9 +212,9 @@
 
             <div class="delivery-package">
 
-                <span class="delivery-package-star">
-                    ✦
-                </span>
+                <span class="delivery-package-tape" aria-hidden="true"></span>
+
+                <span class="delivery-package-star" aria-hidden="true">&#10022;</span>
 
                 <strong>
                     OBI
@@ -281,6 +223,20 @@
                 <small>
                     COSMETICS
                 </small>
+
+                <span class="delivery-shipping-label" aria-hidden="true">
+                    <span>PACKED WITH LOVE</span>
+                    <span class="delivery-barcode"></span>
+                </span>
+
+                <span class="delivery-parcel-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7M3 10H1M3 13H1"></path>
+                        <circle cx="6" cy="18" r="2"></circle>
+                        <circle cx="18" cy="18" r="2"></circle>
+                    </svg>
+                    OBI DELIVERY
+                </span>
 
             </div>
 
@@ -332,9 +288,7 @@
 
                 <div class="delivery-country-top">
 
-                    <span class="delivery-flag">
-                        🇪🇬
-                    </span>
+                    <img src="images/flags/egypt.webp" alt="Egypt flag" class="delivery-flag-image">
 
                     <span class="delivery-country-label">
                         EGYPT
@@ -430,9 +384,7 @@
 
                 <div class="delivery-country-top">
 
-                    <span class="delivery-flag">
-                        🇦🇪
-                    </span>
+                    <img src="images/flags/uae.webp" alt="UAE flag" class="delivery-flag-image">
 
                     <span class="delivery-country-label">
                         UAE
@@ -491,9 +443,7 @@
 
                 <div class="delivery-country-top">
 
-                    <span class="delivery-flag">
-                        🇶🇦
-                    </span>
+                    <img src="images/flags/qatar.webp" alt="Qatar flag" class="delivery-flag-image">
 
                     <span class="delivery-country-label">
                         QATAR
@@ -715,412 +665,42 @@
 
 
 
-        <div class="same-day-payment">
+        <p class="same-day-fee-note">Uber delivery fees depend on your location and the trip price.</p>
+    </section>
 
-            <p class="same-day-payment-label">
-                SAME-DAY PAYMENT
-            </p>
-
-            <h3>
-                Pay before dispatch.
-            </h3>
-
-            <p>
-                Same-day delivery orders must be
-                paid in advance using one of the
-                available methods below.
-            </p>
-
+    <section class="same-day-payment order-payment-summary" id="payment-options" aria-labelledby="payment-heading">
+            <p class="same-day-payment-label">PAYMENTS FOR ALL ORDERS</p>
+            <h2 id="payment-heading">Payment options.</h2>
+            <p>Send your order through WhatsApp. We&rsquo;ll confirm your total, delivery fee and available payment method, then share the payment details in the chat.</p>
 
             <div class="same-day-payment-methods">
-
                 <div class="payment-method">
-
-                    <span class="payment-symbol">
-                        V
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            Vodafone Cash
-                        </strong>
-
-                        <span>
-                            Advance payment
-                        </span>
-
-                    </div>
-
+                    <img src="images/flags/egypt.webp" alt="Egypt flag" class="delivery-flag-image">
+                    <div><strong>Egypt</strong><span>Vodafone Cash, Bank of Khartoum or cash on delivery</span></div>
                 </div>
-
-
                 <div class="payment-method">
-
-                    <span class="payment-symbol">
-                        B
-                    </span>
-
-                    <div>
-
-                        <strong>
-                            Bank of Khartoum
-                        </strong>
-
-                        <span>
-                            Bank payment
-                        </span>
-
-                    </div>
-
+                    <img src="images/flags/ksa.webp" alt="Saudi Arabia flag" class="delivery-flag-image">
+                    <div><strong>Saudi Arabia</strong><span>Bank transfer only</span></div>
                 </div>
-
+                <div class="payment-method">
+                    <img src="images/flags/qatar.webp" alt="Qatar flag" class="delivery-flag-image">
+                    <div><strong>Qatar</strong><span>Bank transfer or cash on delivery</span></div>
+                </div>
+                <div class="payment-method">
+                    <img src="images/flags/uae.webp" alt="UAE flag" class="delivery-flag-image">
+                    <div><strong>UAE</strong><span>Bank transfer or cash on delivery</span></div>
+                </div>
             </div>
-
-
-            <p class="same-day-small-note">
-                Uber delivery cost depends on the
-                delivery location and trip price.
-            </p>
-
-        </div>
-
+            <p class="same-day-small-note">For advance payments, share your payment confirmation in the same WhatsApp chat. Cash on delivery is available for standard delivery; same-day Uber orders in Egypt require advance payment.</p>
     </section>
 
-
-
-    <!-- ========================================
-         HOW DELIVERY WORKS
-    ========================================= -->
-
-    <section class="delivery-process">
-
-        <div class="delivery-section-heading">
-
-            <p class="delivery-eyebrow">
-                FROM OBI TO YOU
-            </p>
-
-            <h2>
-                How your order gets to you.
-            </h2>
-
+    <section class="delivery-essentials" aria-label="Before you order">
+        <div>
+            <h2>A quick note before you order</h2>
+            <p>Delivery times are estimates and depend on your location and courier availability. Check your address and phone number before checkout; contact us promptly for changes, as updates may not be possible after dispatch.</p>
         </div>
-
-
-        <div class="delivery-process-grid">
-
-            <article>
-
-                <span class="process-number">
-                    01
-                </span>
-
-                <div class="process-icon">
-                    ♡
-                </div>
-
-                <h3>
-                    Place Your Order
-                </h3>
-
-                <p>
-                    Choose your OBI favourites,
-                    select your shades and complete
-                    your checkout details.
-                </p>
-
-            </article>
-
-
-            <article>
-
-                <span class="process-number">
-                    02
-                </span>
-
-                <div class="process-icon">
-                    ✦
-                </div>
-
-                <h3>
-                    We Prepare It
-                </h3>
-
-                <p>
-                    Your products are prepared
-                    and packed for delivery.
-                </p>
-
-            </article>
-
-
-            <article>
-
-                <span class="process-number">
-                    03
-                </span>
-
-                <div class="process-icon">
-                    →
-                </div>
-
-                <h3>
-                    On The Way
-                </h3>
-
-                <p>
-                    Your order is handed over
-                    for delivery to your selected
-                    destination.
-                </p>
-
-            </article>
-
-
-            <article>
-
-                <span class="process-number">
-                    04
-                </span>
-
-                <div class="process-icon">
-                    ♡
-                </div>
-
-                <h3>
-                    OBI Arrives
-                </h3>
-
-                <p>
-                    Receive your order and
-                    enjoy your new OBI favourites.
-                </p>
-
-            </article>
-
-        </div>
-
+        <a href="contact.html">Need help? Contact us <span aria-hidden="true">&rarr;</span></a>
     </section>
-
-
-
-    <!-- ========================================
-         DELIVERY NOTES
-    ========================================= -->
-
-    <section class="delivery-notes">
-
-        <div class="delivery-notes-heading">
-
-            <p class="delivery-eyebrow">
-                BEFORE YOU ORDER
-            </p>
-
-            <h2>
-                A few things to know.
-            </h2>
-
-        </div>
-
-
-        <div class="delivery-notes-list">
-
-            <div>
-
-                <span>01</span>
-
-                <p>
-    Delivery times are estimates and may vary
-    depending on destination, courier availability,
-    selected delivery provider and exceptional
-    circumstances.
-</p>
-
-            </div>
-
-
-            <div>
-
-                <span>02</span>
-
-                <p>
-                    Please make sure your phone number
-                    and delivery address are correct
-                    before submitting your order.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <span>03</span>
-
-                <p>
-                    Same-day delivery is subject to
-                    Uber availability and requires
-                    advance payment.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <span>04</span>
-
-                <p>
-                    Delivery prices shown apply to
-                    standard OBI delivery and may be
-                    updated when necessary.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ========================================
-         DELIVERY FAQ
-    ========================================= -->
-
-    <section class="delivery-faq">
-
-        <div class="delivery-section-heading">
-
-            <p class="delivery-eyebrow">
-                DELIVERY QUESTIONS
-            </p>
-
-            <h2>
-                Good to know.
-            </h2>
-
-        </div>
-
-
-        <div class="delivery-faq-list">
-
-
-            <details>
-
-                <summary>
-                    How long does delivery take?
-
-                    <span>
-                        +
-                    </span>
-
-                </summary>
-
-                <p>
-    Cairo and Giza orders are normally
-    delivered within up to 3 days.
-    Other Egyptian governorates,
-    the UAE and Qatar may take up
-    to 4 days. Delivery times in Saudi Arabia
-    depend on the selected provider,
-    RedBox or SMSA, and the delivery location.
-</p>
-
-            </details>
-<details>
-
-    <summary>
-        Which delivery options are available in Saudi Arabia?
-
-        <span>
-            +
-        </span>
-    </summary>
-
-    <p>
-        Saudi Arabia orders can currently be delivered
-        through RedBox or SMSA. The available option
-        and delivery fee are selected during checkout.
-        RedBox is 20 SAR and SMSA is 35 SAR.
-    </p>
-
-</details>
-
-
-            <details>
-
-                <summary>
-                    Can I get my order the same day?
-
-                    <span>
-                        +
-                    </span>
-
-                </summary>
-
-                <p>
-                    Same-day delivery can be arranged
-                    in Egypt through Uber where
-                    available. The order must be paid
-                    in advance before dispatch.
-                </p>
-
-            </details>
-
-
-
-            <details>
-
-                <summary>
-                    How do I pay for same-day delivery?
-
-                    <span>
-                        +
-                    </span>
-
-                </summary>
-
-                <p>
-                    Same-day orders can be paid in
-                    advance through Vodafone Cash
-                    or Bank of Khartoum.
-                </p>
-
-            </details>
-
-
-
-            <details>
-
-                <summary>
-                    What if I entered the wrong address?
-
-                    <span>
-                        +
-                    </span>
-
-                </summary>
-
-                <p>
-                    Contact OBI as soon as possible.
-                    Once an order has been dispatched,
-                    changing the delivery address may
-                    not be possible.
-                </p>
-
-            </details>
-
-
-        </div>
-
-    </section>
-
-
-
-<!-- ========================================
-     FINAL DELIVERY CTA
-========================================= -->
 
 <section class="delivery-final-cta">
 
@@ -1266,10 +846,14 @@
 ========================================= -->
 
 <script src="products.js"></script>
+<script src="favourites.js"></script>
 <script src="market.js"></script>
 <script src="menu.js"></script>
 <script src="store.js"></script>
 
 
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
 </body>
 </html>

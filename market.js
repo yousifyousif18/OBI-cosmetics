@@ -478,6 +478,39 @@ function getCartStorageKey() {
    MIGRATE EXISTING OLD CART TO EGYPT
 ========================================================= */
 
+function readStoredJSON(storage, key, fallback) {
+    try {
+        const value = storage.getItem(key);
+        return value === null ? fallback : JSON.parse(value);
+    } catch (_) {
+        return fallback;
+    }
+}
+
+function validateOrderItems(items) {
+    if (!Array.isArray(items)) return [];
+    return items.filter(function (item) {
+        if (!item || !Number.isSafeInteger(item.quantity) || item.quantity < 1) return false;
+        const product = products.find(function (product) { return product.id === item.productId; });
+        if (!product) return false;
+        const price = getProductNumericPrice(product);
+        if (!Number.isFinite(price) || price <= 0) return false;
+        return !Array.isArray(product.shades) || product.shades.length === 0 ||
+            product.shades.some(function (shade) { return shade.name === item.shade; });
+    }).map(function (item) {
+        const product = products.find(function (product) { return product.id === item.productId; });
+        return {
+            productId: item.productId,
+            quantity: item.quantity,
+            shade: product.shades && product.shades.length ? item.shade : "Not applicable"
+        };
+    });
+}
+
+function getStoredCart() {
+    return validateOrderItems(readStoredJSON(localStorage, getCartStorageKey(), []));
+}
+
 /*
    This keeps the cart you already had
    before introducing countries.
@@ -678,6 +711,15 @@ if (
     marketSelectorButton
 ) {
 
+    document.addEventListener("keydown", function (event) {
+        if (event.key !== "Escape" || !marketSelector.classList.contains("open")) return;
+        event.preventDefault();
+        marketSelector.classList.remove("open");
+        marketSelectorButton.setAttribute("aria-expanded", "false");
+        document.querySelector("header")?.classList.remove("header-locked");
+        marketSelectorButton.focus({ preventScroll: true });
+    });
+
     marketSelectorButton.addEventListener(
         "click",
         function (event) {
@@ -800,7 +842,9 @@ if (
 if (
     typeof renderCart === "function"
 ) {
+    cart = getStoredCart();
     renderCart();
+    updateCartCount();
 }
 
             }
@@ -824,10 +868,14 @@ document.addEventListener(
 
 
         if (
+            marketSelector.classList.contains("open") &&
             !marketSelector.contains(
                 event.target
             )
         ) {
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
 
             marketSelector.classList.remove(
                 "open"
@@ -851,7 +899,8 @@ document
 
         }
 
-    }
+    },
+    { capture: true }
 );
 
 

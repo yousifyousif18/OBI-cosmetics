@@ -2,11 +2,41 @@
    OBI LOVE — ANIMATED COUNTERS
 ========================================================= */
 
+// Start the customer video on page load, independently of scroll animations.
+const customerLoveVideo = document.getElementById("customer-love-video");
+
+if (customerLoveVideo) {
+    customerLoveVideo.muted = true;
+    customerLoveVideo.defaultMuted = true;
+    customerLoveVideo.loop = true;
+    customerLoveVideo.playsInline = true;
+
+    function startCustomerLoveVideo() {
+        if (!customerLoveVideo.paused) return;
+        const playback = customerLoveVideo.play();
+        if (playback) playback.catch(function () {
+            // The browser may defer autoplay until media is ready or a user interacts.
+        });
+    }
+
+    customerLoveVideo.addEventListener("canplay", startCustomerLoveVideo);
+    document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) startCustomerLoveVideo();
+    });
+    document.addEventListener("pointerdown", startCustomerLoveVideo, { once: true, passive: true });
+    startCustomerLoveVideo();
+}
+
 const obiCounters =
     document.querySelectorAll(".obi-counter");
 
 
 function animateObiCounter(counter) {
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        counter.textContent = Number(counter.dataset.target).toLocaleString() + (counter.dataset.suffix || "");
+        return;
+    }
 
     const target =
         Number(counter.dataset.target);

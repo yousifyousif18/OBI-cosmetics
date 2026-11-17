@@ -355,6 +355,11 @@ function updateShopTitle(
         return;
     }
 
+    if (window.OBIFavourites.onlyFavourites) {
+        shopTitle.textContent = "Your Favourites";
+        return;
+    }
+
 
     if (
         category &&
@@ -421,6 +426,9 @@ function updateCategoryURL(
     newURL.searchParams.delete(
         "product"
     );
+
+    if (window.OBIFavourites.onlyFavourites) newURL.searchParams.set("favourites", "1");
+    else newURL.searchParams.delete("favourites");
 
 
     if (category) {
@@ -503,6 +511,20 @@ function renderProducts(
     filteredProducts
 ) {
 
+    if (window.OBIFavourites.onlyFavourites) {
+        filteredProducts = filteredProducts.flatMap(function (product) {
+            if (Array.isArray(product.shades) && product.shades.length) {
+                return window.OBIFavourites.savedShades(product.id).map(function (shade) {
+                    return { ...product, favouriteShade: shade };
+                });
+            }
+            return window.OBIFavourites.has(product.id) ? [product] : [];
+        });
+        noProductsMessage.textContent = "No favourites here yet. Save a shade or a product without options using its heart, or switch off Favourites to browse.";
+    } else {
+        noProductsMessage.textContent = "No products are available in this category.";
+    }
+
     productGrid.innerHTML =
         "";
 
@@ -530,6 +552,11 @@ function renderProducts(
     filteredProducts.forEach(
         function (product) {
 
+            const savedShade = product.shades?.find(shade => shade.name === product.favouriteShade);
+            const savedShadeAttribute = savedShade ? `data-saved-shade="${window.OBIFavourites.escape(savedShade.name)}"` : "";
+            const cardImage = savedShade?.lipImage || savedShade?.image || product.image;
+
+
             const hasShades =
                 Array.isArray(
                     product.shades
@@ -538,7 +565,7 @@ function renderProducts(
 
 
             const optionText =
-                hasShades
+                savedShade ? savedShade.name : hasShades
                     ? (
                         product.shades.length +
                         (
@@ -551,7 +578,7 @@ function renderProducts(
 
 
             const actionText =
-                hasShades
+                savedShade ? "View Saved Shade" : hasShades
                     ? "Choose Shades"
                     : "View Product";
 
@@ -566,14 +593,15 @@ function renderProducts(
                         class="obi-product-image-button open-product-button"
                         type="button"
                         data-product-id="${product.id}"
+                        ${savedShadeAttribute}
                         aria-label="View ${product.name}"
                     >
 
                         <div class="obi-product-image">
 
                             <img
-                                src="${product.image}"
-                                alt="${product.name}"
+                                src="${cardImage}"
+                                alt="${product.name}${savedShade ? " — " + savedShade.name : ""}"
                                 loading="lazy"
                             >
 
@@ -590,6 +618,9 @@ function renderProducts(
 
 
                     <div class="obi-product-info">
+
+                        ${window.OBIFavourites.onlyFavourites ? "" : window.OBIFavourites.summary(product)}
+                        ${savedShade ? `<p class="saved-favourite-shade-name">${window.OBIFavourites.escape(savedShade.name)}</p>` : ""}
 
                         <div class="obi-product-heading">
 
@@ -624,6 +655,7 @@ function renderProducts(
                             class="obi-product-open open-product-button"
                             type="button"
                             data-product-id="${product.id}"
+                            ${savedShadeAttribute}
                         >
                             ${actionText}
 
@@ -712,10 +744,16 @@ categoryFilters.forEach(
                     filter.dataset.category;
 
 
+                const resetFilters = selectedFilter === "all" || selectedFilter === currentCategory;
                 const category =
-                    selectedFilter === "all"
+                    resetFilters
                         ? null
                         : selectedFilter;
+
+                if (resetFilters) {
+                    window.OBIFavourites.onlyFavourites = false;
+                    favouritesToggle.setAttribute("aria-pressed", "false");
+                }
 
 
                 applyCategory(
@@ -1090,6 +1128,25 @@ function openProductModal(
 
     currentModalProduct =
         product;
+
+    document.getElementById("product-favourite-action").innerHTML = window.OBIFavourites.button(product);
+    document.getElementById("product-favourite-action").classList.toggle("has-options", Boolean(product.shades?.length));
+
+    const customerReviews = document.getElementById("product-customer-reviews");
+    if (customerReviews) {
+        const reviewFiles = product.id === 1
+            ? ["gloss-texture-scent", "gloss-value-feedback", "gloss-shades-feedback"]
+            : product.id === 11 ? ["hair-oil-feedback"] : [];
+        customerReviews.hidden = reviewFiles.length === 0;
+        customerReviews.innerHTML = reviewFiles.length ? `
+            <h3>Customer love</h3>
+            <p>${product.id === 11 ? "One customer's personal hair oil experience. Individual results vary." : "Customer feedback on gloss texture, scent and shades."} Tap a screenshot to read it in full.</p>
+            <div class="product-review-thumbnails">${reviewFiles.map(function (file) {
+                return `<a href="images/reviews/${file}.jpeg" target="_blank" rel="noopener" aria-label="Open customer review"><img src="images/reviews/${file}.jpeg" alt="Customer feedback about ${product.name}" loading="lazy"></a>`;
+            }).join("")}</div>
+            <a href="obi-love.html#${product.id === 11 ? "hair-oil-love" : "customer-love"}">More OBI Love &rarr;</a>
+        ` : "";
+    }
 
     currentModalShade =
         null;
@@ -1553,6 +1610,11 @@ productGrid.addEventListener(
             productId
         );
 
+        if (button.dataset.savedShade) {
+            const index = currentModalProduct.shades.findIndex(shade => shade.name === button.dataset.savedShade);
+            modalShades.querySelector(`[data-shade-index="${index}"]`)?.click();
+        }
+
     }
 );
 /* =========================================
@@ -1802,6 +1864,8 @@ modalShades.addEventListener(
         currentModalShade =
             shade.name;
 
+        document.getElementById("product-favourite-action").innerHTML = window.OBIFavourites.button(currentModalProduct, "selected-shade-favourite", shade.name);
+
 
         /* Remove previous selection */
 
@@ -2028,8 +2092,7 @@ if (
         );
 
 
-        window.location.href =
-            "checkout.html";
+        window.location.href = window.OBILanguage ? window.OBILanguage.url("checkout.html") : "checkout.html";
 
     }
 );
@@ -2149,3 +2212,20 @@ function openProductFromURL() {
    controls have been connected */
 
 openProductFromURL();
+
+const favouritesToggle = document.getElementById("shop-favourites-toggle");
+function syncFavouritesView() {
+    favouritesToggle.setAttribute("aria-pressed", String(window.OBIFavourites.onlyFavourites));
+    if (window.OBIFavourites.onlyFavourites) {
+        const focused = document.activeElement;
+        applyCategory(currentCategory, false);
+        if (focused?.matches("[data-favourite-id]") && !focused.isConnected) favouritesToggle.focus({ preventScroll: true });
+    }
+}
+favouritesToggle.addEventListener("click", function () {
+    window.OBIFavourites.onlyFavourites = !window.OBIFavourites.onlyFavourites;
+    favouritesToggle.setAttribute("aria-pressed", String(window.OBIFavourites.onlyFavourites));
+    applyCategory(window.OBIFavourites.onlyFavourites ? currentCategory : null, true);
+});
+document.addEventListener("obi:favourites-changed", syncFavouritesView);
+syncFavouritesView();

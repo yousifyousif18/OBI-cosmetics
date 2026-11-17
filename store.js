@@ -160,8 +160,7 @@ buyNowButtons.forEach(function (button) {
             );
 
 
-            window.location.href =
-                "checkout.html";
+            window.location.href = window.OBILanguage ? window.OBILanguage.url("checkout.html") : "checkout.html";
 
         }
     );
@@ -174,12 +173,7 @@ buyNowButtons.forEach(function (button) {
    CART DATA
 ========================================= */
 
-let cart =
-    JSON.parse(
-        localStorage.getItem(
-            getCartStorageKey()
-        )
-    ) || [];
+let cart = getStoredCart();
 
 
 
@@ -246,7 +240,27 @@ const cartCheckoutButton =
    OPEN / CLOSE CART
 ========================================= */
 
+let cartScrollPosition = 0;
+let cartPreviousFocus = null;
+
+cartDrawer.inert = true;
+cartDrawer.setAttribute("role", "dialog");
+cartDrawer.setAttribute("aria-label", "Shopping cart");
+
 function openCart() {
+
+    if (!document.body.classList.contains("cart-open")) {
+        cartPreviousFocus = document.activeElement;
+        cartScrollPosition = window.scrollY;
+        document.body.style.setProperty(
+            "--cart-scroll-offset",
+            -cartScrollPosition + "px"
+        );
+    }
+
+    document.documentElement.classList.add("cart-open");
+    cartDrawer.inert = false;
+    cartDrawer.setAttribute("aria-modal", "true");
 
     cartDrawer.classList.add("open");
 
@@ -256,10 +270,14 @@ function openCart() {
         "cart-open"
     );
 
+    closeCartButton.focus({ preventScroll: true });
+
 }
 
 
 function closeCart() {
+
+    const wasOpen = document.body.classList.contains("cart-open");
 
     cartDrawer.classList.remove("open");
 
@@ -268,6 +286,19 @@ function closeCart() {
     document.body.classList.remove(
         "cart-open"
     );
+
+    document.documentElement.classList.remove("cart-open");
+    cartDrawer.inert = true;
+    cartDrawer.removeAttribute("aria-modal");
+    document.body.style.removeProperty("--cart-scroll-offset");
+
+    if (wasOpen) {
+        const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = "auto";
+        window.scrollTo(0, cartScrollPosition);
+        document.documentElement.style.scrollBehavior = previousScrollBehavior;
+        if (cartPreviousFocus && cartPreviousFocus.isConnected) cartPreviousFocus.focus({ preventScroll: true });
+    }
 
 }
 
@@ -283,6 +314,22 @@ closeCartButton.addEventListener(
     closeCart
 );
 
+document.addEventListener("keydown", function (event) {
+    if (!cartDrawer.classList.contains("open")) return;
+    if (event.key === "Escape") {
+        event.preventDefault();
+        closeCart();
+    }
+    if (event.key === "Tab") {
+        const controls = Array.from(cartDrawer.querySelectorAll("button:not(:disabled), a[href], input, select, textarea, [tabindex='0']"))
+            .filter(function (element) { return element.getClientRects().length > 0; });
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+});
+
 
 cartOverlay.addEventListener(
     "click",
@@ -294,8 +341,7 @@ continueShoppingButton.addEventListener(
     "click",
     function () {
 
-        window.location.href =
-            "shop.html";
+        window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
 
     }
 );
@@ -493,6 +539,8 @@ function addToCart(
 
     openCart();
 
+    document.dispatchEvent(new CustomEvent("obi:cart-added"));
+
 }
 
 
@@ -503,21 +551,32 @@ function addToCart(
 
 function renderCart() {
 
+    cartDrawer.classList.toggle("is-empty", cart.length === 0);
+
     if (cart.length === 0) {
 
     cartItemsContainer.innerHTML = `
         <div class="empty-cart">
 
-            <p>
-                Your cart is empty.
-            </p>
+            <div class="empty-cart-icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 23h32l3 32H13l3-32Z"></path>
+                    <path d="M24 25V17a8 8 0 0 1 16 0v8"></path>
+                    <path d="m28 38 3 3 6-7"></path>
+                </svg>
+            </div>
+
+            <div class="empty-cart-copy">
+                <h3>Your next favorite is waiting</h3>
+                <p>Your cart is empty. Explore OBI and find something you&rsquo;ll love.</p>
+            </div>
 
             <a
                 href="shop.html"
                 class="empty-cart-shop-button"
             >
-                Go to Shop
-                <span>→</span>
+                Explore the Shop
+                <span aria-hidden="true">&rarr;</span>
             </a>
 
         </div>
@@ -864,8 +923,7 @@ cartCheckoutButton.addEventListener(
         );
 
 
-        window.location.href =
-            "checkout.html";
+        window.location.href = window.OBILanguage ? window.OBILanguage.url("checkout.html") : "checkout.html";
 
     }
 );

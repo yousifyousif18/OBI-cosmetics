@@ -17,6 +17,9 @@
         href="style.css"
     >
 
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
 </head>
 
 
@@ -140,93 +143,30 @@
              DROPDOWN MENU
         ========================================= -->
 
-        <div
-            id="mobile-menu"
-            class="mobile-menu"
-        >
-
-
-            <!-- SHOP DROPDOWN -->
-
-            <div class="shop-menu-group">
-
-                <button
-                    id="shop-menu-button"
-                    class="shop-menu-button"
-                    type="button"
-                >
-
-                    <span>
-                        Shop
-                    </span>
-
-                    <span>
-                        +
-                    </span>
-
-                </button>
-
-
-                <div
-                    id="shop-submenu"
-                    class="shop-submenu"
-                >
-
-                    <a href="shop.html">
-                        Shop All
-                    </a>
-
-                    <a href="shop.html?category=lip-gloss">
-                        Lip Glosses
-                    </a>
-
-                    <a href="shop.html?category=lip-oil">
-                        Lip Oils
-                    </a>
-
-                    <a href="shop.html?category=lip-liner">
-                        Lip Liners
-                    </a>
-
-                    <a href="shop.html?category=blush">
-                        Blush
-                    </a>
-
-                    <a href="shop.html?category=liquid-lipstick">
-                        Liquid Lipsticks
-                    </a>
-
-                    <a href="shop.html?category=body-care">
-                        Body Care
-                    </a>
-
-                    <a href="shop.html?category=hair-care">
-    Hair Care
-</a>
-
-                </div>
-
-            </div>
-
-
-            <!-- OTHER PAGES -->
-
-            <a href="about.html">
-                About Us
-            </a>
-
-            <a href="delivery.html">
-                Delivery
-            </a>
-
-           <a href="obi-love.html">
-    OBI Love
-</a>
-            <a href="contact.html">
-                Contact
-            </a>
-
+        <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
         </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
 
     </header>
 
@@ -971,7 +911,7 @@
             </div>
 
 
-            <div class="obi-story-sticker">
+            <a href="about.html" class="obi-story-sticker">
 
                 <span>
                     ✦
@@ -979,7 +919,7 @@
 
                 MEET OBI
 
-            </div>
+            </a>
 
         </div>
 
@@ -1404,10 +1344,14 @@
     ========================================= -->
 
    <script src="products.js"></script>
+<script src="favourites.js"></script>
 <script src="market.js"></script>
 <script src="menu.js"></script>
 <script src="store.js"></script>
 <script src="home.js"></script>
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
 </body>
 
 </html>

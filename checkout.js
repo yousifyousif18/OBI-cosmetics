@@ -54,6 +54,10 @@ const checkoutForm =
         "checkout-form"
     );
 
+checkoutForm.addEventListener("input", function (event) {
+    if (typeof event.target.setCustomValidity === "function") event.target.setCustomValidity("");
+});
+
 
 const marketFlag =
     document.getElementById(
@@ -82,8 +86,7 @@ const selectedMarketCode =
 
 if (!selectedMarketCode) {
 
-    window.location.href =
-        "shop.html";
+    window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
 
 }
 
@@ -157,17 +160,12 @@ if (
 ) {
 
     const buyNowItem =
-        JSON.parse(
-            sessionStorage.getItem(
-                "buyNowItem"
-            )
-        );
+        readStoredJSON(sessionStorage, "buyNowItem", null);
 
 
-    if (!buyNowItem) {
+    if (validateOrderItems([buyNowItem]).length === 0) {
 
-        window.location.href =
-            "shop.html";
+        window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
 
     } else {
 
@@ -190,12 +188,7 @@ else if (
     "cart"
 ) {
 
-    const cart =
-        JSON.parse(
-            localStorage.getItem(
-                getCartStorageKey()
-            )
-        ) || [];
+    const cart = getStoredCart();
 
 
     if (
@@ -207,8 +200,7 @@ else if (
         );
 
 
-        window.location.href =
-            "shop.html";
+        window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
 
     } else {
 
@@ -227,8 +219,7 @@ else if (
 
 else {
 
-    window.location.href =
-        "shop.html";
+    window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
 
 }
 
@@ -678,6 +669,18 @@ checkoutForm.addEventListener(
 
         event.preventDefault();
 
+        if (!selectedMarket || orderItems.length === 0) {
+            window.location.href = window.OBILanguage ? window.OBILanguage.url("shop.html") : "shop.html";
+            return;
+        }
+
+        const requiredFields = ["customer-name", "customer-phone", "customer-city", "customer-address"];
+        for (const id of requiredFields) {
+            const field = document.getElementById(id);
+            field.setCustomValidity(field.value.trim() ? "" : (window.OBILanguage?.t("Please complete this field.") || "Please complete this field."));
+            if (!field.reportValidity()) return;
+        }
+
 
         if (
             !selectedRegion ||
@@ -891,7 +894,7 @@ _Please confirm the order and delivery details._
 
         const encodedMessage =
             encodeURIComponent(
-                message
+                window.OBILanguage ? window.OBILanguage.translateOrderMessage(message) : message
             );
 
 
