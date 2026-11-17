@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Delivery &amp; Payment | Obi Cosmetics</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
+</head>
+
+
+
+<body>
+
+<div class="obi-announcement">
+
+    <div class="obi-announcement-track">
+
+        <span>
+            GLOSSY KISSES ✦ CUTE WISHES
+        </span>
+
+        <span>
+            FIND YOUR SHADE ✦ SHOP OBI
+        </span>
+
+        <span>
+            GLOSSY KISSES ✦ CUTE WISHES
+        </span>
+
+                <span>
+                 FIND YOUR SHADE ✦ SHOP OBI
+                </span>
+
+              <span>
+                   GLOSSY KISSES ✦ CUTE WISHES
+              </span>
+
+              <span>
+                   FIND YOUR SHADE ✦ SHOP OBI
+              </span>
+
+             </div>
+
+         </div>
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+
+            <!-- LOGO -->
+
+            <a
+              href="index.html"
+              class="logo"
+            >
+
+               <img
+                  src="images/brand/obi-wordmark.jpeg"
+                  alt="Obi Cosmetics"
+                  class="brand-wordmark"
+                >
+
+            </a>
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="nav-actions">
+
+    <!-- MENU BUTTON -->
+
+    <button
+        id="menu-button"
+        class="menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+
+    <!-- CART BUTTON -->
+
+    <button
+        id="open-cart-button"
+        class="cart-button"
+        type="button"
+        aria-label="Open shopping cart"
+    >
+
+        <svg
+            class="cart-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+        >
+            <circle cx="9" cy="20" r="1"></circle>
+            <circle cx="19" cy="20" r="1"></circle>
+            <path d="M3 4h2l2.5 11h10l2-7H7"></path>
+        </svg>
+
+        <span
+            id="cart-count"
+            class="cart-count"
+        >
+            0
+        </span>
+
+    </button>
+
+</div>
+
+        </nav>
+
+
+
+        <!-- ========================================
+             DROPDOWN MENU
+        ========================================= -->
+
+        <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
+        </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
+
+    </header>
+
+
+<main class="delivery-page">
+
+    <!-- ========================================
+         DELIVERY HERO
+    ========================================= -->
+
+    <section class="delivery-hero">
+
+        <div class="delivery-hero-content">
+
+            <p class="delivery-eyebrow">
+                ✦ OBI DELIVERY ✦
+            </p>
+
+            <h1>
+                Your OBI Order,
+                <span>On Its Way.</span>
+            </h1>
+
+            <p class="delivery-hero-text">
+    Fast, simple delivery across Egypt,
+    Saudi Arabia, the UAE and Qatar.
+</p>
+
+            <a
+                href="#delivery-options"
+                class="delivery-hero-button"
+            >
+                See Delivery Options
+                <span>↓</span>
+            </a>
+
+            <a href="#payment-options" class="order-payment-jump">View Payment Options &darr;</a>
+
+        </div>
+
+
+        <div class="delivery-hero-art">
+
+            <div class="delivery-package">
+
+                <span class="delivery-package-tape" aria-hidden="true"></span>
+
+                <span class="delivery-package-star" aria-hidden="true">&#10022;</span>
+
+                <strong>
+                    OBI
+                </strong>
+
+                <small>
+                    COSMETICS
+                </small>
+
+                <span class="delivery-shipping-label" aria-hidden="true">
+                    <span>PACKED WITH LOVE</span>
+                    <span class="delivery-barcode"></span>
+                </span>
+
+                <span class="delivery-parcel-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7M3 10H1M3 13H1"></path>
+                        <circle cx="6" cy="18" r="2"></circle>
+                        <circle cx="18" cy="18" r="2"></circle>
+                    </svg>
+                    OBI DELIVERY
+                </span>
+
+            </div>
+
+            <div class="delivery-route-line"></div>
+
+            <div class="delivery-route-dot dot-one"></div>
+            <div class="delivery-route-dot dot-two"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         DELIVERY OPTIONS
+    ========================================= -->
+
+    <section
+        class="delivery-options-section"
+        id="delivery-options"
+    >
+
+        <div class="delivery-section-heading">
+
+            <p class="delivery-eyebrow">
+                WHERE WE DELIVER
+            </p>
+
+            <h2>
+                Delivery, made simple.
+            </h2>
+
+           <p>
+    Choose your destination to see the
+    available delivery options, estimated
+    time and applicable fee.
+</p>
+
+        </div>
+
+
+        <div class="delivery-country-grid">
+
+
+            <!-- EGYPT -->
+
+            <article class="delivery-country-card featured">
+
+                <div class="delivery-country-top">
+
+                    <img src="images/flags/egypt.webp" alt="Egypt flag" class="delivery-flag-image">
+
+                    <span class="delivery-country-label">
+                        EGYPT
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Cairo & Giza
+                </h3>
+
+
+                <div class="delivery-country-details">
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            DELIVERY
+                        </span>
+
+                        <strong>
+                            Up to 3 days
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            FEE
+                        </span>
+
+                        <strong>
+                            75 EGP
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="delivery-card-divider"></div>
+
+
+                <h4>
+                    Other Governorates
+                </h4>
+
+
+                <div class="delivery-country-details">
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            DELIVERY
+                        </span>
+
+                        <strong>
+                            Up to 4 days
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            FEE
+                        </span>
+
+                        <strong>
+                            100 EGP
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <span class="delivery-card-badge">
+                    Same-day option available
+                </span>
+
+            </article>
+
+
+
+            <!-- UAE -->
+
+            <article class="delivery-country-card">
+
+                <div class="delivery-country-top">
+
+                    <img src="images/flags/uae.webp" alt="UAE flag" class="delivery-flag-image">
+
+                    <span class="delivery-country-label">
+                        UAE
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    United Arab Emirates
+                </h3>
+
+
+                <div class="delivery-country-details">
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            DELIVERY
+                        </span>
+
+                        <strong>
+                            Up to 4 days
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            FEE
+                        </span>
+
+                        <strong>
+                            30 AED
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <p class="delivery-card-note">
+                    Delivered directly to the address
+                    entered during checkout.
+                </p>
+
+            </article>
+
+
+
+            <!-- QATAR -->
+
+            <article class="delivery-country-card">
+
+                <div class="delivery-country-top">
+
+                    <img src="images/flags/qatar.webp" alt="Qatar flag" class="delivery-flag-image">
+
+                    <span class="delivery-country-label">
+                        QATAR
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Qatar
+                </h3>
+
+
+                <div class="delivery-country-details">
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            DELIVERY
+                        </span>
+
+                        <strong>
+                            Up to 4 days
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="delivery-detail-label">
+                            FEE
+                        </span>
+
+                        <strong>
+                            25 QAR
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <p class="delivery-card-note">
+                    Delivered directly to the address
+                    entered during checkout.
+                </p>
+
+            </article>
+
+<article class="delivery-country-card">
+
+    <div class="delivery-country-top">
+
+        <img
+            src="images/flags/ksa.webp"
+            alt="Saudi Arabia flag"
+            class="delivery-flag-image"
+        >
+
+        <span class="delivery-country-label">
+            SAUDI ARABIA
+        </span>
+
+    </div>
+
+
+    <h3>
+        Choose Your Delivery Option
+    </h3>
+
+
+    <div class="delivery-country-details">
+
+        <div>
+
+            <span class="delivery-detail-label">
+                REDBOX
+            </span>
+
+            <strong>
+                20 SAR
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span class="delivery-detail-label">
+                SMSA
+            </span>
+
+            <strong>
+                35 SAR
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <p class="delivery-card-note">
+        Select your preferred delivery provider
+        during checkout. Delivery time may vary
+        depending on the selected carrier and location.
+    </p>
+
+</article>
+        </div>
+
+    </section>
+
+<!-- SAUDI ARABIA -->
+
+
+
+    <!-- ========================================
+         SAME DAY EGYPT
+    ========================================= -->
+
+    <section class="same-day-section">
+
+        <div class="same-day-content">
+
+            <div class="same-day-icon">
+                ⚡
+            </div>
+
+
+            <p class="delivery-eyebrow">
+                NEED IT TODAY?
+            </p>
+
+
+            <h2>
+                Same-Day Delivery
+                <span>in Egypt.</span>
+            </h2>
+
+
+            <p class="same-day-description">
+                Need your OBI order sooner?
+                Same-day delivery can be arranged
+                through Uber where available.
+            </p>
+
+
+            <div class="same-day-features">
+
+                <div class="same-day-feature">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Place your order
+                        </strong>
+
+                        <p>
+                            Complete your OBI order
+                            and delivery details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="same-day-feature">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Pay in advance
+                        </strong>
+
+                        <p>
+                            Same-day orders require
+                            advance payment.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="same-day-feature">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            We arrange Uber
+                        </strong>
+
+                        <p>
+                            Your order is sent directly
+                            using an available Uber trip.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <p class="same-day-fee-note">Uber delivery fees depend on your location and the trip price.</p>
+    </section>
+
+    <section class="same-day-payment order-payment-summary" id="payment-options" aria-labelledby="payment-heading">
+            <p class="same-day-payment-label">PAYMENTS FOR ALL ORDERS</p>
+            <h2 id="payment-heading">Payment options.</h2>
+            <p>Send your order through WhatsApp. We&rsquo;ll confirm your total, delivery fee and available payment method, then share the payment details in the chat.</p>
+
+            <div class="same-day-payment-methods">
+                <div class="payment-method">
+                    <img src="images/flags/egypt.webp" alt="Egypt flag" class="delivery-flag-image">
+                    <div><strong>Egypt</strong><span>Vodafone Cash, Bank of Khartoum or cash on delivery</span></div>
+                </div>
+                <div class="payment-method">
+                    <img src="images/flags/ksa.webp" alt="Saudi Arabia flag" class="delivery-flag-image">
+                    <div><strong>Saudi Arabia</strong><span>Bank transfer only</span></div>
+                </div>
+                <div class="payment-method">
+                    <img src="images/flags/qatar.webp" alt="Qatar flag" class="delivery-flag-image">
+                    <div><strong>Qatar</strong><span>Bank transfer or cash on delivery</span></div>
+                </div>
+                <div class="payment-method">
+                    <img src="images/flags/uae.webp" alt="UAE flag" class="delivery-flag-image">
+                    <div><strong>UAE</strong><span>Bank transfer or cash on delivery</span></div>
+                </div>
+            </div>
+            <p class="same-day-small-note">For advance payments, share your payment confirmation in the same WhatsApp chat. Cash on delivery is available for standard delivery; same-day Uber orders in Egypt require advance payment.</p>
+    </section>
+
+    <section class="delivery-essentials" aria-label="Before you order">
+        <div>
+            <h2>A quick note before you order</h2>
+            <p>Delivery times are estimates and depend on your location and courier availability. Check your address and phone number before checkout; contact us promptly for changes, as updates may not be possible after dispatch.</p>
+        </div>
+        <a href="contact.html">Need help? Contact us <span aria-hidden="true">&rarr;</span></a>
+    </section>
+
+<section class="delivery-final-cta">
+
+    <img
+        src="images/hero/delivery-final-cta.webp"
+        alt="Obi Cosmetics delivery campaign"
+        class="delivery-final-cta-image"
+    >
+
+    <div class="delivery-final-cta-overlay"></div>
+
+
+    <div class="delivery-final-cta-content">
+
+        <p class="delivery-final-eyebrow">
+            READY FOR YOUR NEXT OBI?
+        </p>
+
+        <h2>
+            Delivered to your door.
+            <span>
+                Loved the moment it arrives.
+            </span>
+        </h2>
+
+        <a
+            href="shop.html"
+            class="delivery-final-button"
+        >
+            Shop OBI
+
+            <span>
+                →
+            </span>
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ========================================
+     CART OVERLAY
+========================================= -->
+
+<div
+    id="cart-overlay"
+    class="cart-overlay"
+></div>
+
+
+<!-- ========================================
+     CART DRAWER
+========================================= -->
+
+<aside
+    id="cart-drawer"
+    class="cart-drawer"
+>
+
+    <div class="cart-drawer-header">
+
+        <h2>
+            Your Cart
+        </h2>
+
+
+        <button
+            id="close-cart-button"
+            class="close-cart-button"
+            type="button"
+            aria-label="Close cart"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="cart-items"
+        class="cart-items"
+    >
+    </div>
+
+
+    <div class="cart-drawer-footer">
+
+        <div class="cart-subtotal">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="cart-subtotal">
+                0
+            </strong>
+
+        </div>
+
+
+        <button
+            id="cart-checkout-button"
+            class="cart-checkout-button"
+            type="button"
+        >
+            Go to Checkout
+        </button>
+
+
+        <button
+            id="continue-shopping-button"
+            class="continue-shopping-button"
+            type="button"
+        >
+            Go to Shop
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <p>
+        © 2026 Obi Cosmetics
+    </p>
+
+</footer>
+
+
+
+<!-- ========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="products.js"></script>
+<script src="favourites.js"></script>
+<script src="market.js"></script>
+<script src="menu.js"></script>
+<script src="store.js"></script>
+
+
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
+</body>
+</html>

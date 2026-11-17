@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Checkout | Obi Cosmetics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+
+            <!-- LOGO -->
+
+<a
+    href="index.html"
+    class="logo"
+>
+
+    <img
+        src="images/brand/obi-wordmark.jpeg"
+        alt="Obi Cosmetics"
+        class="brand-wordmark"
+    >
+
+</a>
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="nav-actions">
+
+                <button
+                    id="menu-button"
+                    class="menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+
+        <!-- ========================================
+             DROPDOWN MENU
+        ========================================= -->
+
+        <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
+        </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
+
+    </header>
+
+
+
+    <!-- ========================================
+         CHECKOUT
+    ========================================= -->
+
+    <main class="checkout-container">
+
+
+        <h1>
+            Checkout
+        </h1>
+<div class="checkout-market-card">
+
+    <img
+        id="checkout-market-flag"
+        class="checkout-market-flag"
+        src=""
+        alt=""
+    >
+
+
+    <div class="checkout-market-info">
+
+        <span>
+            Shopping in
+        </span>
+
+        <strong
+            id="checkout-market-name"
+        >
+        </strong>
+
+    </div>
+
+
+    <span
+        id="checkout-market-currency"
+        class="checkout-market-currency"
+    >
+    </span>
+
+</div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <section class="checkout-order">
+
+            <h2>
+                Your Order
+            </h2>
+
+
+            <!-- checkout.js creates products here -->
+
+            <div id="checkout-items">
+            </div>
+
+
+
+            <!-- PRICE SUMMARY -->
+
+            <div class="checkout-price-summary">
+
+
+                <div class="checkout-price-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="checkout-subtotal">
+                        --
+                    </strong>
+
+                </div>
+
+
+
+                <div class="checkout-price-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong id="checkout-delivery">
+                        Select area
+                    </strong>
+
+                </div>
+
+
+
+                <div class="checkout-price-row final-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="checkout-total">
+                        --
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             CUSTOMER DETAILS
+        ========================================= -->
+
+        <section class="customer-details">
+
+            <h2>
+                Delivery Details
+            </h2>
+
+            <p class="checkout-handoff-note">Review your total, then continue to WhatsApp to send your order. OBI will confirm availability and payment details in the chat.</p>
+
+
+            <form id="checkout-form">
+
+
+                <!-- NAME -->
+
+                <label for="customer-name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customer-name"
+                    autocomplete="name"
+                    required
+                >
+
+
+
+                <!-- PHONE -->
+
+                <label for="customer-phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    autocomplete="tel"
+                    required
+                >
+
+
+
+                <!-- DELIVERY REGION -->
+<label
+    id="delivery-option-label"
+    for="customer-region"
+>
+    Delivery Region
+</label>
+
+<select id="customer-region" required>
+    <option value="">
+        Select delivery region
+    </option>
+</select>
+
+
+
+<!-- CITY / GOVERNORATE -->
+
+<label
+    id="city-label"
+    for="customer-city"
+>
+    City / Governorate
+</label>
+
+<input
+    id="customer-city"
+    type="text"
+    required
+    autocomplete="address-level2"
+    placeholder="Enter your city or governorate"
+>
+
+
+
+                <!-- EXACT ADDRESS -->
+
+                <label for="customer-address">
+                    Exact Delivery Address
+                </label>
+
+                <textarea
+                    id="customer-address"
+                    rows="4"
+                    placeholder="Street, building number, floor, apartment, landmark..."
+                    autocomplete="street-address"
+                    required
+                ></textarea>
+
+
+
+                <!-- WHATSAPP CHECKOUT -->
+
+                <button
+                    type="submit"
+                    class="whatsapp-checkout-button"
+                >
+                    Checkout via WhatsApp
+                </button>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Obi Cosmetics
+        </p>
+
+    </footer>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <!-- Product database -->
+    <script src="products.js"></script>
+<script src="favourites.js"></script>
+
+   <script src="market.js"></script>
+
+    <!-- Menu behaviour -->
+    <script src="menu.js"></script>
+
+    <!-- Checkout behaviour -->
+    <script src="checkout.js"></script>
+
+
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
+</body>
+
+</html>

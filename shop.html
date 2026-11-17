@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Shop | Obi Cosmetics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+<link rel="stylesheet" href="reviews.css">
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
+</head>
+
+
+<body>
+
+    <header>
+
+        <nav class="navbar">
+
+            <a
+    href="index.html"
+    class="logo"
+>
+
+    <img
+        src="images/brand/obi-wordmark.jpeg"
+        alt="Obi Cosmetics"
+        class="brand-wordmark"
+    >
+
+</a>
+
+            <div class="nav-actions">
+<!-- MARKET / COUNTRY SELECTOR -->
+
+<!-- ========================================
+     MARKET / COUNTRY SELECTOR
+========================================= -->
+
+<div
+    id="market-selector"
+    class="market-selector"
+>
+
+    <button
+        id="market-selector-button"
+        class="market-selector-button"
+        type="button"
+        aria-label="Choose shopping region"
+        aria-expanded="false"
+    >
+
+        <img
+    id="market-current-flag"
+    class="market-current-flag"
+    src="images/flags/globe.webp"
+    alt=""
+>
+
+<span
+    id="market-current-currency"
+    class="market-current-currency"
+>
+    Select Region
+</span>
+
+        <span
+            class="market-selector-chevron"
+            aria-hidden="true"
+        >
+            ▾
+        </span>
+
+    </button>
+
+
+    <div
+        id="market-selector-menu"
+        class="market-selector-menu"
+    >
+
+        <button
+            type="button"
+            data-market="EGY"
+        >
+
+            <img
+    class="market-option-flag"
+    src="images/flags/egypt.webp"
+    alt="Egypt flag"
+>
+
+            <span class="market-option-name">
+                Egypt
+            </span>
+
+            <strong>
+                EGP
+            </strong>
+
+        </button>
+
+
+       <button
+    type="button"
+    data-market="UAE"
+>
+
+    <img
+        class="market-option-flag"
+        src="images/flags/uae.webp"
+        alt="UAE flag"
+    >
+
+    <span class="market-option-name">
+        UAE
+    </span>
+
+    <strong>
+        AED
+    </strong>
+
+</button>
+
+
+        <button
+            type="button"
+            data-market="KSA"
+        >
+
+           <img
+    class="market-option-flag"
+    src="images/flags/ksa.webp"
+    alt="Saudi Arabia flag"
+>
+
+            <span class="market-option-name">
+                Saudi Arabia
+            </span>
+
+            <strong>
+                SAR
+            </strong>
+
+        </button>
+
+
+        <button
+            type="button"
+            data-market="QAT"
+        >
+
+            <img
+    class="market-option-flag"
+    src="images/flags/qatar.webp"
+    alt="Qatar flag"
+>
+
+            <span class="market-option-name">
+                Qatar
+            </span>
+
+            <strong>
+                QAR
+            </strong>
+
+        </button>
+
+    </div>
+
+</div>
+                <button
+                    id="menu-button"
+                    class="menu-button"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+
+                <button
+                    id="open-cart-button"
+                    class="cart-button"
+                    type="button"
+                    aria-label="Open shopping cart"
+                >
+
+                    <svg
+                        class="cart-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="9"
+                            cy="20"
+                            r="1"
+                        ></circle>
+
+                        <circle
+                            cx="19"
+                            cy="20"
+                            r="1"
+                        ></circle>
+
+                        <path
+                            d="M3 4h2l2.5 11h10l2-7H7"
+                        ></path>
+
+                    </svg>
+
+
+                    <span
+                        id="cart-count"
+                        class="cart-count"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
+        </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
+
+    </header>
+
+
+    <main class="obi-shop-page">
+
+
+    <!-- ========================================
+     NORMAL SHOP HERO
+========================================= -->
+
+<!-- ========================================
+     UNIVERSAL SHOP HEADER
+========================================= -->
+
+<section class="obi-shop-banner">
+
+    <div class="obi-shop-banner-image">
+
+        <img
+            src="images/hero/shop-header.webp"
+            alt="Obi Cosmetics packaging"
+        >
+
+    </div>
+
+
+    <div class="obi-shop-banner-overlay"></div>
+
+
+    <div class="obi-shop-banner-content">
+
+        <p class="obi-shop-banner-eyebrow">
+            THE OBI SHOP
+        </p>
+
+        <h1 id="shop-title">
+            Shop All
+        </h1>
+
+        <p class="obi-shop-banner-tagline">
+            Colour, care and shine for every mood.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- ========================================
+     CATEGORY FILTERS WITH SCROLL ARROWS
+========================================= -->
+
+<section
+    class="obi-shop-filter-section"
+    aria-label="Shop categories"
+>
+
+    <div class="categories-wrapper">
+
+        <!-- LEFT ARROW -->
+
+        <button
+            class="category-arrow category-arrow-left"
+            id="category-left"
+            type="button"
+            aria-label="Scroll categories left"
+        >
+            ‹
+        </button>
+
+
+        <!-- SCROLLABLE CATEGORIES -->
+
+        <div
+            class="obi-shop-filters categories-scroll"
+            id="categories-scroll"
+        >
+
+            <a
+                href="shop.html"
+                class="obi-shop-filter"
+                data-category="all"
+            >
+                All
+            </a>
+
+
+            <a
+                href="shop.html?category=lip-gloss"
+                class="obi-shop-filter"
+                data-category="lip-gloss"
+            >
+                Gloss
+            </a>
+
+
+            <a
+                href="shop.html?category=lip-oil"
+                class="obi-shop-filter"
+                data-category="lip-oil"
+            >
+                Lip Oils
+            </a>
+
+
+            <a
+                href="shop.html?category=lip-liner"
+                class="obi-shop-filter"
+                data-category="lip-liner"
+            >
+                Liners
+            </a>
+
+
+            <a
+                href="shop.html?category=blush"
+                class="obi-shop-filter"
+                data-category="blush"
+            >
+                Blush
+            </a>
+
+
+            <a
+                href="shop.html?category=liquid-lipstick"
+                class="obi-shop-filter"
+                data-category="liquid-lipstick"
+            >
+                Lipstick
+            </a>
+
+
+            <a
+                href="shop.html?category=body-care"
+                class="obi-shop-filter"
+                data-category="body-care"
+            >
+                Body Care
+            </a>
+
+
+            <a
+                href="shop.html?category=hair-care"
+                class="obi-shop-filter"
+                data-category="hair-care"
+            >
+                Hair Care
+            </a>
+
+        </div>
+
+
+        <!-- RIGHT ARROW -->
+
+        <button
+            class="category-arrow category-arrow-right"
+            id="category-right"
+            type="button"
+            aria-label="Scroll categories right"
+        >
+            ›
+        </button>
+
+    </div>
+
+</section>
+
+    <!-- ========================================
+         PRODUCTS
+    ========================================= -->
+
+    <section class="obi-shop-products">
+
+        <div class="obi-shop-products-top">
+
+            <button id="shop-favourites-toggle" class="shop-favourites-toggle" type="button" aria-pressed="false">Favourites <span data-favourites-count>0</span></button>
+
+            <p id="shop-result-count">
+                Products
+            </p>
+
+        </div>
+
+
+        <div
+            id="product-grid"
+            class="obi-shop-grid"
+        >
+        </div>
+
+
+        <p
+            id="no-products-message"
+            class="no-products-message"
+            hidden
+        >
+            No products are available in this
+            category yet.
+        </p>
+
+    </section>
+
+
+</main>
+
+<!-- ========================================
+     PRODUCT QUICK VIEW
+======================================== -->
+
+<div
+    id="product-modal-overlay"
+    class="product-modal-overlay"
+></div>
+
+
+<section
+    id="product-modal"
+    class="product-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="product-modal-title"
+>
+
+    <button
+        id="close-product-modal"
+        class="product-modal-close"
+        type="button"
+        aria-label="Close product"
+    >
+        ×
+    </button>
+
+
+    <div class="product-modal-layout">
+
+
+        <!-- IMAGE / SHADE PREVIEW -->
+
+        <div class="product-modal-media">
+
+    <!-- MAIN PRODUCT IMAGE -->
+
+    <div class="product-modal-visual">
+
+        <img
+            id="product-modal-image"
+            src=""
+            alt=""
+        >
+
+
+        <div
+            id="product-modal-preview-label"
+            class="product-modal-preview-label"
+        >
+            PRODUCT PHOTO
+        </div>
+
+
+        <p
+            id="product-modal-photo-note"
+            class="product-modal-photo-note"
+        >
+            Product shown for reference.
+        </p>
+
+    </div>
+
+
+    <!-- PRODUCT IMAGE GALLERY -->
+
+    <div
+        id="product-modal-gallery"
+        class="product-modal-gallery"
+        hidden
+    >
+    </div>
+
+</div>
+
+
+
+        <!-- PRODUCT DETAILS -->
+<div class="product-modal-content">
+
+    <p class="product-modal-eyebrow">
+        ✦ OBI COSMETICS ✦
+    </p>
+
+
+    <div class="product-modal-title-row">
+
+        <h2 id="product-modal-title"></h2>
+
+        <p
+            id="product-modal-price"
+            class="product-modal-price"
+        ></p>
+
+    </div>
+
+
+    <!-- ========================================
+         SHADES — MOVED UP
+    ========================================= -->
+
+    <div
+        id="product-modal-shade-section"
+        class="product-modal-shade-section"
+    >
+
+        <div class="product-modal-shade-heading">
+
+            <span>
+                CHOOSE YOUR SHADE
+            </span>
+
+            <span
+                id="product-modal-shade-count"
+            ></span>
+
+        </div>
+
+
+        <div class="product-modal-shades-shell">
+
+            <button
+                id="shade-scroll-prev"
+                class="shade-scroll-button shade-scroll-prev"
+                type="button"
+                aria-label="Previous shades"
+            >
+                ‹
+            </button>
+
+
+            <div
+                id="product-modal-shades"
+                class="product-modal-shades"
+            ></div>
+
+
+            <button
+                id="shade-scroll-next"
+                class="shade-scroll-button shade-scroll-next"
+                type="button"
+                aria-label="More shades"
+            >
+                ›
+            </button>
+
+        </div>
+
+
+        <p
+            id="product-modal-selected-shade"
+            class="product-modal-selected-shade"
+        >
+            Select a shade
+        </p>
+
+    </div>
+
+
+
+    <!-- ========================================
+         PURCHASE — MOVED UP
+    ========================================= -->
+
+    <div id="product-favourite-action"></div>
+
+    <div class="product-modal-actions">
+
+        <button
+            id="modal-add-to-cart"
+            class="modal-add-to-cart"
+            type="button"
+        >
+            Add to Cart
+        </button>
+
+
+        <button
+            id="modal-buy-now"
+            class="modal-buy-now"
+            type="button"
+        >
+            Buy Now
+        </button>
+
+    </div>
+
+
+
+    <!-- ========================================
+         DESCRIPTION
+    ========================================= -->
+
+    <section id="product-customer-reviews" class="product-customer-reviews" aria-label="Customer reviews" hidden></section>
+
+    <div class="product-modal-more">
+
+        <button
+            class="product-modal-more-button"
+            type="button"
+            id="product-details-toggle"
+            aria-expanded="false"
+        >
+            <span>
+                Product Details
+            </span>
+
+            <span class="product-details-plus">
+                +
+            </span>
+        </button>
+
+
+        <div
+            id="product-details-content"
+            class="product-modal-more-content"
+            hidden
+        >
+
+            <p
+                id="product-modal-description"
+                class="product-modal-description"
+            ></p>
+
+
+            <div
+                id="product-modal-details"
+                class="product-modal-details"
+            >
+
+                <p
+                    id="product-modal-tagline"
+                    class="product-modal-tagline"
+                ></p>
+
+
+                <div
+                    id="product-modal-benefits-section"
+                    class="product-modal-benefits-section"
+                >
+
+                    <h3>
+                        BENEFITS
+                    </h3>
+
+                    <ul
+                        id="product-modal-benefits"
+                        class="product-modal-benefits"
+                    ></ul>
+
+                </div>
+
+
+                <div
+                    id="product-modal-usage-section"
+                    class="product-modal-usage-section"
+                >
+
+                    <h3>
+                        HOW TO USE
+                    </h3>
+
+                    <p
+                        id="product-modal-usage"
+                        class="product-modal-usage"
+                    ></p>
+<div
+    id="product-modal-specs-section"
+    class="product-modal-specs-section"
+>
+
+    <h3>
+        PRODUCT INFO
+    </h3>
+
+    <p id="product-modal-net-weight"></p>
+
+</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+
+</section>
+    <div
+        id="cart-overlay"
+        class="cart-overlay"
+    ></div>
+
+
+    <aside
+        id="cart-drawer"
+        class="cart-drawer"
+    >
+
+        <div class="cart-drawer-header">
+
+            <h2>
+                Your Cart
+            </h2>
+
+            <button
+                id="close-cart-button"
+                class="close-cart-button"
+                type="button"
+                aria-label="Close cart"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="cart-items"
+            class="cart-items"
+        >
+        </div>
+
+
+        <div class="cart-drawer-footer">
+
+            <div class="cart-subtotal">
+
+                <span>
+                    Subtotal
+                </span>
+
+               <strong id="cart-subtotal">
+    0
+</strong>
+
+            </div>
+
+
+            <button
+                id="cart-checkout-button"
+                class="cart-checkout-button"
+                type="button"
+            >
+                Go to Checkout
+            </button>
+
+
+            <button
+                id="continue-shopping-button"
+                class="continue-shopping-button"
+                type="button"
+            >
+               Go to Shop
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <footer>
+
+        <p>
+            © 2026 Obi Cosmetics
+        </p>
+
+    </footer>
+
+
+    <script src="products.js"></script>
+<script src="favourites.js"></script>
+    <script src="market.js"></script>
+    <script src="menu.js"></script>
+   <script src="shop.js"></script>
+   <script src="store.js"></script>
+
+<script src="reviews.js"></script>
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
+</body>
+</html>

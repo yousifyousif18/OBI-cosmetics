@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Contact Us | Obi Cosmetics
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+<link rel="stylesheet" href="favourites.css">
+<link rel="stylesheet" href="language.css">
+<script src="language-init.js"></script>
+</head>
+
+
+<body>
+
+
+    <header>
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            <img
+                src="images/brand/obi-wordmark.jpeg"
+                alt="Obi Cosmetics"
+                class="brand-wordmark"
+            >
+        </a>
+
+        <div class="nav-actions">
+
+            <button
+                id="menu-button"
+                class="menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <button
+                id="open-cart-button"
+                class="cart-button"
+                type="button"
+                aria-label="Open shopping cart"
+            >
+
+                <svg
+                    class="cart-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="19" cy="20" r="1"></circle>
+                    <path d="M3 4h2l2.5 11h10l2-7H7"></path>
+                </svg>
+
+                <span
+                    id="cart-count"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+   </nav>
+
+<div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Main navigation">
+    <div class="shop-menu-group">
+        <button id="shop-menu-button" class="shop-menu-button" type="button" aria-expanded="false" aria-controls="shop-submenu">
+            <span>Shop</span><span aria-hidden="true">+</span>
+        </button>
+        <div id="shop-submenu" class="shop-submenu">
+            <a href="shop.html">Shop All</a>
+            <a href="shop.html?category=lip-gloss">Lip Glosses</a>
+            <a href="shop.html?category=lip-oil">Lip Oils</a>
+            <a href="shop.html?category=lip-liner">Lip Liners</a>
+            <a href="shop.html?category=blush">Blush</a>
+            <a href="shop.html?category=liquid-lipstick">Liquid Lipsticks</a>
+            <a href="shop.html?category=body-care">Body Care</a>
+            <a href="shop.html?category=hair-care">Hair Care</a>
+        </div>
+    </div>
+    <a href="shop.html?favourites=1">Favourites <span class="favourites-menu-count" data-favourites-count>0</span></a>
+    <a href="about.html">About OBI</a>
+    <a href="obi-love.html">OBI Love</a>
+    <div class="menu-support-links" role="group" aria-label="Help and information">
+        <a href="delivery.html">Delivery &amp; Payment</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+</div>
+
+</header>
+
+<main class="contact-page">
+    <section class="contact-hero">
+        <p class="contact-eyebrow">TALK TO OBI</p>
+        <h1>Need help? <span>We&rsquo;re here.</span></h1>
+        <p class="contact-hero-text">Questions about shades, products or your order? Let&rsquo;s chat.</p>
+    </section>
+
+    <section class="contact-options" aria-label="Contact options">
+        <article class="contact-option-card contact-option-primary">
+            <span class="contact-option-label">LET&rsquo;S CHAT</span>
+            <h2>WhatsApp Us</h2>
+            <p>Talk to OBI for product advice, shade help or any questions.</p>
+            <button id="contact-whatsapp-button" class="contact-card-button" type="button">Chat on WhatsApp <span aria-hidden="true">&rarr;</span></button>
+        </article>
+        <article class="contact-option-card">
+            <span class="contact-option-label">ALREADY ORDERED?</span>
+            <h2>Order help</h2>
+            <p>Send your name, phone number and order details so we can help you faster.</p>
+            <button id="order-help-button" class="contact-card-button contact-card-button-light" type="button">Get Order Help <span aria-hidden="true">&rarr;</span></button>
+        </article>
+    </section>
+
+    <section class="contact-form-section" aria-labelledby="inquiry-heading">
+        <div class="contact-form-intro">
+            <p class="contact-eyebrow">SEND AN INQUIRY</p>
+            <h2 id="inquiry-heading">Tell us what <span>you need.</span></h2>
+            <p>Fill in your details and message below. You&rsquo;ll review and send your inquiry through WhatsApp.</p>
+        </div>
+                <form id="contact-form" class="contact-form">
+
+            <label for="contact-name">
+                Your Name
+            </label>
+
+            <input
+                id="contact-name"
+                type="text"
+                required
+                autocomplete="name"
+                placeholder="Enter your name"
+            >
+
+
+            <label for="contact-phone">
+                Phone Number
+            </label>
+
+            <input
+                id="contact-phone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Enter your phone number"
+            >
+
+
+            <label for="contact-topic">
+                How can we help?
+            </label>
+
+            <select
+                id="contact-topic"
+                required
+            >
+
+                <option value="">
+                    Select a topic
+                </option>
+
+                <option value="Product question">
+                    Product Question
+                </option>
+
+                <option value="Shade help">
+                    Shade Help
+                </option>
+
+                <option value="Delivery question">
+                    Delivery Question
+                </option>
+
+                <option value="Order help">
+                    Order Help
+                </option>
+
+                <option value="Collaboration">
+                    Collaboration
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="contact-message">
+                Message
+            </label>
+
+            <textarea
+                id="contact-message"
+                rows="6"
+                required
+                placeholder="Tell us how we can help..."
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="contact-submit-button"
+            >
+                Continue on WhatsApp
+                <span>→</span>
+            </button>
+
+        </form>
+    </section>
+
+    <section class="contact-faq">
+        <div class="contact-section-heading">
+            <p class="contact-eyebrow">QUICK ANSWERS</p>
+            <h2>Before you message us.</h2>
+        </div>
+        <div class="contact-faq-list">
+            <details>
+                <summary>Delivery or payment questions? <span aria-hidden="true">+</span></summary>
+                <p>Find delivery times, fees and payment options on our <a href="delivery.html">Delivery &amp; Payment page</a>.</p>
+            </details>
+            <details>
+                <summary>Need help choosing a shade? <span aria-hidden="true">+</span></summary>
+                <p>Send the product and shades you&rsquo;re considering through WhatsApp. We&rsquo;ll help you choose.</p>
+            </details>
+        </div>
+    </section>
+
+    <section class="contact-community">
+        <div>
+            <p class="contact-eyebrow">STAY CLOSE TO OBI</p>
+            <h2>New drops. <span>Fresh shades.</span></h2>
+        </div>
+        <div class="contact-community-actions">
+            <a href="https://www.instagram.com/obicorner/" class="contact-community-button" target="_blank" rel="noopener noreferrer">Follow on Instagram <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </section>
+</main>
+
+<!-- ========================================
+     CART OVERLAY
+========================================= -->
+
+<div
+    id="cart-overlay"
+    class="cart-overlay"
+></div>
+
+
+<!-- ========================================
+     CART DRAWER
+========================================= -->
+
+<aside
+    id="cart-drawer"
+    class="cart-drawer"
+>
+
+    <div class="cart-drawer-header">
+
+        <h2>
+            Your Cart
+        </h2>
+
+
+        <button
+            id="close-cart-button"
+            class="close-cart-button"
+            type="button"
+            aria-label="Close cart"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        id="cart-items"
+        class="cart-items"
+    >
+    </div>
+
+
+    <div class="cart-drawer-footer">
+
+        <div class="cart-subtotal">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="cart-subtotal">
+                0
+            </strong>
+
+        </div>
+
+
+        <button
+            id="cart-checkout-button"
+            class="cart-checkout-button"
+            type="button"
+        >
+            Go to Checkout
+        </button>
+
+
+        <button
+            id="continue-shopping-button"
+            class="continue-shopping-button"
+            type="button"
+        >
+            Go to Shop
+        </button>
+
+    </div>
+
+</aside>
+
+<script src="products.js"></script>
+<script src="favourites.js"></script>
+<script src="market.js"></script>
+<script src="menu.js"></script>
+<script src="store.js"></script>
+<script src="contact.js"></script>
+
+<script src="motion.js"></script>
+<script src="translations.js"></script>
+<script src="language.js"></script>
+</body>
+</html>
