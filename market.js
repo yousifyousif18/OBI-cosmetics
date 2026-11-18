@@ -619,7 +619,22 @@ const marketDisplay = {
    UPDATE SELECTOR DISPLAY
 ========================================= */
 
+function updateDeliveryAnnouncement() {
+    const announcement = document.querySelector(".obi-announcement");
+    if (!announcement) return;
+
+    const market = getSelectedMarketCode();
+    const isEgypt = market === "EGY";
+    const message = !market ? "We deliver to Egypt, Saudi Arabia, the UAE & Qatar" :
+        isEgypt ? "Same-day delivery in Egypt, where available" : "See delivery fees & timing";
+
+    announcement.href = !market ? "delivery.html" :
+        isEgypt ? "delivery.html#same-day-delivery" : "delivery.html#delivery-options";
+    announcement.querySelector(".obi-announcement-message").textContent = message;
+}
+
 function updateMarketSelectorDisplay() {
+    updateDeliveryAnnouncement();
 
     if (
         !marketSelector ||

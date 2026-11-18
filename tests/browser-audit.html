@@ -40,6 +40,18 @@
     try {
         localStorage.removeItem('obiLanguage');
         localStorage.removeItem('obiFavourites');
+        {
+            const win = await load('index.html', '');
+            const doc = win.document;
+            const banner = doc.querySelector('.obi-announcement');
+            const message = banner.querySelector('.obi-announcement-message');
+            check('Announcement introduces all delivery countries', message.textContent === 'We deliver to Egypt, Saudi Arabia, the UAE & Qatar' && banner.href === new URL('delivery.html', root).href);
+            check('Homepage hero carries the OBI slogan', doc.querySelector('.obi-campaign-kicker').textContent.trim() === 'Glossy Kisses ✦ Cute Wishes');
+            win.selectShoppingMarket('EGY');
+            check('Egypt announcement links to same-day delivery', message.textContent === 'Same-day delivery in Egypt, where available' && banner.hash === '#same-day-delivery');
+            win.selectShoppingMarket('KSA');
+            check('Other markets link to delivery fees and timing', message.textContent === 'See delivery fees & timing' && banner.hash === '#delivery-options');
+        }
         for (const page of ['index.html','about.html','shop.html','contact.html','delivery.html','obi-love.html','checkout.html']) {
             const win = await load(page, 'EGY', page === 'checkout.html' ? [{productId:1,shade:'Nude',quantity:2}] : []);
             const doc = win.document;

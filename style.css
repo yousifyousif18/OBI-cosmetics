@@ -1630,86 +1630,33 @@ header {
 ========================================================= */
 
 .obi-announcement {
-
-    width: 100%;
-
-    overflow: hidden;
-
-    background:
-        var(--obi-black);
-
-    color:
-        var(--obi-white);
-
-    padding:
-        9px 0;
-
-}
-
-
-.obi-announcement-track {
-
-    width: max-content;
-
     display: flex;
-
     align-items: center;
-
-    gap: 45px;
-
-
-    animation:
-        obiAnnouncementMove
-        25s
-        linear
-        infinite;
-
-}
-
-
-.obi-announcement-track span {
-
-    white-space: nowrap;
-
-
-    font-size: 11px;
-
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+    background: var(--obi-black);
+    color: var(--obi-white);
+    font-size: 13px;
     font-weight: 700;
-
-    letter-spacing: 1.7px;
-
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
 }
 
-
-.obi-announcement:hover
-.obi-announcement-track {
-
-    animation-play-state:
-        paused;
-
+.obi-announcement:hover {
+    text-decoration: underline;
 }
 
-
-
-@keyframes obiAnnouncementMove {
-
-    from {
-
-        transform:
-            translateX(0);
-
-    }
-
-
-    to {
-
-        transform:
-            translateX(-50%);
-
-    }
-
+.obi-announcement:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -4px;
 }
 
+#same-day-delivery {
+    scroll-margin-top: calc(var(--obi-header-height, 76px) + 24px);
+}
 
 
 /* =========================================================
@@ -2633,7 +2580,6 @@ header {
     reduce
 ) {
 
-    .obi-announcement-track,
     .obi-shade-track,
     .obi-hero-image,
     .obi-sparkle {
