@@ -154,6 +154,13 @@
             win = await load('checkout.html', market, [{productId:1,shade:'Nude',quantity:2}]);
             doc = win.document;
             const select = doc.getElementById('customer-region');
+            if (market === 'EGY') {
+                const groups = [...select.querySelectorAll('optgroup')];
+                check('Egypt checkout shows all Masar areas grouped by fee',
+                    groups.map(group => group.children.length).join(',') === '5,14,18,1' &&
+                    win.getDeliveryPrice('Dokki') === 70 && win.getDeliveryPrice('Faisal') === 80 &&
+                    win.getDeliveryPrice('Nasr City') === 100 && win.getDeliveryPrice('Other Governorates') === 120);
+            }
             select.selectedIndex = 1;
             select.dispatchEvent(new win.Event('change'));
             check(market + ': total calculated', !/NaN|--/.test(doc.getElementById('checkout-total').textContent), doc.getElementById('checkout-total').textContent);
@@ -164,13 +171,21 @@
             if (url) {
                 const message = new URL(url).searchParams.get('text');
                 check(market + ': WhatsApp order data', message.includes('Test Customer') && message.includes('Quantity: 2') && message.includes('Nude'));
-                const expected = ({EGY:435,UAE:70,KSA:60,QAT:65})[market];
+                const expected = ({EGY:430,UAE:70,KSA:60,QAT:65})[market];
                 check(market + ': exact total', win.getProductNumericPrice(win.eval('products[0]')) * 2 + win.getDeliveryPrice(select.value) === expected, expected);
             }
             check(market + ': checkout no JS errors', !win.__errors.length, win.__errors);
         }
         {
             const win = await load('obi-love.html'); const doc = win.document;
+            const video = doc.getElementById('customer-love-video');
+            check('OBI Love video is silent, looping and non-interactive',
+                video.autoplay && video.loop && video.muted && video.playsInline && video.inert &&
+                !video.controls && video.disablePictureInPicture && video.disableRemotePlayback &&
+                win.getComputedStyle(video).pointerEvents === 'none');
+            video.muted = false;
+            video.dispatchEvent(new win.Event('volumechange'));
+            check('OBI Love video restores mute if changed', video.muted);
             const first = doc.querySelector('.obi-chat-gallery a');
             first.click();
             const dialog = doc.querySelector('.review-viewer');

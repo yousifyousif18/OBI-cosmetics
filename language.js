@@ -63,7 +63,7 @@
     }
 
     function skip(element) {
-        return !element || element.closest("script, style, noscript, code, pre, [data-no-translate], .logo, .brand-wordmark, .obi-about-old-name, .obi-footer-logo");
+        return !element || element.closest("script, style, noscript, code, pre, [data-no-translate], .logo, .brand-wordmark, .obi-about-old-name");
     }
     function translateNode(node) {
         if (skip(node.parentElement) || !node.nodeValue.trim()) return;

@@ -12,6 +12,67 @@
    MARKET INFORMATION
 ========================================================= */
 
+const EGYPT_DELIVERY_TIERS = [
+    {
+        fee: 70,
+        areas: [
+            "Mohandessin",
+            "Dokki",
+            "Zamalek",
+            "Agouza",
+            "Lebanon Square"
+        ]
+    },
+    {
+        fee: 80,
+        areas: [
+            "Imbaba",
+            "Al Warraq",
+            "Rod El Farag",
+            "Shubra Misr",
+            "Shubra El Kheima",
+            "Faisal",
+            "Haram",
+            "Hadayek Al Ahram",
+            "Ard El Lewa",
+            "Manial",
+            "Sayeda Zeinab",
+            "Sayeda Nafisa",
+            "Downtown Cairo",
+            "Old Cairo"
+        ]
+    },
+    {
+        fee: 100,
+        areas: [
+            "6th of October City",
+            "Sheikh Zayed",
+            "Hadayek October",
+            "New Cairo (El Tagamoa)",
+            "Al Rehab",
+            "Madinaty",
+            "El Salam City",
+            "El Marg",
+            "El Shorouk",
+            "Badr City",
+            "El Obour",
+            "Maadi",
+            "Hadayek El Maadi",
+            "Helwan",
+            "Hadayek Helwan",
+            "Mokattam",
+            "Nasr City",
+            "Heliopolis"
+        ]
+    },
+    {
+        fee: 120,
+        areas: [
+            "Other Governorates"
+        ]
+    }
+];
+
 const OBI_MARKETS = {
 
    EGY: {
@@ -39,25 +100,9 @@ const OBI_MARKETS = {
         mode:
             "regions",
 
-        options: [
-
-            {
-                name:
-                    "Cairo (including Giza)",
-
-                fee:
-                    75
-            },
-
-            {
-                name:
-                    "Other Governorates",
-
-                fee:
-                    100
-            }
-
-        ]
+        options: EGYPT_DELIVERY_TIERS.flatMap(({ fee, areas }) =>
+            areas.map(name => ({ name, fee }))
+        )
 
     }
 

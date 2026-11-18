@@ -511,6 +511,7 @@ function populateDeliveryOptions() {
        ADD DELIVERY OPTIONS
     ======================================== */
 
+    const deliveryGroups = new Map();
     options.forEach(
         function (deliveryOption) {
 
@@ -532,9 +533,19 @@ function populateDeliveryOptions() {
                 );
 
 
-            regionSelect.appendChild(
-                option
-            );
+            if (selectedMarketCode !== "EGY") {
+                regionSelect.appendChild(option);
+                return;
+            }
+
+            const fee = deliveryOption.fee;
+            if (!deliveryGroups.has(fee)) {
+                const group = document.createElement("optgroup");
+                group.label = formatMoney(fee);
+                deliveryGroups.set(fee, group);
+                regionSelect.appendChild(group);
+            }
+            deliveryGroups.get(fee).appendChild(option);
 
         }
     );

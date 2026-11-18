@@ -19,6 +19,9 @@ if (customerLoveVideo) {
         });
     }
 
+    customerLoveVideo.addEventListener("volumechange", function () {
+        if (!customerLoveVideo.muted) customerLoveVideo.muted = true;
+    });
     customerLoveVideo.addEventListener("canplay", startCustomerLoveVideo);
     document.addEventListener("visibilitychange", function () {
         if (!document.hidden) startCustomerLoveVideo();
