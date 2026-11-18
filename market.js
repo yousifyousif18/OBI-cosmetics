@@ -32,7 +32,7 @@ const OBI_MARKETS = {
         "en-EG",
 
     whatsapp:
-        "601169390811",
+        "201515630587",
 
     delivery: {
 
@@ -80,7 +80,7 @@ const OBI_MARKETS = {
     locale: "en-AE",
 
     whatsapp:
-        "601169390811",
+        "201515630587",
 
     delivery: {
 
@@ -171,7 +171,7 @@ const OBI_MARKETS = {
         "en-QA",
 
     whatsapp:
-        "601169390811",
+        "201515630587",
 
     delivery: {
 

@@ -25,27 +25,7 @@ const orderHelpButton =
    GET CONTACT NUMBER
 ========================================================= */
 
-function getContactMarket() {
-
-    const market =
-        getSelectedMarket();
-
-    if (market) {
-        return market;
-    }
-
-
-    /*
-       If no region is selected yet,
-       use the shared OBI number.
-    */
-
-    return {
-        name: "OBI Cosmetics",
-        whatsapp: "601169390811"
-    };
-
-}
+const contactWhatsAppNumber = "201515630587";
 
 
 /* =========================================================
@@ -56,21 +36,9 @@ function openContactWhatsApp(
     message
 ) {
 
-    const market =
-        getContactMarket();
-
-
-    if (
-        !market ||
-        !market.whatsapp
-    ) {
-        return;
-    }
-
-
     const url =
         "https://wa.me/" +
-        market.whatsapp +
+        contactWhatsAppNumber +
         "?text=" +
         encodeURIComponent(window.OBILanguage ? window.OBILanguage.translateOrderMessage(message) : message);
 
