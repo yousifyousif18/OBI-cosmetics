@@ -550,6 +550,8 @@ function addToCart(
 ========================================= */
 
 function renderCart() {
+    const hasMarket = Boolean(getSelectedMarketCode());
+    cartCheckoutButton.textContent = hasMarket ? "Go to Checkout" : "Choose Delivery Country";
 
     cartDrawer.classList.toggle("is-empty", cart.length === 0);
 
@@ -571,6 +573,7 @@ function renderCart() {
                 <p>Your cart is empty. Explore OBI and find something you&rsquo;ll love.</p>
             </div>
 
+            ${!hasMarket ? `<button type="button" class="empty-cart-shop-button" data-choose-cart-market>Choose Delivery Country</button>` : `
             <a
                 href="shop.html"
                 class="empty-cart-shop-button"
@@ -578,10 +581,15 @@ function renderCart() {
                 Explore the Shop
                 <span aria-hidden="true">&rarr;</span>
             </a>
+            `}
 
         </div>
     `;
 
+
+    cartItemsContainer.querySelector("[data-choose-cart-market]")?.addEventListener("click", function () {
+        openPurchaseMarketPicker();
+    });
 
     cartSubtotalElement.textContent =
         "0";
@@ -906,6 +914,11 @@ cartItemsContainer.addEventListener(
 cartCheckoutButton.addEventListener(
     "click",
     function () {
+        if (!getSelectedMarketCode()) {
+            openPurchaseMarketPicker();
+            return;
+        }
+
 
         if (cart.length === 0) {
 

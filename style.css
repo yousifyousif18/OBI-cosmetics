@@ -21,6 +21,67 @@ body {
 
 /* ---------- GLOBAL ---------- */
 
+.purchase-market-dialog {
+    width: min(420px, calc(100% - 32px));
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 24px;
+    overflow: auto;
+    border: 1px solid #ead7e2;
+    border-radius: 20px;
+    background: #fff9fc;
+    color: #402c38;
+    font-family: inherit;
+}
+
+.purchase-market-dialog::backdrop {
+    background: rgb(34 20 30 / 60%);
+}
+
+.purchase-market-dialog h2 {
+    font-size: 21px;
+    line-height: 1.25;
+}
+
+.purchase-market-options {
+    display: grid;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.purchase-market-dialog button {
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid #ead7e2;
+    border-radius: 10px;
+    background: white;
+    color: inherit;
+}
+
+.purchase-market-options button {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    text-align: start;
+}
+
+.purchase-market-options img {
+    width: 24px;
+    height: 18px;
+    border-radius: 3px;
+    object-fit: cover;
+}
+
+.purchase-market-dialog button:hover {
+    background: #f9e6f1;
+}
+
+.purchase-market-dialog button:focus-visible {
+    outline: 2px solid #8d2866;
+    outline-offset: 2px;
+}
+
 button,
 a {
     font: inherit;
@@ -7465,6 +7526,10 @@ body.product-modal-open {
     transform:
         translateY(-2px);
 
+}
+
+.modal-add-to-cart[hidden] + .modal-buy-now {
+    grid-column: 1 / -1;
 }
 
 
@@ -18503,6 +18568,7 @@ summary span {
 
 .empty-cart-shop-button {
     display: inline-flex;
+    border: 0;
 
     align-items: center;
 

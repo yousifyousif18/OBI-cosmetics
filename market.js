@@ -773,86 +773,69 @@ else {
    SELECT REGION
 ========================================= */
 
-marketOptions.forEach(
-    function (option) {
+function selectShoppingMarket(code) {
+    setSelectedMarket(code);
+    updateMarketSelectorDisplay();
 
-        option.addEventListener(
-            "click",
-            function (event) {
+    marketSelector?.classList.remove("open");
+    marketSelectorButton?.setAttribute("aria-expanded", "false");
+    document.querySelector("header")?.classList.remove("header-locked");
 
-                event.stopPropagation();
-
-
-                const selectedMarket =
-                    option.dataset.market;
-
-
-                if (
-                    !marketDisplay[
-                        selectedMarket
-                    ]
-                ) {
-                    return;
-                }
-
-setSelectedMarket(
-    selectedMarket
-);
-
-                updateMarketSelectorDisplay();
-
-
-                if (marketSelector) {
-
-                    marketSelector.classList.remove(
-                        "open"
-                    );
-document
-    .querySelector(
-        "header"
-    )
-    ?.classList.remove(
-        "header-locked"
-    );
-                }
-
-
-                if (marketSelectorButton) {
-
-                    marketSelectorButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-
-            /* Update shop without reloading */
-
-if (
-    typeof applyCategory === "function"
-) {
-    applyCategory(
-        currentCategory,
-        false
-    );
-}
-
-
-if (
-    typeof renderCart === "function"
-) {
-    cart = getStoredCart();
-    renderCart();
-    updateCartCount();
-}
-
-            }
-        );
-
+    if (typeof applyCategory === "function") {
+        applyCategory(currentCategory, false);
+        updateProductPurchaseActions();
     }
-);
 
+    if (typeof renderCart === "function") {
+        cart = getStoredCart();
+        renderCart();
+        updateCartCount();
+    }
+}
+
+marketOptions.forEach(function (option) {
+    option.addEventListener("click", function (event) {
+        event.stopPropagation();
+        selectShoppingMarket(option.dataset.market);
+    });
+});
+
+function openPurchaseMarketPicker(codes = Object.keys(OBI_MARKETS)) {
+    const dialog = document.createElement("dialog");
+    dialog.className = "purchase-market-dialog";
+    dialog.setAttribute("aria-labelledby", "purchase-market-title");
+    dialog.innerHTML = `
+        <h2 id="purchase-market-title">Choose your delivery country</h2>
+        <div class="purchase-market-options"></div>
+        <form method="dialog"><button type="submit">Cancel</button></form>
+    `;
+
+    const options = dialog.querySelector(".purchase-market-options");
+    for (const code of codes) {
+        const { name, flag, currency } = OBI_MARKETS[code];
+        const button = document.createElement("button");
+        button.type = "button";
+        button.innerHTML = `<img src="${flag}" alt=""><span>${name}</span><span>${currency}</span>`;
+        button.addEventListener("click", function () {
+            dialog.close();
+            selectShoppingMarket(code);
+        });
+        options.append(button);
+    }
+
+    // Let the native dialog handle Escape and Tab ahead of the underlying drawer.
+    dialog.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Tab") event.stopPropagation();
+    });
+    dialog.addEventListener("close", function () {
+        dialog.remove();
+        if (document.body.classList.contains("cart-open") && document.activeElement === document.body) {
+            document.getElementById("close-cart-button")?.focus();
+        }
+    });
+    document.body.append(dialog);
+    dialog.showModal();
+}
 
 /* =========================================
    CLICK OUTSIDE TO CLOSE

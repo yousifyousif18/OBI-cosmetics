@@ -497,7 +497,7 @@ function getProductPrice(product) {
     }
 
 
-    return "Not Available";
+    return "Unavailable in your delivery country";
 }
 
 /* =========================================
@@ -1099,6 +1099,27 @@ function renderProductGallery(
    OPEN PRODUCT MODAL
 ========================================= */
 
+function getAvailableProductMarkets(product) {
+    return Object.keys(OBI_MARKETS).filter(function (code) {
+        return Number.isFinite(product.prices?.[code]) && product.prices[code] > 0;
+    });
+}
+
+function updateProductPurchaseActions() {
+    if (!currentModalProduct) return;
+
+    const market = getSelectedMarketCode();
+    const availableMarkets = getAvailableProductMarkets(currentModalProduct);
+    const canPurchase = availableMarkets.includes(market);
+
+    modalPrice.textContent = getProductPrice(currentModalProduct);
+    modalAddToCart.hidden = !canPurchase;
+    modalAddToCart.disabled = !canPurchase || !currentModalShade;
+    modalBuyNow.disabled = canPurchase ? !currentModalShade : Boolean(market && !availableMarkets.length);
+    modalBuyNow.textContent = canPurchase ? "Buy Now" : !market ? "Choose Delivery Country" :
+        availableMarkets.length ? "See Available Countries" : "Unavailable";
+}
+
 function openProductModal(
     productId
 ) {
@@ -1307,32 +1328,6 @@ else {
         product.shades.length > 0;
 
 
-    const hasPrice =
-        typeof getProductNumericPrice(product) === "number";
-
-
-    /* Reset button text */
-
-    if (hasPrice) {
-
-        modalAddToCart.textContent =
-            "Add to Cart";
-
-        modalBuyNow.textContent =
-            "Buy Now";
-
-    }
-    else {
-
-        modalAddToCart.textContent =
-            "Coming Soon!";
-
-        modalBuyNow.textContent =
-            "Not Available Yet";
-
-    }
-
-
     /* =========================================
        PRODUCT HAS SHADES
     ========================================= */
@@ -1401,17 +1396,6 @@ else {
         );
 
 
-        /*
-            Customer must select
-            a shade first.
-        */
-
-        modalAddToCart.disabled =
-            true;
-
-        modalBuyNow.disabled =
-            true;
-
     }
 
 
@@ -1427,14 +1411,6 @@ else {
 
         currentModalShade =
             "Not applicable";
-
-
-        modalAddToCart.disabled =
-            !hasPrice;
-
-
-        modalBuyNow.disabled =
-            !hasPrice;
 
 
         if (shadeScrollPrev) {
@@ -1454,6 +1430,8 @@ else {
 
     }
 
+
+    updateProductPurchaseActions();
 
     /* =========================================
        OPEN MODAL
@@ -1982,20 +1960,7 @@ modalShades.addEventListener(
         );
 
 
-        /* =========================================
-           ENABLE BUY BUTTONS
-        ========================================= */
-
-        const hasPrice =
-           typeof getProductNumericPrice(currentModalProduct) === "number";
-
-
-        modalAddToCart.disabled =
-            !hasPrice;
-
-
-        modalBuyNow.disabled =
-            !hasPrice;
+        updateProductPurchaseActions();
 
     }
 );
@@ -2045,24 +2010,16 @@ modalAddToCart.addEventListener(
 modalBuyNow.addEventListener(
     "click",
     function () {
+        if (!currentModalProduct) return;
 
-        if (
-            !currentModalProduct ||
-            !currentModalShade
-        ) {
-
+        const market = getSelectedMarketCode();
+        const availableMarkets = getAvailableProductMarkets(currentModalProduct);
+        if (!market || !availableMarkets.includes(market)) {
+            const choices = market ? availableMarkets : undefined;
+            if (!choices || choices.length) openPurchaseMarketPicker(choices);
             return;
         }
-
-if (
-    typeof getProductNumericPrice(
-        currentModalProduct
-    ) !== "number"
-) {
-
-    return;
-}
-
+        if (!currentModalShade) return;
 
         const buyNowItem = {
 

@@ -73,6 +73,59 @@
                 check(page + ': scroll unlocks', !doc.body.classList.contains('cart-open'));
             }
         }
+        {
+            const win = await load('shop.html', '');
+            const doc = win.document;
+            const buyNow = doc.getElementById('modal-buy-now');
+            win.openProductModal(1);
+            check('Buy Now offers country selection before shade selection',
+                !buyNow.disabled && buyNow.textContent === 'Choose Delivery Country');
+            buyNow.click();
+            const picker = doc.querySelector('.purchase-market-dialog');
+            const countries = picker?.querySelectorAll('.purchase-market-options button');
+            check('Purchase picker opens with all delivery countries', picker?.open && countries?.length === 4);
+            countries?.[0]?.click();
+            check('Choosing a country refreshes the open product and still requires a shade',
+                win.getSelectedMarketCode() === 'EGY' && buyNow.disabled && buyNow.textContent === 'Buy Now');
+            doc.querySelector('.product-modal-shade').click();
+            buyNow.click();
+            check('Buy Now continues to checkout after country and shade selection',
+                win.__navigations.some(url => url.includes('checkout.html')) &&
+                JSON.parse(sessionStorage.getItem('buyNowItem')).productId === 1);
+        }
+        {
+            const win = await load('shop.html', 'UAE');
+            const doc = win.document;
+            const buyNow = doc.getElementById('modal-buy-now');
+            win.openProductModal(8);
+            check('Unavailable product explains the region restriction',
+                doc.getElementById('product-modal-price').textContent === 'Unavailable in your delivery country' &&
+                doc.getElementById('modal-add-to-cart').hidden && buyNow.textContent === 'See Available Countries');
+            buyNow.click();
+            const countries = doc.querySelectorAll('.purchase-market-options button');
+            check('Unavailable product lists only countries that sell it',
+                countries.length === 1 && countries[0].textContent.includes('Egypt'));
+            countries[0]?.click();
+            check('Product becomes purchasable in an available country',
+                win.getSelectedMarketCode() === 'EGY' && !buyNow.disabled && buyNow.textContent === 'Buy Now');
+        }
+        {
+            const win = await load('index.html', '');
+            const doc = win.document;
+            localStorage.setItem('cart_EGY', JSON.stringify([{productId:1,shade:'Nude',quantity:2}]));
+            doc.getElementById('open-cart-button').click();
+            doc.querySelector('[data-choose-cart-market]')?.click();
+            const picker = doc.querySelector('.purchase-market-dialog');
+            check('Cart offers country selection before checkout', picker?.open && !win.__navigations.length);
+            picker?.querySelector('.purchase-market-options button')?.click();
+            const checkout = doc.getElementById('cart-checkout-button');
+            check('Choosing a country restores its cart in the open drawer',
+                doc.body.classList.contains('cart-open') && doc.getElementById('cart-count').textContent.trim() === '2' &&
+                checkout.textContent === 'Go to Checkout');
+            checkout.click();
+            check('Cart proceeds to checkout after country selection',
+                win.__navigations.some(url => url.includes('checkout.html')));
+        }
         for (const market of ['EGY','UAE','KSA','QAT']) {
             let win = await load('shop.html', market);
             let doc = win.document;
