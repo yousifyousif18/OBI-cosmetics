@@ -1,5 +1,10 @@
 /* Modern Standard Arabic. Product IDs, shade keys and order values stay canonical. */
 window.OBI_AR = {
+    "Curious what customers are loving?": "هل تودين معرفة ما يحبه عملاؤنا؟",
+    "See their favourite shades and read their stories.": "اكتشفي درجاتهم المفضلة واقرئي قصصهم.",
+    "Explore OBI Love": "تصفّحي آراء عملاء أوبي",
+    "Meet the customers who are part of our story.": "تعرّفي على العملاء الذين يشكّلون جزءًا من قصتنا.",
+    "Read customer stories": "اقرئي قصص العملاء",
     "Choose shopping region": "اختيار بلد التسوق", "Close product": "إغلاق تفاصيل المنتج", "Before you order": "قبل إرسال طلبك",
     "Egypt flag": "علم مصر", "UAE flag": "علم الإمارات العربية المتحدة", "Qatar flag": "علم قطر", "Saudi Arabia flag": "علم المملكة العربية السعودية",
     "Obi Cosmetics Blush": "أحمر الخدود من أوبي", "Obi Cosmetics Body Care": "منتجات أوبي للعناية بالجسم", "Obi Cosmetics collection": "مجموعة منتجات أوبي",

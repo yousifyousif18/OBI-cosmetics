@@ -1113,6 +1113,7 @@ function updateProductPurchaseActions() {
     const canPurchase = availableMarkets.includes(market);
 
     modalPrice.textContent = getProductPrice(currentModalProduct);
+    productModal.classList.toggle("product-modal--unavailable", Boolean(market) && !canPurchase);
     modalAddToCart.hidden = !canPurchase;
     modalAddToCart.disabled = !canPurchase || !currentModalShade;
     modalBuyNow.disabled = canPurchase ? !currentModalShade : Boolean(market && !availableMarkets.length);
@@ -1460,6 +1461,8 @@ else {
 document.body.classList.add(
     "product-modal-open"
 );
+
+    productModal.scrollTo({ top: 0, behavior: "instant" });
 
     /* =========================================
        SHADE INTRO ANIMATION

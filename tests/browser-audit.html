@@ -109,17 +109,34 @@
             const win = await load('shop.html', 'UAE');
             const doc = win.document;
             const buyNow = doc.getElementById('modal-buy-now');
-            win.openProductModal(8);
+            const modal = doc.getElementById('product-modal');
+            const title = doc.getElementById('product-modal-title');
+            const price = doc.getElementById('product-modal-price');
+            const photo = doc.getElementById('product-modal-image');
+            const openLotion = () => doc.querySelector('.open-product-button[data-product-id="9"]').click();
+            frame.style.height = '600px';
+            openLotion();
+            check('Unavailable Body Lotion title sits above the region message',
+                title.textContent === 'Body Lotion' &&
+                title.getBoundingClientRect().bottom <= price.getBoundingClientRect().top);
             check('Unavailable product explains the region restriction',
-                doc.getElementById('product-modal-price').textContent === 'Unavailable in your delivery country' &&
+                price.textContent === 'Unavailable in your delivery country' &&
                 doc.getElementById('modal-add-to-cart').hidden && buyNow.textContent === 'See Available Countries');
+            modal.scrollTop = modal.scrollHeight;
+            check('Body Lotion details can scroll', modal.scrollTop > 0);
+            doc.getElementById('close-product-modal').click();
+            openLotion();
+            check('Reopening Body Lotion starts at the product photo',
+                modal.scrollTop === 0 && photo.getBoundingClientRect().top >= modal.getBoundingClientRect().top &&
+                photo.getBoundingClientRect().top < modal.getBoundingClientRect().bottom);
             buyNow.click();
             const countries = doc.querySelectorAll('.purchase-market-options button');
             check('Unavailable product lists only countries that sell it',
                 countries.length === 1 && countries[0].textContent.includes('Egypt'));
             countries[0]?.click();
             check('Product becomes purchasable in an available country',
-                win.getSelectedMarketCode() === 'EGY' && !buyNow.disabled && buyNow.textContent === 'Buy Now');
+                win.getSelectedMarketCode() === 'EGY' && !buyNow.disabled && buyNow.textContent === 'Buy Now' &&
+                !modal.classList.contains('product-modal--unavailable'));
         }
         {
             const win = await load('index.html', '');

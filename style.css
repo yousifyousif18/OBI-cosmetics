@@ -3042,6 +3042,37 @@ header {
    PICK YOUR VIBE
 ========================================================= */
 
+.obi-love-invite {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    max-width: 760px;
+    margin: 0 auto 32px;
+    width: calc(100% - 32px);
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: #fff1f7;
+    color: #6c264d;
+}
+
+.obi-love-invite h2 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+}
+
+.obi-love-invite p {
+    margin: 0;
+}
+
+.obi-love-invite-link {
+    color: #6c264d;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 .obi-vibes-section {
 
     max-width: 1250px;
@@ -12722,6 +12753,12 @@ body.product-modal-open {
         font-size: 30px !important;
 
         line-height: 1 !important;
+    }
+
+    .product-modal--unavailable .product-modal-title-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
     }
 
 
